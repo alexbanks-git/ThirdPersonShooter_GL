@@ -1,3 +1,7 @@
-﻿     Creating library C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\Debug\ThirdPersonShooter_GL.lib and object C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\Debug\ThirdPersonShooter_GL.exp
+﻿  game.cpp
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(77): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
   ThirdPersonShooter_GL.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\Debug\ThirdPersonShooter_GL.exe
   ThirdPersonShooter_GL.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\Debug\ThirdPersonShooter_GL.pdb (Partial PDB)
