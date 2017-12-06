@@ -76,6 +76,9 @@
     <ClCompile Include="..\src\skeleton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\vertex_shader.glsl">
@@ -88,6 +91,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="..\shaders\physics_fragment_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\skybox_vertex_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\skybox_fragment_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
@@ -144,6 +153,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\skeleton.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\skybox.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

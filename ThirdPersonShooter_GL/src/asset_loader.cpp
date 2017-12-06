@@ -2,7 +2,7 @@
 #include "SDL_image.h"
 
 static const aiScene* scene;
-void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths)
+void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths, AnimationController* animator)
 {
 	Assimp::Importer importer;
 	std::vector<Assimp::Importer> anim_importers;
@@ -88,10 +88,16 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 					index, scene->mMeshes[m]->mBones[b]->mWeights[w].mWeight);
 			}
 		}
-
+		
 		for (GLuint a = 0; a < anim_scenes.size(); a++)
 		{
-			model->skeleton.set_max_time(anim_scenes[a]->mAnimations[0]->mDuration);
+			if (anim_scenes[a]->mNumAnimations == 0)
+			{
+				std::cout << animation_paths[a] << " does not contain animations." << std::endl;
+				continue;
+			}
+			animator->add_duration(anim_scenes[a]->mAnimations[0]->mDuration);
+			
 			for (GLuint c = 0; c < anim_scenes[a]->mAnimations[0]->mNumChannels; c++)
 			{
 
@@ -107,7 +113,7 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 					model->skeleton.add_position_key(a, anim_scenes[a]->mAnimations[0]->mChannels[c]->mNodeName.C_Str(),
 						time, position);
 				}
-
+				
 
 				for (GLuint r = 0; r < anim_scenes[a]->mAnimations[0]->mChannels[c]->mNumRotationKeys; r++)
 				{
@@ -123,11 +129,13 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 					GLfloat time = anim_scenes[a]->mAnimations[0]->mChannels[c]->mRotationKeys[r].mTime;
 
 					model->skeleton.add_rotation_key(a, anim_scenes[a]->mAnimations[0]->mChannels[c]->mNodeName.C_Str(), time, rotation);
+					//std::cout << "Got_Here" << std::endl;
 				}
 			}
+			
 		}
 
-
+		
 		for (GLuint f = 0; f < scene->mMeshes[m]->mNumFaces; f++)
 		{
 			for (GLuint i = 0; i < scene->mMeshes[m]->mFaces[f].mNumIndices; i++)
@@ -155,7 +163,6 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 		model->meshes[m].set_diffuse_texture(diffuse);
 
 		model->meshes[m].set_indices(indices);
-
 	}
 }
 

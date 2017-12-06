@@ -9,9 +9,6 @@
 class Skeleton
 {
 private:
-	GLfloat elapsed_animation_time = 0;
-	GLfloat start_time;
-	GLfloat max_animation_time;
 	std::vector<GLfloat> durations;
 
 	typedef struct
@@ -60,6 +57,8 @@ public:
 
 	/**
 	 * @brief Adds a position key to a specific bone in the skeleton's bone hierarchy.
+	 * @param index the index of the animation that the position key belongs to
+	 * @param name the name of the bone to add the position key to
 	 * @param time the time (in ticks) of the position key
 	 * @param pos the position of the position key
 	 */
@@ -67,26 +66,22 @@ public:
 
 	/**
 	 * @brief Adds a rotation key to a specific bone in the skeleton's bone hierarchy.
+	 * @param index the index of the animation that the rotation key belongs to
+	 * @param name the name of the bone to add the rotation key to
 	 * @param time the time (in ticks) of the rotation key
 	 * @param rot the rotation of the rotation key
 	 */
 	void add_rotation_key(GLuint index, std::string name, GLfloat time, glm::quat rot);
 
 	/**
-	 * @brief Adds a bone to the skeleton's bone hierarchy.
-	 * @param bone the bone to add to the skeleton
+	 * @brief Adds an empty bone to the skeleton's bone hierarchy.
 	 */
 	void increase_size();
 
 	/**
-	 * @brief Sets the duration of the skeleton's animation
-	 * @param time the duration of the animation
-	 */
-	void set_max_time(GLfloat time);
-
-	/**
 	 * @brief Retrieves the bone at the specified index
 	 * @param i the index of the bone
+	 * @returns the bone at the specified index
 	 */
 	Bone* get_bone_at(GLuint i);
 
@@ -112,9 +107,4 @@ public:
 	 * @brief Sets the final transforms of the skeleton's bones
 	 */
 	void init();
-
-	/**
-	 * @brief Updates bones' rotations and positions based on their keys
-	 */
-	void update();
 };

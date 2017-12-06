@@ -9,6 +9,7 @@ static GLuint target_fps;
 static GLuint frame_delay;
 static GLuint default_shader;
 static GLuint debug_shader;
+static GLuint skybox_shader;
 
 GLuint Graphics::get_default_shader()
 {
@@ -18,6 +19,11 @@ GLuint Graphics::get_default_shader()
 GLuint Graphics::get_debug_shader()
 {
 	return debug_shader;
+}
+
+GLuint Graphics::get_skybox_shader()
+{
+	return skybox_shader;
 }
 
 GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
@@ -67,6 +73,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 
 	default_shader = create_shader_program("vertex_shader.glsl", "fragment_shader.glsl");
 	debug_shader = create_shader_program("physics_vertex_shader.glsl", "physics_fragment_shader.glsl");
+	skybox_shader = create_shader_program("skybox_vertex_shader.glsl", "skybox_fragment_shader.glsl");
 	return 1;
 }
 

@@ -2,6 +2,7 @@
 #include "drawable_component.hpp"
 #include "mesh.hpp"
 #include "skeleton.hpp"
+#include "animation_controller.hpp"
 
 class Model : public DrawableComponent
 {
@@ -10,15 +11,14 @@ public:
 	Skeleton skeleton;
 	/**
 	 * @brief Retrieves the number of meshes the model contains.
-	 * @param returns the number of meshes
+	 * @returns the number of meshes
 	 */
 	GLuint get_mesh_count();
 
 	/**
 	 * @brief Loads model from file, and buffers vertex information.
-	 * @param path the file path of the model
 	 */
-	void create(std::string path);
+	void Model::create(std::string path, std::vector<std::string> anim_paths=std::vector<std::string>(), AnimationController* animator=nullptr);
 
 	/**
 	 * @brief Draws all meshes this model contains.

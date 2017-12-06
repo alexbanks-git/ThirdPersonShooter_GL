@@ -37,6 +37,7 @@
     <ClCompile Include="..\src\physics_debug_drawer.cpp" />
     <ClCompile Include="..\src\player_controller.cpp" />
     <ClCompile Include="..\src\skeleton.cpp" />
+    <ClCompile Include="..\src\skybox.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -57,12 +58,15 @@
     <ClInclude Include="..\include\physics_debug_drawer.hpp" />
     <ClInclude Include="..\include\player_controller.hpp" />
     <ClInclude Include="..\include\skeleton.hpp" />
+    <ClInclude Include="..\include\skybox.hpp" />
     <ClInclude Include="..\include\transform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\fragment_shader.glsl" />
     <None Include="..\shaders\physics_fragment_shader.glsl" />
     <None Include="..\shaders\physics_vertex_shader.glsl" />
+    <None Include="..\shaders\skybox_fragment_shader.glsl" />
+    <None Include="..\shaders\skybox_vertex_shader.glsl" />
     <None Include="..\shaders\vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>

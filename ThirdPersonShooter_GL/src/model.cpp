@@ -5,16 +5,15 @@
 void Model::set_meshes(std::vector<Mesh> data)
 {
 	//meshes = data;
-	
+
 }
 
-void Model::create(std::string path)
+void Model::create(std::string path, std::vector<std::string> anim_paths, AnimationController* animator)
 {
 	skeleton = Skeleton();
-	std::vector<std::string> frames;
-	frames.push_back("Knight_Attack.fbx");
-	frames.push_back("Knight_Run.fbx");
-	AssetLoader::model_from_file(path.c_str(), this, frames);
+	AssetLoader::model_from_file(path.c_str(), this, anim_paths, animator);
+	if (animator != nullptr)
+		animator->attach_skeleton(&skeleton);
 	skeleton.init();
 
 	for (GLuint i = 0; i < meshes.size(); i++)
@@ -26,9 +25,8 @@ void Model::create(std::string path)
 
 void Model::draw()
 {
-	skeleton.update();
 	GLuint model_location = glGetUniformLocation(Graphics::get_default_shader(), "model");
-	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform->transform_matrix));
+	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform->get_transformation()));
 
 	GLuint bone_loc = glGetUniformLocation(Graphics::get_default_shader(), "bone_mats");
 	glUniformMatrix4fv(bone_loc, skeleton.size(), GL_FALSE, glm::value_ptr(skeleton.bone_transforms[0]));

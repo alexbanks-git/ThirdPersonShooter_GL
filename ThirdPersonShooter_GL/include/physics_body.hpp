@@ -44,9 +44,20 @@ public:
 	 */
 	std::string type_name();
 
+	/**
+	 * @brief Keeps the physics body's transform updated.
+	 */
 	void update();
 
+	/**
+	 * @brief Retrieves the rigid body of the physics body.
+	 * @returns the rigid body attached to this physics body
+	 */
 	btRigidBody* get_rigid_body();
 
+	/**
+	 * @brief Moves the physics body in the world.
+	 * @param velocity the direction and speed to move the physics body
+	 */
 	void move(glm::vec3 velocity);
 };

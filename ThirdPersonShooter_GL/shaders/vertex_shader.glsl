@@ -36,6 +36,6 @@ void main()
 
 	tbn_mat = mat3(v_tangent, v_bitangent, v_normal);
 
-	frag_position = vec3(model * vec4(position, 1.0f));
+	frag_position = vec3(model * final_position);
 	gl_Position = projection * view * model * final_position;
 }

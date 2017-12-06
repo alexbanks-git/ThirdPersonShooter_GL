@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "model.hpp"
+#include "animation_controller.hpp"
 
 class AssetLoader
 {
@@ -22,6 +23,7 @@ public:
 	/**
 	* @brief Loads a model from an OBJ or FBX file.
 	* @param path the path of the file
+	* @param animation_paths the paths to the animations to be used for the model
 	*/
-	static void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths);
+	static void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths=std::vector<std::string>(), AnimationController* animator=nullptr);
 };

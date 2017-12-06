@@ -75,19 +75,19 @@ public:
 
 	/**
 	 * @brief Sets the diffuse texture of the mesh.
-	 * @param path the diffuse texture of the mesh
+	 * @param path the file path of the mesh's diffuse texture
 	 */
 	void set_diffuse_texture(std::string path);
 
 	/**
 	* @brief Sets the specular texture of the mesh.
-	* @param path the specular texture of the mesh
+	* @param path the file path of the mesh's specular texture
 	*/
 	void set_specular_texture(std::string path);
 
 	/**
 	* @brief Sets the normal map of the mesh.
-	* @param path the normal map of the mesh
+	* @param path the file path of the mesh's normal map
 	*/
 	void set_normal_map(std::string path);
 

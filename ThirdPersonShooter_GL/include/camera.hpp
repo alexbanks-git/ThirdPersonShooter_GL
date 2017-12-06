@@ -1,5 +1,6 @@
 #include "GL/glew.h"
 #include "glm/glm.hpp"
+#include "transform.hpp"
 
 class Camera
 {
@@ -8,14 +9,14 @@ private:
 	GLfloat far_clip;
 	GLfloat field_of_view;
 public:
-	glm::vec3 world_up;
-	glm::vec3 position;
-	glm::vec3 forward;
-	glm::vec3 right;
-	glm::vec3 up;
+	Transform transform;
 
 	/**
 	 * @brief Initializes the camera's members.
+	 * @param pos the position of the camera
+	 * @param field_of_view the field of view of the camera
+	 * @param near the near clipping plane of the camera
+	 * @param far the far clipping plane of the camera
 	 */
 	Camera(glm::vec3 pos, GLfloat field_of_view, GLfloat near, GLfloat far);
 	/**
@@ -47,8 +48,14 @@ public:
 	GLfloat near_clip_plane();
 
 	/**
-	* @brief Retrieves the field of view of the camera.
-	* @returns the field of view
-	*/
+	 * @brief Retrieves the field of view of the camera.
+	 * @returns the field of view
+	 */
 	GLfloat get_field_of_view();
+
+	void look_at(Transform target);
+
+	void rotate_around(Transform target, GLfloat yaw, GLfloat pitch);
+
+	void follow(Transform target, GLfloat offset);
 };

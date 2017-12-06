@@ -14,7 +14,16 @@ void EntityManager::add_entity(Entity* entity)
 
 void EntityManager::update_entities()
 {
-
+	for (GLuint e = 0; e < entities.size(); e++)
+	{
+		for (GLuint c = 0; c < entities[e]->get_components().size(); c++)
+		{
+			if (dynamic_cast<ControllerComponent*>(entities[e]->get_component(c)) != nullptr)
+			{
+				((ControllerComponent*)entities[e]->get_component(c))->update();
+			}
+		}
+	}
 }
 
 void EntityManager::draw_entities()

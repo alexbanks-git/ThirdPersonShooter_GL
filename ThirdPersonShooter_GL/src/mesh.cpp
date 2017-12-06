@@ -142,6 +142,7 @@ void Mesh::bind()
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "normal_map"), 2);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(vao);
 }
 

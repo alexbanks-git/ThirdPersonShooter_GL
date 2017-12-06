@@ -1,18 +1,16 @@
+#include <iostream>
 #include "camera.hpp"
 
 Camera::Camera(glm::vec3 pos, GLfloat field_of_view, GLfloat near, GLfloat far)
 {
-	position = pos;
+	transform.translate(pos);
 	field_of_view = field_of_view;
 	near_clip = near;
 	far_clip = far;
 
-	world_up = glm::vec3(0.0f, 1.0f, 0.0f);
-	forward = glm::vec3(0.0f, 0.0f, 1.0f);
-	forward = glm::normalize(forward);
-
-	right = glm::normalize(glm::cross(world_up, forward));
-	up = glm::normalize(glm::cross(right, forward));
+	transform.forward = glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f));
+	transform.right = glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f));
+	transform.up = glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 GLfloat Camera::near_clip_plane()
@@ -32,18 +30,34 @@ GLfloat Camera::get_field_of_view()
 
 void Camera::translate(GLfloat x, GLfloat y, GLfloat z)
 {
-	position.x += (x * right.x) + (z * forward.x) + (y * up.x);
-	position.y += (x * right.y) + (z * forward.y) + (y * up.y);
-	position.z += (x * right.z) + (z * forward.z) + (y * up.z);
+	glm::mat3 rot = glm::mat3(transform.right, transform.up, transform.forward);
+	transform.translate(rot * glm::vec3(x, y, z));
 }
 
 void Camera::rotate(GLfloat pitch, GLfloat yaw, GLfloat roll)
 {
-	forward.x = glm::cos(glm::radians(pitch)) * glm::cos(glm::radians(yaw));
-	forward.y = glm::sin(glm::radians(pitch));
-	forward.z = glm::cos(glm::radians(pitch)) * glm::sin(glm::radians(yaw));
-	forward = glm::normalize(forward);
-
-	right = glm::normalize(glm::cross(world_up, forward));
-	up = glm::normalize(glm::cross(right, forward));
+	transform.rotate(pitch, glm::vec3(1.0f, 0.0f, 0.0f));
+	transform.rotate(yaw, glm::vec3(0.0f, 1.0f, 0.0f));
+	transform.rotate(roll, glm::vec3(0.0f, 0.0f, 1.0f));
 }
+
+void Camera::look_at(Transform target)
+{
+	transform.forward = glm::normalize(target.position - transform.position);
+	transform.right = glm::normalize(glm::cross(Transform::world_up_vector(), transform.forward));
+	transform.up = glm::normalize(glm::cross(transform.forward, transform.right));
+}
+
+void Camera::follow(Transform target, GLfloat offset)
+{
+	glm::vec3 delta = (target.position + transform.forward * offset) - (transform.position);
+	
+	transform.translate(delta);
+}
+
+void Camera::rotate_around(Transform target, GLfloat yaw, GLfloat pitch)
+{
+	translate(yaw, pitch, 0.0f);
+	look_at(target);
+}
+

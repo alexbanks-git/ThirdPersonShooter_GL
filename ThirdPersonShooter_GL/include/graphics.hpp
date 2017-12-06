@@ -65,6 +65,12 @@ public:
 	static GLuint get_default_shader();
 
 	/**
+	 * @brief Retrieves the skybox shader.
+	 * @returns the skybox shader
+	 */
+	static GLuint get_skybox_shader();
+
+	/**
 	 * @brief Draws a mesh to the screen.
 	 * @param mesh the mesh to draw
 	 */
