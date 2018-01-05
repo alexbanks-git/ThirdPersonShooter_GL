@@ -4,6 +4,11 @@
 #include "model.hpp"
 #include "transform.hpp"
 #include "component.hpp"
+#include "player_controller.hpp"
+#include "model.hpp"
+#include "physics_body.hpp"
+#include "animation_controller.hpp"
+
 
 class Entity
 {
@@ -26,7 +31,7 @@ public:
 	 * @param type the class type of the component
 	 * @returns the component with the specified class type
 	 */
-	Component* get_component(std::string type);
+	//Component* get_component(std::string type);
 
 	/**
 	 * @brief Retrieves the component at the specified index
@@ -34,6 +39,20 @@ public:
 	 * @returns the component at the specified index
 	 */
 	Component* get_component(GLuint i);
+
+	template<class T> T* get_component()
+	{
+		Component* comp = nullptr;
+		for (GLuint i = 0; i < components.size(); i++)
+		{
+			if (dynamic_cast<T*>(components[i]) != nullptr)
+			{
+				comp = components[i];
+				break;
+			}
+		}
+		return dynamic_cast<T*>(comp);
+	}
 
 	/**
 	 * @brief Retrieves all components attached to this entity

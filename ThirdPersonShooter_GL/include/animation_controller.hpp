@@ -25,12 +25,6 @@ public:
 	std::string type_name();
 
 	/**
-	 * @brief Sets the speed (in seconds) of the animation.
-	 * @param anim_speed the speed of the animation
-	 */
-	void set_speed(GLfloat anim_speed);
-
-	/**
 	 * @brief Attaches a skeleton to this animation controller.
 	 * @param skeleton the skeleton to attach
 	 */

@@ -138,4 +138,8 @@ public:
 	 * @param bone_weight the bone weight to add
 	 */
 	void add_bone_weight(GLuint index, GLuint bone_index, GLfloat bone_weight);
+
+	void create_texture(SDL_Surface* surface, GLuint* id);
+
+	void bind_texture(GLuint id, std::string location, GLuint num);
 };

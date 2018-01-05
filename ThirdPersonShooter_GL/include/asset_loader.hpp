@@ -18,7 +18,7 @@ private:
 	 * @param node the base node of the hierarchy
 	 * @param skeleton the skeleton to initialize
 	 */
-	static void recursive_func(aiNode* node, Skeleton* skeleton);
+	static void setup_skeleton(aiNode* node, Skeleton* skeleton);
 public:
 	/**
 	* @brief Loads a model from an OBJ or FBX file.

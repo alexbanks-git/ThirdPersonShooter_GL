@@ -1,4 +1,3 @@
-
 #include "camera.hpp"
 #include "asset_loader.hpp"
 #include "entity.hpp"
@@ -17,7 +16,7 @@ int main(int argc, char* args[])
 	//DrawClass debugDraw = DrawClass();
 	//debugDraw.setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 
-	Camera camera = Camera(glm::vec3(0.0f, 100.0f, -300.0f), glm::radians(60.0f), 1.0f, 1000.0f);
+	Camera camera = Camera(glm::vec3(0.0f, 100.0f, -300.0f), glm::radians(60.0f), 1.0f, 1000000.0f);
 
 	GLuint width = 800;
 	GLuint height = 600;
@@ -25,24 +24,23 @@ int main(int argc, char* args[])
 	Graphics::init_graphics(width, height, 60);
 	GLboolean running = true;
 	PhysicsWorld::init_physics();
-	PhysicsWorld::set_gravity(glm::vec3(0.0f, -200.0f, 0.0f));
+	PhysicsWorld::set_gravity(glm::vec3(0.0f, -100.0f, 0.0f));
 	LevelManager::init_level();
 
 	Entity entity = Entity();
+	//Entity city = Entity();
 	Entity ground = Entity();
+	Entity entity_2 = Entity();
+	Entity entity_3 = Entity();
+	Entity entity_4 = Entity();
 	/*Entity entity_2 = Entity();
 	Entity entity_3 = Entity();*/
 
-	ground.transform.translate(glm::vec3(0.0f, -20.0f, 0.0f));
-	entity.transform.translate(glm::vec3(0.0f, 100.0f, 0.0f));/*
-	entity_2.transform.translate(glm::vec3(70.0f, 50.0f, 20.0f));
-	entity_3.transform.translate(glm::vec3(120.0f, 50.0f, -40.0f));
-
-	entity_2.add_component("Model");
-	entity_3.add_component("Model");
-
-	((Model*)entity_2.get_component("Model"))->create("parasite_l_starkie.fbx");
-	((Model*)entity_3.get_component("Model"))->create("parasite_l_starkie.fbx");*/
+	//ground.transform.translate(glm::vec3(0.0f, 100.0f, 0.0f));
+	entity.transform.local_translate(glm::vec3(0.0f, 0.0f, -400.0f));
+	entity_2.transform.local_translate(glm::vec3(0.0f, 0.0f, 0.0f));
+	entity_3.transform.local_translate(glm::vec3(0.0f, 0.0f, 0.0f));
+	entity_4.transform.local_translate(glm::vec3(1000.0f, 0.0f, 200.0f));
 
 	entity.add_component("AnimationController");
 
@@ -51,24 +49,44 @@ int main(int argc, char* args[])
 	anim_paths.push_back("survivor_idle.fbx");
 	anim_paths.push_back("survivor_run.fbx");
 	anim_paths.push_back("survivor_jump.fbx");
-	((Model*)entity.get_component("Model"))->create(
-		"survivor.fbx", anim_paths, ((AnimationController*)entity.get_component("AnimationController")));
+	anim_paths.push_back("Rifle Aiming Idle.fbx");
+	anim_paths.push_back("Firing Rifle (1).fbx");
+	entity.get_component<Model>()->create(
+		"survivor.fbx", anim_paths, entity.get_component<AnimationController>());
 
 	entity.add_component("PhysicsBody");
-	Model model = *((Model*)entity.get_component("Model"));
-	((PhysicsBody*)entity.get_component("PhysicsBody"))->create(
+	Model model = *entity.get_component<Model>();
+	entity.get_component<PhysicsBody>()->create(
 		"Capsule", 1.0f, glm::vec3(model.get_max_bounds().z, model.get_max_bounds().y, model.get_max_bounds().x));
 
-	ground.add_component("PhysicsBody");
-	((PhysicsBody*)ground.get_component("PhysicsBody"))->create(
-		"StaticPlane", 0.0f, glm::vec3(100.0f, 1.0f, 100.0f));
-
 	entity.add_component("PlayerController");
-	((PlayerController*)entity.get_component("PlayerController"))->set_camera(&camera.transform);
+	entity.get_component<PlayerController>()->set_camera(&camera.transform);
+	
+	entity_2.add_component("Model");
+	entity_2.get_component<Model>()->create("tree.fbx");
+	entity_2.add_component("PhysicsBody");
+	Model model_3 = *entity_2.get_component<Model>();
+	entity_2.get_component<PhysicsBody>()->create(
+		"Box", 0.0f, glm::vec3(model_3.get_max_bounds().z, model_3.get_max_bounds().y, model_3.get_max_bounds().x));
 
-	EntityManager::add_entity(&entity);/*
+	entity_4.add_component("Model");
+	entity_4.get_component<Model>()->create("tree.fbx");
+	entity_4.add_component("PhysicsBody");
+	Model model_5 = *entity_2.get_component<Model>();
+	entity_4.get_component<PhysicsBody>()->create(
+		"Box", 0.0f, glm::vec3(model_5.get_max_bounds().z, model_5.get_max_bounds().y, model_5.get_max_bounds().x));
+
+	entity_3.add_component("Model");
+	entity_3.get_component<Model>()->create("grass.fbx");
+	entity_3.add_component("PhysicsBody");
+	Model model_4 = *entity_3.get_component<Model>();
+	entity_3.get_component<PhysicsBody>()->create(
+		"StaticPlane", 0.0f, glm::vec3(model_4.get_max_bounds().z, model_4.get_max_bounds().y, model_4.get_max_bounds().x));
+
+	EntityManager::add_entity(&entity);
 	EntityManager::add_entity(&entity_2);
-	EntityManager::add_entity(&entity_3);*/
+	EntityManager::add_entity(&entity_3);
+	EntityManager::add_entity(&entity_4);
 
 	GLint mouse_x;
 	GLint mouse_y;
@@ -143,7 +161,7 @@ int main(int argc, char* args[])
 			camera.transform.position,
 			camera.transform.position + camera.transform.forward,
 			Transform::world_up_vector());
-		((PlayerController*)entity.get_component("PlayerController"))->update();
+		entity.get_component<PlayerController>()->update();
 		LevelManager::update_level();
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
@@ -182,12 +200,12 @@ int main(int argc, char* args[])
 		glUseProgram(Graphics::get_debug_shader());
 
 		view_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "view");
-		glUniformMatrix3fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
+		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
 		projection_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-		PhysicsWorld::draw_physics_world();
+		//PhysicsWorld::draw_physics_world();
 		Graphics::update_window();
 		SDL_WarpMouseInWindow(Graphics::get_window(), width / 2, height / 2);
 	}

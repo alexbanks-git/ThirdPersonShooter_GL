@@ -10,6 +10,7 @@ static GLuint frame_delay;
 static GLuint default_shader;
 static GLuint debug_shader;
 static GLuint skybox_shader;
+static GLfloat elapsed_time;
 
 GLuint Graphics::get_default_shader()
 {
@@ -30,7 +31,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		std::cout << "Error initializing SDL" << std::endl;
+		std::clog << "Error initializing SDL" << std::endl;
 	}
 
 	window_width = w;
@@ -50,7 +51,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 
 	if (window == nullptr)
 	{
-		std::cout << "Failed to create window!\n" << std::endl;
+		std::clog << "Failed to create window!\n" << std::endl;
 		return 0;
 	}
 
@@ -58,7 +59,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 
 	if (context == nullptr)
 	{
-		std::cout << "Failed to create context!\n" << std::endl;
+		std::clog << "Failed to create context!\n" << std::endl;
 		return 0;
 	}
 
@@ -67,7 +68,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 	GLint glew_status = glewInit();
 	if (glew_status != 0)
 	{
-		std::cout << "Error: " << glewGetErrorString(glew_status) << std::endl;
+		std::clog << "Error: " << glewGetErrorString(glew_status) << std::endl;
 		return 0;
 	}
 
@@ -101,7 +102,13 @@ void Graphics::update_window()
 	{
 		SDL_Delay(frame_delay - (now - then));
 	}
-	//std::cout << 1000.0 / (SDL_GetTicks() - then) << std::endl;
+	elapsed_time = 1000.0f / (SDL_GetTicks() - then);
+	std::cout << elapsed_time << std::endl;
+}
+
+GLfloat Graphics::get_elapsed_time()
+{
+	return elapsed_time;
 }
 
 GLuint Graphics::create_shader(std::string shader_type, std::string path)
@@ -139,7 +146,7 @@ GLuint Graphics::create_shader(std::string shader_type, std::string path)
 	if (!result)
 	{
 		glGetShaderInfoLog(shader, 512, nullptr, info_log);
-		std::cout << "SHADER COMPILATION FAILED\n" << info_log << std::endl;
+		std::clog << "SHADER COMPILATION FAILED\n" << info_log << std::endl;
 		return 0;
 	}
 	file.close();
@@ -164,7 +171,7 @@ GLuint Graphics::create_shader_program(std::string vs_path, std::string fs_path)
 	if (!result)
 	{
 		glGetProgramInfoLog(shader_program, 512, nullptr, info_log);
-		std::cout << "SHADER LINKING FAILED\n" << info_log << std::endl;
+		std::clog << "SHADER LINKING FAILED\n" << info_log << std::endl;
 	}
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
@@ -174,6 +181,11 @@ GLuint Graphics::create_shader_program(std::string vs_path, std::string fs_path)
 
 void Graphics::draw_mesh(Mesh* mesh)
 {
+	if (mesh == nullptr)
+	{
+		std::clog << "Graphics::draw_mesh: mesh is null" << std::endl;
+		return;
+	}
 	mesh->bind();
 
 	glDrawElements(GL_TRIANGLES, mesh->get_index_count(), GL_UNSIGNED_INT, 0);

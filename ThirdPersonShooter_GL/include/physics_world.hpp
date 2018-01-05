@@ -33,4 +33,14 @@ public:
 	 * @param body the physics body to add to the world
 	 */
 	static void add_physics_body(PhysicsBody* body);
+
+	/**
+	 * @brief Performs a raycast from a specified starting position for a certain distance
+	 * @param start the starting position of the raycast
+	 * @param direction the direction of the raycast
+	 * @param distance how far the raycast extends
+	 */
+	static bool ray_cast(glm::vec3 start, glm::vec3 direction, GLfloat distance);
+
+	static bool on_ground(PhysicsBody* body);
 };

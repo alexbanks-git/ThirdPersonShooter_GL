@@ -33,11 +33,11 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 		std::vector<glm::vec3> vertices;
 		aiMatrix4x4 mat1 = aiMatrix4x4();
 
-		if (model->skeleton.size() == 0)
+		if (model->skeleton.size() == 0 && animation_paths.size() > 0)
 		{
 			model->skeleton.increase_size();
 			model->skeleton.get_first_bone()->parent_index = -1;
-			recursive_func(scene->mRootNode->mChildren[0], &model->skeleton);
+			setup_skeleton(scene->mRootNode->mChildren[0], &model->skeleton);
 		}
 
 		for (GLuint v = 0; v < scene->mMeshes[m]->mNumVertices; v++)
@@ -166,8 +166,19 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 	}
 }
 
-void AssetLoader::recursive_func(aiNode* node, Skeleton* skeleton)
+void AssetLoader::setup_skeleton(aiNode* node, Skeleton* skeleton)
 {
+	if (node == nullptr)
+	{
+		std::clog << "AssetLoader::setup_skeleton: node is null" << std::endl;
+		return;
+	}
+
+	if (skeleton == nullptr)
+	{
+		std::clog << "AssetLoader::setup_skeleton: skeleton is null" << std::endl;
+		return;
+	}
 	skeleton->get_last_bone()->transform = to_glm_mat(node->mTransformation);
 	skeleton->get_last_bone()->final_transform = skeleton->get_last_bone()->transform;
 	skeleton->get_last_bone()->name.resize(node->mName.length);
@@ -184,7 +195,7 @@ void AssetLoader::recursive_func(aiNode* node, Skeleton* skeleton)
 		skeleton->increase_size();
 		skeleton->get_last_bone()->parent_index = parent_index;
 		skeleton->get_bone_at(parent_index)->children.push_back(skeleton->size() - 1);
-		recursive_func(node->mChildren[c], skeleton);
+		setup_skeleton(node->mChildren[c], skeleton);
 	}
 }
 

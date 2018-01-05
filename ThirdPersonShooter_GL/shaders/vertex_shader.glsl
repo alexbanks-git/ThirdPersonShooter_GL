@@ -19,13 +19,21 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform mat4 bone_mats[100];
+uniform int has_bones;
 
 void main()
 {
 	vec4 final_position = vec4(0);
-	for (int i = 0; i < 4; i++)
+	if (has_bones == 1)
 	{
-		final_position += bone_mats[bone_ids[i]] * vec4(position, 1.0f) * bone_weights[i];
+		for (int i = 0; i < 4; i++)
+		{
+			final_position += bone_mats[bone_ids[i]] * vec4(position, 1.0f) * bone_weights[i];
+		}
+	}
+	else
+	{
+		final_position = vec4(position, 1.0f);
 	}
 
 	tex_coord = texture_coordinate;

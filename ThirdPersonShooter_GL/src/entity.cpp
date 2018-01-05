@@ -36,17 +36,17 @@ void Entity::add_component(std::string type)
 	components.push_back(component);
 }
 
-Component* Entity::get_component(std::string type)
-{
-	for (GLuint i = 0; i < components.size(); i++)
-	{
-		if (components[i]->type_name() == type)
-		{
-			return components[i];
-		}
-	}
-	return nullptr;
-}
+//Component* Entity::get_component(std::string type)
+//{
+//	for (GLuint i = 0; i < components.size(); i++)
+//	{
+//		if (components[i]->type_name() == type)
+//		{
+//			return components[i];
+//		}
+//	}
+//	return nullptr;
+//}
 
 Component* Entity::get_component(GLuint i)
 {

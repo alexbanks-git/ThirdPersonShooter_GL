@@ -3,7 +3,7 @@
 
 Camera::Camera(glm::vec3 pos, GLfloat field_of_view, GLfloat near, GLfloat far)
 {
-	transform.translate(pos);
+	transform.local_translate(pos);
 	field_of_view = field_of_view;
 	near_clip = near;
 	far_clip = far;
@@ -31,7 +31,7 @@ GLfloat Camera::get_field_of_view()
 void Camera::translate(GLfloat x, GLfloat y, GLfloat z)
 {
 	glm::mat3 rot = glm::mat3(transform.right, transform.up, transform.forward);
-	transform.translate(rot * glm::vec3(x, y, z));
+	transform.local_translate(rot * glm::vec3(x, y, z));
 }
 
 void Camera::rotate(GLfloat pitch, GLfloat yaw, GLfloat roll)
@@ -51,8 +51,7 @@ void Camera::look_at(Transform target)
 void Camera::follow(Transform target, GLfloat offset)
 {
 	glm::vec3 delta = (target.position + transform.forward * offset) - (transform.position);
-	
-	transform.translate(delta);
+	transform.local_translate(delta);
 }
 
 void Camera::rotate_around(Transform target, GLfloat yaw, GLfloat pitch)

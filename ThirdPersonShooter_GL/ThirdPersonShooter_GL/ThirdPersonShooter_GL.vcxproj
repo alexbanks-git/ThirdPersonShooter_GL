@@ -62,6 +62,7 @@
     <ClInclude Include="..\include\transform.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\shaders\default_vertex_shader.glsl" />
     <None Include="..\shaders\fragment_shader.glsl" />
     <None Include="..\shaders\physics_fragment_shader.glsl" />
     <None Include="..\shaders\physics_vertex_shader.glsl" />

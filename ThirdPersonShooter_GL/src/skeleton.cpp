@@ -82,6 +82,11 @@ Skeleton::Bone* Skeleton::get_first_bone()
 
 void Skeleton::calculate_bone_positions(Bone* bone)
 {
+	if (bone == nullptr)
+	{
+		std::clog << "Skeleton::calculate_bone_positions: bone is null" << std::endl;
+		return;
+	}
 	if (bone->parent_index != -1)
 	{
 		bone->final_transform = bones[bone->parent_index].final_transform * bone->transform;

@@ -9,6 +9,11 @@ void EntityManager::init()
 
 void EntityManager::add_entity(Entity* entity)
 {
+	if (entity == nullptr)
+	{
+		std::clog << "EntityManager::add_entity: entity is null" << std::endl;
+		return;
+	}
 	entities.push_back(entity);
 }
 

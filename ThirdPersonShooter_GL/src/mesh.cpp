@@ -1,3 +1,4 @@
+#include <string>
 #include "graphics.hpp"
 #include "mesh.hpp"
 
@@ -113,37 +114,24 @@ GLuint Mesh::get_vertex_count()
 
 void Mesh::bind()
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, diffuse_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "diffuse_texture"), 0);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, specular_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "specular_texture"), 1);
-
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, normal_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "normal_map"), 2);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	bind_texture(diffuse_id, "diffuse_texture", 0);
+	bind_texture(specular_id, "specular_texture", 1);
+	bind_texture(normal_id, "normal_map", 2);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(vao);
+}
+
+void Mesh::bind_texture(GLuint id, std::string location, GLuint num)
+{
+	glActiveTexture(GL_TEXTURE0+num);
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), location.c_str()), num);
 }
 
 void Mesh::create()
@@ -182,54 +170,13 @@ void Mesh::create()
 	max_bounds = max;
 
 	SDL_Surface* diffuse_surface = IMG_Load(diffuse_texture.c_str());
+	create_texture(diffuse_surface, &diffuse_id);
+
 	SDL_Surface* specular_surface = IMG_Load(specular_texture.c_str());
+	create_texture(specular_surface, &specular_id);
+
 	SDL_Surface* normal_surface = IMG_Load(normal_map.c_str());
-
-	SDL_PixelFormat* diffuse_format = diffuse_surface->format;
-	SDL_PixelFormat* specular_format = specular_surface->format;
-	SDL_PixelFormat* normal_format = normal_surface->format;
-
-	GLint type;
-
-	if (diffuse_format->Amask)
-	{
-		type = GL_RGBA;
-	}
-	else
-	{
-		type = GL_RGB;
-	}
-	glGenTextures(1, &diffuse_id);
-	glBindTexture(GL_TEXTURE_2D, diffuse_id);
-	glTexImage2D(GL_TEXTURE_2D, 0, type, diffuse_surface->w, diffuse_surface->h, 0, type, GL_UNSIGNED_BYTE, diffuse_surface->pixels);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	if (specular_format->Amask)
-	{
-		type = GL_RGBA;
-	}
-	else
-	{
-		type = GL_RGB;
-	}
-	glGenTextures(1, &specular_id);
-	glBindTexture(GL_TEXTURE_2D, specular_id);
-	glTexImage2D(GL_TEXTURE_2D, 0, type, specular_surface->w, specular_surface->h, 0, type, GL_UNSIGNED_BYTE, specular_surface->pixels);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	if (normal_format->Amask)
-	{
-		type = GL_RGBA;
-	}
-	else
-	{
-		type = GL_RGB;
-	}
-	glGenTextures(1, &normal_id);
-	glBindTexture(GL_TEXTURE_2D, normal_id);
-	glTexImage2D(GL_TEXTURE_2D, 0, type, normal_surface->w, normal_surface->h, 0, type, GL_UNSIGNED_BYTE, normal_surface->pixels);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	create_texture(normal_surface, &normal_id);
 
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
@@ -266,15 +213,7 @@ void Mesh::create()
 	glEnableVertexAttribArray(6);
 	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, bone_weights));
 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 	glBindVertexArray(0);
-
-	//SDL_FreeSurface(diffuse_surface);
-	//SDL_FreeSurface(specular_surface);
-	//SDL_FreeSurface(normal_surface);
 }
 
 glm::vec3 Mesh::get_min_bounds()
@@ -284,6 +223,39 @@ glm::vec3 Mesh::get_min_bounds()
 
 glm::vec3 Mesh::get_max_bounds()
 {
-
 	return max_bounds;
+}
+
+void Mesh::create_texture(SDL_Surface* surface, GLuint* id)
+{
+	if (id == nullptr)
+	{
+		std::clog << "Mesh::create_texture: id is null" << std::endl;
+		return;
+	}
+
+	glGenTextures(1, id);
+	glBindTexture(GL_TEXTURE_2D, *id);
+
+	if (surface == nullptr)
+	{
+		std::clog << "Mesh::create_texture: surface is null" << std::endl;
+		glm::vec2 pixels = glm::vec2(0.0f, 0.0f);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1, 1, 0, GL_RGB, GL_UNSIGNED_BYTE, glm::value_ptr(pixels));
+	}
+	else
+	{
+		SDL_PixelFormat* pixel_format = surface->format;
+		GLuint type;
+
+		if (pixel_format->Amask)
+			type = GL_RGBA;
+		else
+			type = GL_RGB;
+
+		glTexImage2D(GL_TEXTURE_2D, 0, type, surface->w, surface->h, 0, type, GL_UNSIGNED_BYTE, surface->pixels);
+
+		SDL_FreeSurface(surface);
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

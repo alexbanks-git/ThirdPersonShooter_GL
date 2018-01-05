@@ -24,7 +24,8 @@ void LevelManager::init_level()
 void LevelManager::update_level()
 {
 	EntityManager::update_entities();
-	PhysicsWorld::update_physics_world(1/30.0f, 10.0f);
+	
+	PhysicsWorld::update_physics_world(Graphics::get_elapsed_time(), 7.0f);
 }
 
 void LevelManager::draw_level()

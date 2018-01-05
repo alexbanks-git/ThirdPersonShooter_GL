@@ -13,10 +13,11 @@ private:
 	btScalar mass;
 	btVector3 inertia;
 	btDefaultMotionState* motion_state;
-	GLfloat height;
 	btRigidBody* rigid_body;
+	glm::vec3 localVelocity;
 public:
-	
+	GLfloat height;
+	GLfloat width;
 	/**
 	 * @brief Creates a rigid body with a specified shape and size.
 	 * @param shape the shape of the rigid body
@@ -60,4 +61,16 @@ public:
 	 * @param velocity the direction and speed to move the physics body
 	 */
 	void move(glm::vec3 velocity);
+
+	/**
+	 * @brief Applies an instant force to the physics body.
+	 * @param force the amount and direction of the force
+	 */
+	void apply_impulse(glm::vec3 force);
+
+	void set_velocity(glm::vec3 vel);
+
+	glm::vec3 linear_velocity();
+
+	glm::vec3 local_linear_velocity();
 };

@@ -94,11 +94,6 @@ std::string AnimationController::type_name()
 	return "AnimationController";
 }
 
-void AnimationController::set_speed(GLfloat anim_speed)
-{
-
-}
-
 void AnimationController::attach_skeleton(Skeleton* skel)
 {
 	skeleton = skel;

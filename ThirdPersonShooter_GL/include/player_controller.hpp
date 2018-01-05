@@ -5,6 +5,8 @@ class PlayerController : public ControllerComponent
 {
 private:
 	Transform* camera_transform;
+	enum class Action {None, Shooting, Aiming};
+	Action current_action;
 public:
 	/**
 	 * @brief Handles player input 

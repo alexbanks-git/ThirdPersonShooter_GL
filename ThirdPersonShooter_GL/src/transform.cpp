@@ -5,9 +5,15 @@
 #include "glm/gtc/matrix_access.hpp"
 
 
-void Transform::translate(glm::vec3 pos)
+void Transform::local_translate(glm::vec3 pos)
 {
 	transform_mat = glm::translate(transform_mat, pos);
+	position = glm::vec3(transform_mat[3][0], transform_mat[3][1], transform_mat[3][2]);
+}
+
+void Transform::global_translate(glm::vec3 pos)
+{
+	transform_mat = glm::translate(glm::mat4(), pos) * transform_mat;
 	position = glm::vec3(transform_mat[3][0], transform_mat[3][1], transform_mat[3][2]);
 }
 
@@ -17,11 +23,6 @@ void Transform::rotate(GLfloat angle, glm::vec3 axis)
 	forward = glm::normalize(glm::rotate(forward, glm::radians(angle), axis));
 	right = glm::normalize(glm::cross(world_up_vector(), forward));
 	up = glm::normalize(glm::cross(forward, right));
-}
-
-void Transform::resize()
-{
-
 }
 
 glm::vec3 Transform::world_up_vector()
@@ -41,11 +42,13 @@ glm::vec3 Transform::get_position()
 
 glm::mat4 Transform::get_transformation()
 {
-	/*glm::vec4 column_1 = glm::vec4(right.x, right.y, right.z, 0.0f);
-	glm::vec4 column_2 = glm::vec4(up.x, up.y, up.z, 0.0f);
-	glm::vec4 column_3 = glm::vec4(forward.x, forward.y, forward.z, 0.0f);
-	glm::vec4 column_4 = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	glm::mat4 mat_4 = glm::mat4(column_1, column_2, column_3, column_4);
-	mat_4 = glm::translate(mat_4, position);*/
 	return transform_mat;
+}
+
+void Transform::look_at(Transform target)
+{
+	forward = glm::normalize(target.position - position);
+	right = glm::normalize(glm::cross(world_up_vector(), forward));
+	up = glm::normalize(glm::cross(forward, right));
+	transform_mat = glm::lookAt(position, position + forward, world_up_vector());
 }

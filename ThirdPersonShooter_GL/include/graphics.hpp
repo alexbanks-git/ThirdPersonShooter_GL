@@ -81,4 +81,10 @@ public:
 	 * @returns the debug shader
 	 */
 	static GLuint get_debug_shader();
+
+	/**
+	 * @brief Retrieves the time passed since the last update.
+	 * @returns the time passed since the last update
+	 */
+	static GLfloat get_elapsed_time();
 };

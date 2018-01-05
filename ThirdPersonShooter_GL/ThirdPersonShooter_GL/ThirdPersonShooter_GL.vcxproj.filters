@@ -99,6 +99,9 @@
     <None Include="..\shaders\skybox_fragment_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="..\shaders\default_vertex_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\graphics.hpp">

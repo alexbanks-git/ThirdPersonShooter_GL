@@ -11,10 +11,18 @@ void Model::set_meshes(std::vector<Mesh> data)
 void Model::create(std::string path, std::vector<std::string> anim_paths, AnimationController* animator)
 {
 	skeleton = Skeleton();
-	AssetLoader::model_from_file(path.c_str(), this, anim_paths, animator);
+	if (anim_paths.size() > 0)
+	{
+		AssetLoader::model_from_file(path.c_str(), this, anim_paths, animator);
+		skeleton.init();
+	}
+	else
+	{
+		AssetLoader::model_from_file(path.c_str(), this);
+	}
+
 	if (animator != nullptr)
 		animator->attach_skeleton(&skeleton);
-	skeleton.init();
 
 	for (GLuint i = 0; i < meshes.size(); i++)
 	{
@@ -28,8 +36,19 @@ void Model::draw()
 	GLuint model_location = glGetUniformLocation(Graphics::get_default_shader(), "model");
 	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform->get_transformation()));
 
-	GLuint bone_loc = glGetUniformLocation(Graphics::get_default_shader(), "bone_mats");
-	glUniformMatrix4fv(bone_loc, skeleton.size(), GL_FALSE, glm::value_ptr(skeleton.bone_transforms[0]));
+	if (skeleton.size() > 0)
+	{
+		GLuint bone_loc = glGetUniformLocation(Graphics::get_default_shader(), "bone_mats");
+		glUniformMatrix4fv(bone_loc, skeleton.size(), GL_FALSE, glm::value_ptr(skeleton.bone_transforms[0]));
+
+		GLint flag_loc = glGetUniformLocation(Graphics::get_default_shader(), "has_bones");
+		glUniform1i(flag_loc, 1);
+	}
+	else
+	{
+		GLint flag_loc = glGetUniformLocation(Graphics::get_default_shader(), "has_bones");
+		glUniform1i(flag_loc, 0);
+	}
 
 	for (GLuint i = 0; i < meshes.size(); i++)
 	{

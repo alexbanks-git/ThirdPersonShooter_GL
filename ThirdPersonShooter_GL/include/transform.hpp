@@ -20,17 +20,14 @@ public:
 	 * @brief Translates the transform to the specified location.
 	 * @param pos to position to translate the transform to
 	 */
-	void translate(glm::vec3 pos);
+	void local_translate(glm::vec3 pos);
+
+	void global_translate(glm::vec3 pos);
 
 	/**
 	 * @brief Rotates the transform by the specified angle.
 	 */
 	void rotate(GLfloat angle, glm::vec3 axis);
-
-	/**
-	 * @brief Scales the transform by the specified amount.
-	 */
-	void resize();
 
 	/**
 	 * @brief Retrieves the world up direction
@@ -43,4 +40,6 @@ public:
 	glm::mat3 get_rotation();
 
 	glm::vec3 get_position();
+
+	void look_at(Transform target);
 };
