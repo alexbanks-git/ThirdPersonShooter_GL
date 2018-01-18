@@ -14,9 +14,26 @@ uniform sampler2D normal_map;
 void main()
 {
 	vec3 frag_normal = texture(normal_map, tex_coord).xyz;
+	vec4 diffuse = vec4(0);
+	vec4 specular = vec4(0);
 
-	vec4 diffuse = texture(diffuse_texture, tex_coord);
-	vec4 specular = texture(specular_texture, tex_coord);
+	if (textureSize(diffuse_texture, 0).x == 1)
+	{
+		diffuse = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+	else
+	{
+		diffuse = texture(diffuse_texture, tex_coord);
+	}
+
+	if (textureSize(specular_texture, 0).x == 1)
+	{
+		specular = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	}
+	else
+	{
+		specular = texture(specular_texture, tex_coord);
+	}
 
 	frag_normal = normalize(frag_normal * 2.0f - 1.0f);
 	frag_normal = normalize(tbn_mat * frag_normal);

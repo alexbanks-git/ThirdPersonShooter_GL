@@ -1,0 +1,242 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  player_controller.cpp
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+..\src\player_controller.cpp(83): warning C4244: '=': conversion from 'Uint32' to 'GLfloat', possible loss of data
+  
+  Searching libraries
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+  
+  Finished searching libraries
+     Creating library .\ThirdPersonShooter_GL.lib and object .\ThirdPersonShooter_GL.exp
+  
+  Searching libraries
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+  
+  Finished searching libraries
+  Generating code
+  0 of 3048 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  
+  Searching libraries
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+  
+  Finished searching libraries
+  
+  Searching libraries
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletCollision.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\BulletDynamics.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+  
+  Finished searching libraries
+  ThirdPersonShooter_GL.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\ThirdPersonShooter_GL\.\ThirdPersonShooter_GL.exe
+  ThirdPersonShooter_GL.vcxproj -> .\ThirdPersonShooter_GL.pdb (Full PDB)

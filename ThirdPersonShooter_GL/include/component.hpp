@@ -5,15 +5,16 @@ class Entity;
 class Component
 {
 protected:
-	Entity* owner;
+	Entity& owner;
 public:
-	Transform* transform;
-	
+	Transform& transform;
+	Component(Entity* entity);
+
 	/**
-	 * @brief Sets the entity that this component belongs to.
-	 * @param entity the owner of this component
+	 * @brief Returns a reference to the component's owner entity
+	 * @returns a reference to the owner entity
 	 */
-	virtual void set_owner(Entity* entity);
+	virtual Entity& get_owner();
 
 	/**
 	 * @brief Retrieves the type of the class.

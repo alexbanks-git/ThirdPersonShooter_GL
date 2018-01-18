@@ -2,9 +2,14 @@
 #include "graphics.hpp"
 #include "asset_loader.hpp"
 
+Model::Model(Entity* entity) : DrawableComponent(entity)
+{
+	material = 0;
+
+}
+
 void Model::set_meshes(std::vector<Mesh> data)
 {
-	//meshes = data;
 
 }
 
@@ -28,13 +33,12 @@ void Model::create(std::string path, std::vector<std::string> anim_paths, Animat
 	{
 		meshes[i].create();
 	}
-
 }
 
 void Model::draw()
 {
 	GLuint model_location = glGetUniformLocation(Graphics::get_default_shader(), "model");
-	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform->get_transformation()));
+	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform.get_transformation()));
 
 	if (skeleton.size() > 0)
 	{
@@ -46,6 +50,10 @@ void Model::draw()
 	}
 	else
 	{
+		//glm::mat4 new_matrix = transform.get_transformation();
+		//new_matrix[3][1] -= get_max_bounds().y / 2;
+		//glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(new_matrix));
+
 		GLint flag_loc = glGetUniformLocation(Graphics::get_default_shader(), "has_bones");
 		glUniform1i(flag_loc, 0);
 	}

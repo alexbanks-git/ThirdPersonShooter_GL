@@ -1,1 +1,12 @@
-﻿  LinearMath.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib
+﻿  btAlignedAllocator.cpp
+  btConvexHull.cpp
+  btConvexHullComputer.cpp
+  btGeometryUtil.cpp
+  btPolarDecomposition.cpp
+  btQuickprof.cpp
+  btSerializer.cpp
+  btSerializer64.cpp
+  btThreads.cpp
+  btVector3.cpp
+  Generating Code...
+  LinearMath.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib

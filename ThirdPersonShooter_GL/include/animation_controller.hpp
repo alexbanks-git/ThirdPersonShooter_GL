@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "GL/glew.h"
 #include "controller_component.hpp"
 #include "skeleton.hpp"
@@ -13,6 +14,7 @@ private:
 	GLuint elapsed_time;
 
 public:
+	AnimationController(Entity* entity);
 	/**
 	 * @brief Updates the pose of the model attached to this animation controller.
 	 */
@@ -41,4 +43,10 @@ public:
 	 * @param index the index of the animationto change to
 	 */
 	void change_animation(GLuint index);
+
+	/**
+	 * @brief Returns a pointer to the skeleton attached to this animation controller
+	 * @returns a pointer to the skeleton
+	 */
+	Skeleton* get_skeleton();
 };

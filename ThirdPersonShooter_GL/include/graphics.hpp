@@ -17,7 +17,7 @@ public:
 	 * @param fps the target frames per second
 	 * @returns 0 on error, or 1 otherwise
 	 */
-	static GLint init_graphics(GLint w, GLint h, GLuint fps);
+	static GLint init_graphics(GLint w, GLint h, GLfloat fps);
 
 	/**
 	 * @brief Swaps buffers and updates the game by one frame.
@@ -65,6 +65,12 @@ public:
 	static GLuint get_default_shader();
 
 	/**
+	* @brief Retrieves the user interface shader.
+	* @returns the user interface shader
+	*/
+	static GLuint get_user_interface_shader();
+
+	/**
 	 * @brief Retrieves the skybox shader.
 	 * @returns the skybox shader
 	 */
@@ -87,4 +93,10 @@ public:
 	 * @returns the time passed since the last update
 	 */
 	static GLfloat get_elapsed_time();
+
+	/**
+	 * @brief Returns the image shader.
+	 * @returns the image shader
+	 */
+	static GLuint Graphics::get_image_shader();
 };

@@ -24,16 +24,25 @@ void LevelManager::init_level()
 void LevelManager::update_level()
 {
 	EntityManager::update_entities();
-	
-	PhysicsWorld::update_physics_world(Graphics::get_elapsed_time(), 7.0f);
+	PhysicsWorld::update_physics_world(Graphics::get_elapsed_time(), 10);
 }
 
 void LevelManager::draw_level()
 {
-	EntityManager::draw_entities();
+	EntityManager::draw_entities(0);
+}
+
+void LevelManager::draw_ui()
+{
+	EntityManager::draw_entities(1);
 }
 
 void LevelManager::draw_skybox()
 {
 	current_skybox.draw_skybox();
+}
+
+void LevelManager::draw_images()
+{
+	EntityManager::draw_entities(2);
 }

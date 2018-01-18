@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "GL/glew.h"
 #include <btBulletDynamicsCommon.h>
 #include "component.hpp"
@@ -8,33 +9,29 @@ class PhysicsBody : public Component
 {
 
 private:
-	
-	btCollisionShape* collision_shape;
-	btScalar mass;
-	btVector3 inertia;
-	btDefaultMotionState* motion_state;
-	btRigidBody* rigid_body;
-	glm::vec3 localVelocity;
+	std::unique_ptr<btCollisionShape> collision_shape;
+	btDefaultMotionState motion_state;
+	std::unique_ptr<btRigidBody> rigid_body;
+	bool kinematic;
 public:
+	PhysicsBody(Entity* entity);
 	GLfloat height;
 	GLfloat width;
 	/**
-	 * @brief Creates a rigid body with a specified shape and size.
-	 * @param shape the shape of the rigid body
-	 * @param width the width of the rigid body
-	 * @param height the height of the rigid body
-	 * @param depth the depth of the rigid body
+	 * @brief Creates a physics body with a specified shape and size.
+	 * @param shape the shape of the physics body
+	 * @param size the width, height, and depth of the physics body
 	 */
 	void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size);
 
 	/**
-	 * @brief Sets the mass of the rigid body.
+	 * @brief Sets the mass of the physics body.
 	 * @param m the mass to be used
 	 */
 	void set_mass(GLfloat m);
 
 	/**
-	 * @brief Sets the inertia of the rigid body.
+	 * @brief Sets the inertia of the physics body.
 	 * @param i the inertia to be used
 	 */
 	void set_inertia(glm::vec3 i);
@@ -46,7 +43,7 @@ public:
 	std::string type_name();
 
 	/**
-	 * @brief Keeps the physics body's transform updated.
+	 * @brief Updates the physics body's transform.
 	 */
 	void update();
 
@@ -68,9 +65,29 @@ public:
 	 */
 	void apply_impulse(glm::vec3 force);
 
+	/**
+	 * @brief Sets the velocity of the physics body.
+	 * @param vel the value to set the physics body's velocity to
+	 */
 	void set_velocity(glm::vec3 vel);
 
+	/**
+	 * @brief Returns the linear velocity of the physics body.
+	 * @returns the linear velocity 
+	 */
 	glm::vec3 linear_velocity();
 
-	glm::vec3 local_linear_velocity();
+	/**
+	 * @brief Returns whether or not the physics body is kinematic.
+	 * @returns true if the physics body is kinematic, and false if not
+	 */
+	bool is_kinematic();
+
+	/**
+	 * @brief Sets whether or not the physics body is kinematic
+	 * @param value 
+	 */
+	void set_kinematic(bool value);
+
+	glm::mat3 to_glm_mat(btMatrix3x3& matrix);
 };

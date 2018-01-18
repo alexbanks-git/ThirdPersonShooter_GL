@@ -1,8 +1,12 @@
 #include "controller_component.hpp"
 
-void ControllerComponent::update()
+ControllerComponent::ControllerComponent(Entity* entity) : Component(entity)
 {
 
+}
+
+void ControllerComponent::update()
+{
 }
 
 std::string ControllerComponent::type_name()

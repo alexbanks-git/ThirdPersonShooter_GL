@@ -33,6 +33,7 @@ private:
 		std::vector<GLuint> children;
 		std::vector<std::vector<PositionKey>> position_keys;
 		std::vector<std::vector<RotationKey>> rotation_keys;
+		glm::mat4 other_transform;
 	}Bone;
 
 	std::vector<Bone> bones;
@@ -80,10 +81,10 @@ public:
 
 	/**
 	 * @brief Retrieves the bone at the specified index
-	 * @param i the index of the bone
+	 * @param index the index of the bone
 	 * @returns the bone at the specified index
 	 */
-	Bone* get_bone_at(GLuint i);
+	Bone* get_bone_at(GLuint index);
 
 	/**
 	 * @brief Retrieves the last bone in the skeleton's bone hierarchy
@@ -107,4 +108,12 @@ public:
 	 * @brief Sets the final transforms of the skeleton's bones
 	 */
 	void init();
+
+	/**
+	 * @brief Rotates the bone at the specified index.
+	 * @param bone_index the index of the bone
+	 * @param angle the angle to rotate the bone by
+	 * @param axis the axis to perform the rotation around
+	 */
+	void rotate_bone(GLuint bone_index, GLfloat angle, glm::vec3 axis);
 };

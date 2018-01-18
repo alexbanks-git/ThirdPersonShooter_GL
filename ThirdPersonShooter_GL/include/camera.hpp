@@ -1,49 +1,28 @@
+#pragma once
+#include "component.hpp"
+
 #include "GL/glew.h"
 #include "glm/glm.hpp"
 #include "transform.hpp"
 
-class Camera
+class Camera : public Component
 {
 private:
 	GLfloat near_clip;
 	GLfloat far_clip;
 	GLfloat field_of_view;
 public:
-	Transform transform;
+	Camera(Entity* entity);
 
 	/**
-	 * @brief Initializes the camera's members.
-	 * @param pos the position of the camera
-	 * @param field_of_view the field of view of the camera
-	 * @param near the near clipping plane of the camera
-	 * @param far the far clipping plane of the camera
-	 */
-	Camera(glm::vec3 pos, GLfloat field_of_view, GLfloat near, GLfloat far);
-	/**
-	 * @brief Translates the camera.
-	 * @param x the amount to translate the camera on the x-axis
-	 * @param y the amount to translate the camera on the y-axis
-	 * @param z the amount to translate the camera on the z-axis
-	 */
-	void translate(GLfloat x, GLfloat y, GLfloat z);
-
-	/**
-	 * @brief Rotates the camera.
-	 * @param pitch the amount to rotate around the x-axis
-	 * @param yaw the amount to rotate around the y-axis
-	 * @param roll the amount to rotate around the z-axis
-	 */
-	void rotate(GLfloat pitch, GLfloat yaw, GLfloat roll);
-
-	/**
-	 * @brief Retrieves the far clip plane of the camera.
-	 * @returns the far clip plane
+	 * @brief Returns the far clipping plane of the camera
+	 * @returns the far clipping plane
 	 */
 	GLfloat far_clip_plane();
 
 	/**
-	 * @brief Retrieves the near clip plane of the camera.
-	 * @returns the near clip plane
+	 * @brief Retrieves the near clipping plane of the camera
+	 * @returns the near clipping plane
 	 */
 	GLfloat near_clip_plane();
 
@@ -53,9 +32,31 @@ public:
 	 */
 	GLfloat get_field_of_view();
 
-	void look_at(Transform target);
+	/**
+	 * @brief Rotates the camera around the specified position
+	 * @param target the position to rotate around
+	 * @param yaw the amount to rotate around the y-axis
+	 * @param pitch the amount to rotate around the x-axis
+	 */
+	void rotate_around(glm::vec3 target, GLfloat yaw, GLfloat pitch);
 
-	void rotate_around(Transform target, GLfloat yaw, GLfloat pitch);
+	/**
+	 * @brief Makes the camera follow the specified target
+	 * @param target the target vector to follow
+	 * @param distance the distance to follow the target from
+	 */
+	void follow(glm::vec3 target, GLfloat distance);
 
-	void follow(Transform target, GLfloat offset);
+	/**
+	 * @brief Initializes the field of view of the camera
+	 * @param field_of_view the value to set the camera's field of view
+	 */
+	void set_field_of_view(GLfloat field_of_view);
+
+	/**
+	 * @brief Initializes the camera's clipping planes
+	 * @param near the value to set the camera's near clipping plane
+	 * @param far the value to set the camera's far clipping plane
+	 */
+	void set_clipping_planes(GLfloat near, GLfloat far);
 };

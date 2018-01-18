@@ -65,9 +65,9 @@ void Skeleton::add_rotation_key(GLuint index, std::string name, GLfloat time, gl
 	}
 }
 
-Skeleton::Bone* Skeleton::get_bone_at(GLuint i)
+Skeleton::Bone* Skeleton::get_bone_at(GLuint index)
 {
-	return &bones[i];
+	return &bones[index];
 }
 
 Skeleton::Bone* Skeleton::get_last_bone()
@@ -78,6 +78,11 @@ Skeleton::Bone* Skeleton::get_last_bone()
 Skeleton::Bone* Skeleton::get_first_bone()
 {
 	return &bones[0];
+}
+
+void Skeleton::rotate_bone(GLuint bone_index, GLfloat angle, glm::vec3 axis)
+{
+	bones[bone_index].other_transform = glm::rotate(glm::mat4(), angle, axis);
 }
 
 void Skeleton::calculate_bone_positions(Bone* bone)

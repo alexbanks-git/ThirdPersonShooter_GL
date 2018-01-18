@@ -1,15 +1,14 @@
 #include "component.hpp"
 #include "entity.hpp"
 
-void Component::set_owner(Entity* entity)
+Component::Component(Entity* entity) : owner(*entity), transform(owner.transform)
 {
-	if (entity == nullptr)
-	{
-		std::clog << "Component::set_owner: entity is null" << std::endl;
-		return;
-	}
-	owner = entity;
-	transform = &entity->transform;
+
+}
+
+Entity& Component::get_owner()
+{
+	return owner;
 }
 
 std::string Component::type_name()

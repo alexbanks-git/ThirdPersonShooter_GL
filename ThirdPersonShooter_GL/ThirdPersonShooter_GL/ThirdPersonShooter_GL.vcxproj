@@ -19,16 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\camera_controller.cpp" />
     <ClCompile Include="..\src\animation_controller.cpp" />
     <ClCompile Include="..\src\asset_loader.cpp" />
+    <ClCompile Include="..\src\bullet_controller.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\component.cpp" />
     <ClCompile Include="..\src\controller_component.cpp" />
     <ClCompile Include="..\src\drawable_component.cpp" />
+    <ClCompile Include="..\src\enemy_controller.cpp" />
     <ClCompile Include="..\src\entity.cpp" />
     <ClCompile Include="..\src\entity_manager.cpp" />
     <ClCompile Include="..\src\game.cpp" />
     <ClCompile Include="..\src\graphics.cpp" />
+    <ClCompile Include="..\src\image.cpp" />
     <ClCompile Include="..\src\level_manager.cpp" />
     <ClCompile Include="..\src\mesh.cpp" />
     <ClCompile Include="..\src\model.cpp" />
@@ -38,18 +42,23 @@
     <ClCompile Include="..\src\player_controller.cpp" />
     <ClCompile Include="..\src\skeleton.cpp" />
     <ClCompile Include="..\src\skybox.cpp" />
+    <ClCompile Include="..\src\spawn.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\animation_controller.hpp" />
     <ClInclude Include="..\include\asset_loader.hpp" />
+    <ClInclude Include="..\include\bullet_controller.hpp" />
     <ClInclude Include="..\include\camera.hpp" />
+    <ClInclude Include="..\include\camera_controller.hpp" />
     <ClInclude Include="..\include\component.hpp" />
     <ClInclude Include="..\include\controller_component.hpp" />
     <ClInclude Include="..\include\drawable_component.hpp" />
+    <ClInclude Include="..\include\enemy_controller.hpp" />
     <ClInclude Include="..\include\entity.hpp" />
     <ClInclude Include="..\include\entity_manager.hpp" />
     <ClInclude Include="..\include\graphics.hpp" />
+    <ClInclude Include="..\include\image.hpp" />
     <ClInclude Include="..\include\level_manager.hpp" />
     <ClInclude Include="..\include\mesh.hpp" />
     <ClInclude Include="..\include\model.hpp" />
@@ -59,10 +68,14 @@
     <ClInclude Include="..\include\player_controller.hpp" />
     <ClInclude Include="..\include\skeleton.hpp" />
     <ClInclude Include="..\include\skybox.hpp" />
+    <ClInclude Include="..\include\spawn.hpp" />
     <ClInclude Include="..\include\transform.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\shaders\default_vertex_shader.glsl" />
+    <None Include="..\shaders\image_fragment_shader.glsl" />
+    <None Include="..\shaders\image_vertex_shader.glsl" />
+    <None Include="..\shaders\ui_fragment_shader.glsl" />
+    <None Include="..\shaders\ui_vertex_shader.glsl" />
     <None Include="..\shaders\fragment_shader.glsl" />
     <None Include="..\shaders\physics_fragment_shader.glsl" />
     <None Include="..\shaders\physics_vertex_shader.glsl" />
@@ -134,10 +147,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\include;C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\include;C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86;$(LibraryPath)</LibraryPath>
+    <OutDir>.</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -145,11 +160,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalOptions>/VERBOSE:LIB %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,13 +183,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <AdditionalOptions>/VERBOSE:LIB %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -114,24 +114,24 @@ GLuint Mesh::get_vertex_count()
 
 void Mesh::bind()
 {
-	bind_texture(diffuse_id, "diffuse_texture", 0);
-	bind_texture(specular_id, "specular_texture", 1);
-	bind_texture(normal_id, "normal_map", 2);
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, diffuse_id);
+	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "diffuse_texture"), 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, specular_id);
+	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "specular_texture"), 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, normal_id);
+	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "normal_map"), 2);
+
 	glBindVertexArray(vao);
 }
 
 void Mesh::bind_texture(GLuint id, std::string location, GLuint num)
 {
-	glActiveTexture(GL_TEXTURE0+num);
-	glBindTexture(GL_TEXTURE_2D, id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), location.c_str()), num);
+	
 }
 
 void Mesh::create()
@@ -170,13 +170,13 @@ void Mesh::create()
 	max_bounds = max;
 
 	SDL_Surface* diffuse_surface = IMG_Load(diffuse_texture.c_str());
-	create_texture(diffuse_surface, &diffuse_id);
+	create_texture(diffuse_surface, &diffuse_id, "diffuse_texture", 0);
 
 	SDL_Surface* specular_surface = IMG_Load(specular_texture.c_str());
-	create_texture(specular_surface, &specular_id);
+	create_texture(specular_surface, &specular_id, "specular_texture", 1);
 
 	SDL_Surface* normal_surface = IMG_Load(normal_map.c_str());
-	create_texture(normal_surface, &normal_id);
+	create_texture(normal_surface, &normal_id, "normal_map", 2);
 
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
@@ -226,7 +226,7 @@ glm::vec3 Mesh::get_max_bounds()
 	return max_bounds;
 }
 
-void Mesh::create_texture(SDL_Surface* surface, GLuint* id)
+void Mesh::create_texture(SDL_Surface* surface, GLuint* id, std::string location, GLuint num)
 {
 	if (id == nullptr)
 	{
@@ -236,12 +236,12 @@ void Mesh::create_texture(SDL_Surface* surface, GLuint* id)
 
 	glGenTextures(1, id);
 	glBindTexture(GL_TEXTURE_2D, *id);
+	GLubyte pixels[] = {0, 0, 0, 255};
 
 	if (surface == nullptr)
 	{
 		std::clog << "Mesh::create_texture: surface is null" << std::endl;
-		glm::vec2 pixels = glm::vec2(0.0f, 0.0f);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1, 1, 0, GL_RGB, GL_UNSIGNED_BYTE, glm::value_ptr(pixels));
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 	}
 	else
 	{
@@ -257,5 +257,11 @@ void Mesh::create_texture(SDL_Surface* surface, GLuint* id)
 
 		SDL_FreeSurface(surface);
 	}
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	
 }

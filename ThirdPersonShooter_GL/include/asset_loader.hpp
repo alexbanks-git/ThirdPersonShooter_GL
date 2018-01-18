@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <vector>
 #include "model.hpp"
 #include "animation_controller.hpp"
@@ -18,12 +19,18 @@ private:
 	 * @param node the base node of the hierarchy
 	 * @param skeleton the skeleton to initialize
 	 */
-	static void setup_skeleton(aiNode* node, Skeleton* skeleton);
+	static void setup_bone_transforms(aiNode* node, Skeleton* skeleton);
+
+	static void setup_model(aiNode* node, Model& model);
+	static void setup_mesh(aiMesh* ai_mesh, Model& model, Mesh& mesh);
+	static void setup_skinning_info(aiBone* ai_bone, Mesh& mesh, Skeleton& skeleton);
+	static void setup_animations(const aiScene* scene, GLuint index, Model& model, AnimationController& animator);
 public:
 	/**
-	* @brief Loads a model from an OBJ or FBX file.
+	* @brief Loads a model from an FBX file.
 	* @param path the path of the file
 	* @param animation_paths the paths to the animations to be used for the model
+	* @param animator the animation controller attached to the entity that the model belongs to
 	*/
 	static void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths=std::vector<std::string>(), AnimationController* animator=nullptr);
 };

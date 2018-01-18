@@ -2,27 +2,51 @@
 #include "SDL.h"
 #include "player_controller.hpp"
 #include "entity.hpp"
+#include "entity_manager.hpp"
 #include "physics_body.hpp"
 #include "physics_world.hpp"
 #include "glm/gtx/vector_angle.hpp"
+#include "spawn.hpp"
+
+PlayerController::PlayerController(Entity* entity) : ControllerComponent(entity)
+{
+	jump_force = 1.5f;
+	run_speed = 5.0f;
+}
 
 void PlayerController::update()
 {
-	GLint mouseX = 0;
-	GLint mouseY = 0;
+	GLint mouse_x = 0;
+	GLint mouse_y = 0;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-	Uint32 mouse = SDL_GetMouseState(&mouseX, &mouseY);
-	PhysicsBody* body = owner->get_component<PhysicsBody>();
+	Uint32 mouse = SDL_GetMouseState(&mouse_x, &mouse_y);
+	PhysicsBody* body = owner.get_component<PhysicsBody>();
 	GLfloat forward_speed = 0.0f;
-	GLfloat jump_speed = 0.0f;
-	GLfloat rotation = 0.0f;
+	glm::vec3 direction = transform.forward;
+	glm::vec3 new_dir;
+	GLfloat bones_angle = 0.0f;
+
+	if ((new_dir = change_facing_direction(keystate)) != glm::vec3())
+	{
+		forward_speed = run_speed;
+		direction = new_dir;
+	}
 
 	if (mouse & SDL_BUTTON(SDL_BUTTON_LEFT))
 	{
+		bones_angle = camera->transform.forward.y;
 		current_action = Action::Shooting;
+		direction = camera->transform.forward;
+
+		if (!firing_bullet)
+		{
+			firing_bullet = true;
+		}
 	}
 	else if (mouse & SDL_BUTTON(SDL_BUTTON_RIGHT))
 	{
+		direction = camera->transform.forward;
+		bones_angle = camera->transform.forward.y;
 		current_action = Action::Aiming;
 	}
 	else
@@ -30,76 +54,137 @@ void PlayerController::update()
 		current_action = Action::None;
 	}
 
-	if (keystate[SDL_SCANCODE_W])
+	if (!(mouse & SDL_BUTTON(SDL_BUTTON_LEFT)))
 	{
-		forward_speed = 150.0f;
-		rotation = glm::angle(glm::cross(camera_transform->right, Transform::world_up_vector()), transform->forward);
-	}
-	else if (keystate[SDL_SCANCODE_S])
-	{
-		forward_speed = 150.0f;
-		rotation = glm::angle(-glm::cross(camera_transform->right, Transform::world_up_vector()), transform->forward);
+		firing_bullet = false;
 	}
 
-	if (keystate[SDL_SCANCODE_A])
-	{
-		forward_speed = 150.0f;
-		rotation = glm::angle(camera_transform->right, transform->forward);
-	}
-	else if (keystate[SDL_SCANCODE_D])
-	{
-		forward_speed = 150.0f;
-		rotation = glm::angle(-camera_transform->right, transform->forward);
-	}
+	rotate_bones(bones_angle);
 
 	if (PhysicsWorld::on_ground(body))
 	{
-		if (forward_speed == 0.0f)
+		if (forward_speed == 0.0f && body->linear_velocity().y >= -0.01f && body->linear_velocity().y <= 0.01f)
 		{
-			if (current_action == Action::Aiming)
-			{
-				rotation = glm::angle(glm::cross(camera_transform->right, Transform::world_up_vector()), transform->forward);
-				owner->get_component<AnimationController>()->change_animation(3);
-			}
-			else if (current_action == Action::Shooting)
-			{
-				rotation = glm::angle(glm::cross(camera_transform->right, Transform::world_up_vector()), transform->forward);
-				owner->get_component<AnimationController>()->change_animation(4);
-			}
-			else
-			{
-				owner->get_component<AnimationController>()->change_animation(0);
-			}
+			owner.get_component<AnimationController>()->change_animation(current_animation());
 		}
 		else
 		{
-			owner->get_component<AnimationController>()->change_animation(1);
+			owner.get_component<AnimationController>()->change_animation(1);
 		}
 
 		if (keystate[SDL_SCANCODE_SPACE])
 		{
-			jump_speed = 100.0f;
-			body->apply_impulse(Transform::world_up_vector() * jump_speed);
-			owner->get_component<AnimationController>()->change_animation(2);
+			jump();
 		}
 	}
-	transform->rotate(glm::degrees(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::vec3 forward = glm::cross(transform->right, Transform::world_up_vector());
-	glm::vec3 forward_velocity = forward * forward_speed;
+
+	if (SDL_GetTicks() - shoot_start_time >= 200 && firing_bullet)
+	{
+		shoot_start_time = SDL_GetTicks();
+		fire_bullet();
+
+	}
+	direction = glm::normalize(direction);
+	direction.y = 0;
+	transform.look_at(transform.position + direction);
+	glm::vec3 forward_velocity = direction * forward_speed;
 	body->set_velocity(glm::vec3(forward_velocity.x, body->linear_velocity().y, forward_velocity.z));
 }
 
-void PlayerController::set_camera(Transform* cam_transform)
+void PlayerController::set_camera(Camera* cam)
 {
-	if (transform == nullptr)
+	if (cam == nullptr)
 	{
-		std::clog << "PlayerController::set_camera: cam_transform is null" << std::endl;
+		std::clog << "PlayerController::set_camera: cam is null" << std::endl;
 		return;
 	}
-	camera_transform = cam_transform;
+	camera = cam;
 }
 
 std::string PlayerController::type_name()
 {
 	return "PlayerController";
+}
+
+void PlayerController::rotate_bones(GLfloat angle)
+{
+	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(5, angle, glm::vec3(-1, 0, 0));
+	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(7, angle, glm::vec3(-1, 0, 0));
+	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(31, angle, glm::vec3(-1, 0, 0));
+}
+
+GLuint PlayerController::current_animation()
+{
+	GLuint index = 0;
+	if (current_action == Action::Aiming)
+	{
+		index = 3;
+		owner.get_component<AnimationController>()->change_animation(3);
+	}
+	else if (current_action == Action::Shooting)
+	{
+		index = 4;
+		owner.get_component<AnimationController>()->change_animation(4);
+	}
+
+	return index;
+}
+
+void PlayerController::jump()
+{
+	owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * jump_force);
+	owner.get_component<AnimationController>()->change_animation(2);
+}
+
+void PlayerController::fire_bullet()
+{
+	PhysicsWorld::RayHit* hit = PhysicsWorld::ray_cast(
+		camera->transform.position, camera->transform.forward, 3000.0f);
+
+	glm::vec3 bullet_velocity = glm::vec3();
+	glm::vec3 bullet_end = glm::vec3();
+	if (hit != nullptr)
+	{
+		bullet_end = hit->hit_point;
+		if (hit->entity->get_component<EnemyController>())
+		{
+			EntityManager::remove_entity(hit->entity);
+		}
+		else if (hit->entity->get_component<PhysicsBody>())
+		{
+			hit->entity->get_component<PhysicsBody>()->apply_impulse(
+				glm::normalize(bullet_end - camera->transform.position) * 5.0f);
+		}
+	}
+	else
+	{
+		bullet_end = camera->transform.position + camera->transform.forward * 3000.0f;
+	}
+	bullet_velocity = glm::normalize(bullet_end - transform.position) * 5.0f;
+	Entity& bullet = Spawn::spawn_bullet(transform.position, bullet_velocity, bullet_end, "crosshair.png");
+	bullet.transform.look_at(transform.position + transform.right);
+}
+
+glm::vec3 PlayerController::change_facing_direction(const Uint8* keys)
+{
+	glm::vec3 direction = glm::vec3();
+	if (keys[SDL_SCANCODE_W])
+	{
+		direction = camera->transform.forward;
+	}
+	else if (keys[SDL_SCANCODE_S])
+	{
+		direction = -camera->transform.forward;
+	}
+
+	if (keys[SDL_SCANCODE_A])
+	{
+		direction += camera->transform.right;
+	}
+	else if (keys[SDL_SCANCODE_D])
+	{
+		direction += -camera->transform.right;
+	}
+
+	return direction;
 }

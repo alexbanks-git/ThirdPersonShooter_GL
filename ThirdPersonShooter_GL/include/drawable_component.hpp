@@ -4,6 +4,9 @@
 class DrawableComponent : public Component
 {
 public:
+	GLuint material;
+	GLuint visible;
+	DrawableComponent(Entity* entity);
 	/**
 	 * @brief Draws the component to the screen.
 	 */

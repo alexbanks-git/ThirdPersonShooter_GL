@@ -79,6 +79,21 @@
     <ClCompile Include="..\src\skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\spawn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\camera_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\enemy_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bullet_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\vertex_shader.glsl">
@@ -99,7 +114,16 @@
     <None Include="..\shaders\skybox_fragment_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="..\shaders\default_vertex_shader.glsl">
+    <None Include="..\shaders\ui_vertex_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\ui_fragment_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\image_vertex_shader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\image_fragment_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
@@ -159,6 +183,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\skybox.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\spawn.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\camera_controller.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\image.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\enemy_controller.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bullet_controller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

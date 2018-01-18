@@ -4,6 +4,11 @@
 class ControllerComponent : public Component
 {
 public:
+	ControllerComponent(Entity* entity);
+
+	/**
+	 * @brief Updates the controller component's attributes
+	 */
 	virtual void update();
 
 	/**

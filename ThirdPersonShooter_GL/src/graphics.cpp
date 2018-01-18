@@ -5,16 +5,28 @@ static GLint window_width;
 static GLint window_height;
 static GLuint then;
 static GLuint now;
-static GLuint target_fps;
-static GLuint frame_delay;
+static GLfloat target_fps;
+static GLfloat frame_delay;
 static GLuint default_shader;
+static GLuint user_interface_shader;
 static GLuint debug_shader;
 static GLuint skybox_shader;
 static GLfloat elapsed_time;
+static GLuint image_shader;
 
 GLuint Graphics::get_default_shader()
 {
 	return default_shader;
+}
+
+GLuint Graphics::get_image_shader()
+{
+	return image_shader;
+}
+
+GLuint Graphics::get_user_interface_shader()
+{
+	return user_interface_shader;
 }
 
 GLuint Graphics::get_debug_shader()
@@ -27,7 +39,7 @@ GLuint Graphics::get_skybox_shader()
 	return skybox_shader;
 }
 
-GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
+GLint Graphics::init_graphics(GLint w, GLint h, GLfloat fps)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -37,7 +49,7 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 	window_width = w;
 	window_height = h;
 	target_fps = fps;
-	frame_delay = 1000.0 / target_fps;
+	frame_delay = 1000.0f/target_fps;
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
@@ -71,7 +83,8 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLuint fps)
 		std::clog << "Error: " << glewGetErrorString(glew_status) << std::endl;
 		return 0;
 	}
-
+	image_shader = create_shader_program("image_vertex_shader.glsl", "image_fragment_shader.glsl");
+	user_interface_shader = create_shader_program("ui_vertex_shader.glsl", "ui_fragment_shader.glsl");
 	default_shader = create_shader_program("vertex_shader.glsl", "fragment_shader.glsl");
 	debug_shader = create_shader_program("physics_vertex_shader.glsl", "physics_fragment_shader.glsl");
 	skybox_shader = create_shader_program("skybox_vertex_shader.glsl", "skybox_fragment_shader.glsl");
@@ -102,8 +115,7 @@ void Graphics::update_window()
 	{
 		SDL_Delay(frame_delay - (now - then));
 	}
-	elapsed_time = 1000.0f / (SDL_GetTicks() - then);
-	std::cout << elapsed_time << std::endl;
+	elapsed_time = (SDL_GetTicks() - then) / 1000.0f;
 }
 
 GLfloat Graphics::get_elapsed_time()
@@ -189,7 +201,5 @@ void Graphics::draw_mesh(Mesh* mesh)
 	mesh->bind();
 
 	glDrawElements(GL_TRIANGLES, mesh->get_index_count(), GL_UNSIGNED_INT, 0);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }

@@ -2,6 +2,11 @@
 #include "animation_controller.hpp"
 #include "SDL.h"
 
+AnimationController::AnimationController(Entity* entity) : ControllerComponent(entity)
+{
+
+}
+
 void AnimationController::update()
 {
 	if (start_time == 0)
@@ -32,8 +37,10 @@ void AnimationController::update()
 		GLfloat pos_factor = 0;
 		GLfloat rot_delta_time;
 		GLfloat pos_delta_time;
-		//std::cout << skeleton->get_bone_at(i)->position_keys.size() << " | " <<current_animation<<  std::endl;
-		if (skeleton->get_bone_at(i)->position_keys.size() <= current_animation) continue;
+
+		if (skeleton->get_bone_at(i)->position_keys.size() <= current_animation) 
+			continue;
+
 		for (GLuint p = 0; p < skeleton->get_bone_at(i)->position_keys[current_animation].size(); p++)
 		{
 			if (p == skeleton->get_bone_at(i)->position_keys[current_animation].size() - 1)
@@ -65,7 +72,6 @@ void AnimationController::update()
 
 			if (elapsed_time < skeleton->get_bone_at(i)->rotation_keys[current_animation][r + 1].time)
 			{
-
 				start_rot = skeleton->get_bone_at(i)->rotation_keys[current_animation][r].rotation;
 				end_rot = skeleton->get_bone_at(i)->rotation_keys[current_animation][r + 1].rotation;
 
@@ -78,7 +84,7 @@ void AnimationController::update()
 			}
 
 		}
-		skeleton->get_bone_at(i)->transform = glm::translate(glm::mat4(), pos_result) * glm::toMat4(rot_result) * glm::mat4();
+		skeleton->get_bone_at(i)->transform = glm::translate(skeleton->get_bone_at(i)->other_transform, pos_result) * glm::toMat4(rot_result);
 	}
 
 	skeleton->bone_transforms.resize(skeleton->size());
@@ -97,6 +103,11 @@ std::string AnimationController::type_name()
 void AnimationController::attach_skeleton(Skeleton* skel)
 {
 	skeleton = skel;
+}
+
+Skeleton* AnimationController::get_skeleton()
+{
+	return skeleton;
 }
 
 void AnimationController::add_duration(GLuint d)

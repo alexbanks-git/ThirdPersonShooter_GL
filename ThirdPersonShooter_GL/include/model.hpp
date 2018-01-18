@@ -7,6 +7,7 @@
 class Model : public DrawableComponent
 {
 public:
+	Model(Entity* entity);
 	std::vector<Mesh> meshes;
 	Skeleton skeleton;
 	/**

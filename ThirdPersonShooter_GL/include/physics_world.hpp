@@ -5,6 +5,12 @@
 class PhysicsWorld
 {
 public:
+	class RayHit
+	{
+	public:
+		Entity* entity;
+		glm::vec3 hit_point;
+	};
 	/**
 	 * @brief Initializes the physics world.
 	 */
@@ -35,12 +41,23 @@ public:
 	static void add_physics_body(PhysicsBody* body);
 
 	/**
-	 * @brief Performs a raycast from a specified starting position for a certain distance
+	 * @brief Removes a physics body from the world.
+	 * @param body the physics body to remove from the world
+	 */
+	static void remove_physics_body(PhysicsBody* body);
+
+	/**
+	 * @brief Performs a raycast from a specified starting position for a certain distance.
 	 * @param start the starting position of the raycast
 	 * @param direction the direction of the raycast
 	 * @param distance how far the raycast extends
+	 * @returns the object that was hit as a RayHit object
 	 */
-	static bool ray_cast(glm::vec3 start, glm::vec3 direction, GLfloat distance);
+	static RayHit* ray_cast(glm::vec3 start, glm::vec3 direction, GLfloat distance);
 
+	/**
+	 * @brief Returns whether or not the specified physics body is on the ground.
+	 * @param body a pointer to the physics body
+	 */
 	static bool on_ground(PhysicsBody* body);
 };

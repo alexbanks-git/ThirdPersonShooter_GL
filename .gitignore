@@ -1,1 +1,12 @@
 ThirdPersonShooter_GL.VC.db
+ThirdPersonShooter_GL.exe
+ThirdPersonShooter_GL.vcxproj.user
+ThirdPersonShooter_GL.vcxproj
+ThirdPersonShooter_GL.vcxproj.filters
+ThirdPersonShooter_GL.pdb
+ThirdPersonShooter_GL.lib
+ThirdPersonShooter_GL.iobj
+ThirdPersonShooter_GL.exp
+*.fbx
+*.jpg
+*.png
