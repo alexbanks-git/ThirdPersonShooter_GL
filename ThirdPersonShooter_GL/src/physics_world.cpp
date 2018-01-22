@@ -88,6 +88,6 @@ PhysicsWorld::RayHit* PhysicsWorld::ray_cast(glm::vec3 start, glm::vec3 directio
 bool PhysicsWorld::on_ground(PhysicsBody* body)
 {
 	glm::vec3 raycast_origin = body->transform.get_position();
-	raycast_origin.y -= body->height/2;
+	raycast_origin.y -= (body->height/2 + body->center_offset.y);
 	return ray_cast(raycast_origin, -Transform::world_up_vector(), 0.4f) != nullptr;
 }

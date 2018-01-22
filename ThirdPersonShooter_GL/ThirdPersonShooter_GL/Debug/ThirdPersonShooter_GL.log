@@ -4,15 +4,19 @@
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\include\entity.hpp(34): warning C4316: 'PhysicsBody': object allocated on the heap may not be aligned 16
-  c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(25): note: see reference to function template instantiation 'void Entity::add_component<PhysicsBody>(void)' being compiled
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(16): warning C4244: '=': conversion from 'float' to 'GLint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(18): warning C4244: '=': conversion from 'float' to 'GLint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(38): warning C4244: '=': conversion from 'float' to 'GLint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(40): warning C4244: '=': conversion from 'float' to 'GLint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\include\entity.hpp(35): warning C4316: 'PhysicsBody': object allocated on the heap may not be aligned 16
+  c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\spawn.cpp(9): note: see reference to function template instantiation 'void Entity::add_component<PhysicsBody>(void)' being compiled
   skybox.cpp
   skeleton.cpp
   player_controller.cpp
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\player_controller.cpp(112): warning C4244: '=': conversion from 'Uint32' to 'GLfloat', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\player_controller.cpp(93): warning C4244: '=': conversion from 'Uint32' to 'GLfloat', possible loss of data
   physics_debug_drawer.cpp
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
@@ -34,16 +38,14 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
   image.cpp
   graphics.cpp
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\graphics.cpp(110): warning C4244: 'argument': conversion from 'GLfloat' to 'Uint32', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\graphics.cpp(116): warning C4244: 'argument': conversion from 'GLfloat' to 'Uint32', possible loss of data
   game.cpp
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(78): warning C4101: 'mouse_x': unreferenced local variable
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(82): warning C4101: 'mouseState': unreferenced local variable
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(79): warning C4101: 'mouse_y': unreferenced local variable
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\include\entity.hpp(34): warning C4316: 'PhysicsBody': object allocated on the heap may not be aligned 16
-  c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(43): note: see reference to function template instantiation 'void Entity::add_component<PhysicsBody>(void)' being compiled
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(45): warning C4101: 'mouse_x': unreferenced local variable
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(49): warning C4101: 'mouseState': unreferenced local variable
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\game.cpp(46): warning C4101: 'mouse_y': unreferenced local variable
   entity_manager.cpp
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
@@ -65,12 +67,22 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
   Generating Code...
   Compiling...
   camera.cpp
+  bullet_controller.cpp
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
   asset_loader.cpp
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(99): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(111): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(129): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(46): warning C4018: '<': signed/unsigned mismatch
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(53): warning C4018: '<': signed/unsigned mismatch
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(61): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(72): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(87): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\asset_loader.cpp(128): warning C4018: '<': signed/unsigned mismatch
   animation_controller.cpp
-c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\animation_controller.cpp(17): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\thirdpersonshooter_gl\src\animation_controller.cpp(18): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
   camera_controller.cpp
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
@@ -98,13 +110,120 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
       Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
       Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
+BulletCollision_Debug.lib(btCollisionDispatcher.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionDispatcher.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btDefaultCollisionConfiguration.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btDbvtBroadphase.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btDbvtBroadphase.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionObject.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionObject.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionShape.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionShape.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexShape.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexShape.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btPolyhedralConvexShape.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btPolyhedralConvexShape.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btManifoldResult.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btManifoldResult.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexConvexAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexConvexAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btEmptyCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btEmptyCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexConcaveCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexConcaveCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btCompoundCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCompoundCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btCompoundCompoundCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCompoundCompoundCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexPlaneCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexPlaneCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btBoxBoxCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btBoxBoxCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btSphereSphereCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btSphereSphereCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btSphereTriangleCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btSphereTriangleCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btDbvt.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btDbvt.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btOverlappingPairCache.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btOverlappingPairCache.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexPolyhedron.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btConvexPolyhedron.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btActivatingCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btActivatingCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btPolyhedralContactClipping.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btPolyhedralContactClipping.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionAlgorithm.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btHashedSimplePairCache.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btHashedSimplePairCache.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
+BulletDynamics_Debug.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btDiscreteDynamicsWorld.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletDynamics_Debug.lib(btSequentialImpulseConstraintSolver.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btSequentialImpulseConstraintSolver.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletDynamics_Debug.lib(btRigidBody.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btRigidBody.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletDynamics_Debug.lib(btTypedConstraint.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btTypedConstraint.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletDynamics_Debug.lib(btConeTwistConstraint.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btConeTwistConstraint.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletDynamics_Debug.lib(btGeneric6DofConstraint.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletDynamics_Debug.lib(btGeneric6DofConstraint.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
+LinearMath_Debug.lib(btConvexHullComputer.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+LinearMath_Debug.lib(btConvexHullComputer.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+LinearMath_Debug.lib(btGeometryUtil.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+LinearMath_Debug.lib(btGeometryUtil.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+LinearMath_Debug.lib(btQuickprof.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+LinearMath_Debug.lib(btQuickprof.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
+      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
+      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
+BulletCollision_Debug.lib(btCollisionWorld.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btCollisionWorld.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btSimulationIslandManager.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btSimulationIslandManager.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btBvhTriangleMeshShape.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btBvhTriangleMeshShape.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btUnionFind.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btUnionFind.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btQuantizedBvh.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btQuantizedBvh.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
+BulletCollision_Debug.lib(btOptimizedBvh.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '2' doesn't match value '0' in camera_controller.obj
+BulletCollision_Debug.lib(btOptimizedBvh.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MTd_StaticDebug' doesn't match value 'MT_StaticRelease' in camera_controller.obj
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMTD.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
       Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntimed.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
       Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
@@ -127,36 +246,10 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMTD.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
       Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntimed.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrtd.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2main.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\glu32.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\glew32.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\assimp-vc140-mt.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\lib\x86\SDL2_image.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\odbccp32.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
-      Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
       Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMTD.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
   
   Finished searching libraries
      Creating library .\ThirdPersonShooter_GL.lib and object .\ThirdPersonShooter_GL.exp
@@ -184,11 +277,12 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMTD.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
       Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntimed.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
   
   Finished searching libraries
   
@@ -215,12 +309,12 @@ c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bull
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletCollision_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\BulletDynamics_Debug.lib:
       Searching C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Debug\LinearMath_Debug.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMTD.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmt.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\LIBCMT.lib:
       Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\OLDNAMES.lib:
-      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntimed.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libcpmtd.lib:
+      Searching C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\libvcruntime.lib:
+      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86\libucrt.lib:
   
   Finished searching libraries
-  ThirdPersonShooter_GL.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\ThirdPersonShooter_GL\ThirdPersonShooter_GL\.\ThirdPersonShooter_GL.exe
-  ThirdPersonShooter_GL.vcxproj -> .\ThirdPersonShooter_GL.pdb (Partial PDB)
+.\ThirdPersonShooter_GL.exe : fatal error LNK1319: 78 mismatches detected

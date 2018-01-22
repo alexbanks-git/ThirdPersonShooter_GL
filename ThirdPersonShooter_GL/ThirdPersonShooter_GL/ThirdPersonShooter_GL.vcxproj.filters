@@ -94,6 +94,9 @@
     <ClCompile Include="..\src\bullet_controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\vertex_shader.glsl">
@@ -198,6 +201,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bullet_controller.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\animation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\include\camera_controller.cpp" />
+    <ClCompile Include="..\src\animation.cpp" />
     <ClCompile Include="..\src\animation_controller.cpp" />
     <ClCompile Include="..\src\asset_loader.cpp" />
     <ClCompile Include="..\src\bullet_controller.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="..\src\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\animation.hpp" />
     <ClInclude Include="..\include\animation_controller.hpp" />
     <ClInclude Include="..\include\asset_loader.hpp" />
     <ClInclude Include="..\include\bullet_controller.hpp" />
@@ -110,7 +112,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

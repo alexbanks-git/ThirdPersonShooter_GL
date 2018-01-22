@@ -92,6 +92,11 @@ glm::mat4 Transform::get_transformation()
 	return transform_mat;
 }
 
+void Transform::multiply(glm::mat4 matrix)
+{
+	transform_mat = transform_mat * matrix;
+}
+
 void Transform::look_at(glm::vec3 target)
 {
 	forward = glm::normalize(target - position);

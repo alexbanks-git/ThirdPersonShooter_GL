@@ -13,21 +13,15 @@ void Model::set_meshes(std::vector<Mesh> data)
 
 }
 
-void Model::create(std::string path, std::vector<std::string> anim_paths, AnimationController* animator)
+void Model::create(std::string path, bool has_bones)
 {
 	skeleton = Skeleton();
-	if (anim_paths.size() > 0)
+	AssetLoader::model_from_file(path.c_str(), this, has_bones);
+
+	if (has_bones)
 	{
-		AssetLoader::model_from_file(path.c_str(), this, anim_paths, animator);
 		skeleton.init();
 	}
-	else
-	{
-		AssetLoader::model_from_file(path.c_str(), this);
-	}
-
-	if (animator != nullptr)
-		animator->attach_skeleton(&skeleton);
 
 	for (GLuint i = 0; i < meshes.size(); i++)
 	{

@@ -13,7 +13,9 @@ private:
 	btDefaultMotionState motion_state;
 	std::unique_ptr<btRigidBody> rigid_body;
 	bool kinematic;
+	
 public:
+	glm::vec3 center_offset;
 	PhysicsBody(Entity* entity);
 	GLfloat height;
 	GLfloat width;
@@ -22,7 +24,7 @@ public:
 	 * @param shape the shape of the physics body
 	 * @param size the width, height, and depth of the physics body
 	 */
-	void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size);
+	void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size, glm::vec3 offset = glm::vec3());
 
 	/**
 	 * @brief Sets the mass of the physics body.
@@ -89,5 +91,8 @@ public:
 	 */
 	void set_kinematic(bool value);
 
+	/**
+	 * @brief Converts a 3D Bullet Physics' matrix into a 3D GLM matrix
+	 */
 	glm::mat3 to_glm_mat(btMatrix3x3& matrix);
 };

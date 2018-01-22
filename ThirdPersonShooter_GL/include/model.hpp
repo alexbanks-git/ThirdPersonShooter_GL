@@ -19,7 +19,7 @@ public:
 	/**
 	 * @brief Loads model from file, and buffers vertex information.
 	 */
-	void Model::create(std::string path, std::vector<std::string> anim_paths=std::vector<std::string>(), AnimationController* animator=nullptr);
+	void Model::create(std::string path, bool has_bones=false);
 
 	/**
 	 * @brief Draws all meshes this model contains.

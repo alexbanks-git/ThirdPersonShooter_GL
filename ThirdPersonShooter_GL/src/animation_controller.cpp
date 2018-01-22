@@ -1,98 +1,36 @@
 #include <iostream>
 #include "animation_controller.hpp"
 #include "SDL.h"
+#include "entity.hpp"
 
 AnimationController::AnimationController(Entity* entity) : ControllerComponent(entity)
 {
+}
 
+void AnimationController::add_animation(Animation animation)
+{
+	animations.push_back(animation);
 }
 
 void AnimationController::update()
 {
-	if (start_time == 0)
+	animations[current_animation].update();
+	if (animations[current_animation].has_constraints())
 	{
-		start_time = SDL_GetTicks();
+		glm::vec3 delta = animations[current_animation].get_delta_position();
+		glm::vec3 final_delta = delta;
+
+		if (delta.y > 0)
+			final_delta.y= delta.y*8.0f;
+		
+		final_delta.x *= -1.0f;
+		final_delta.z *= -1.0f;
+
+		owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * final_delta.y);
+		owner.get_component<PhysicsBody>()->apply_impulse(transform.forward * final_delta.z);
+		owner.get_component<PhysicsBody>()->apply_impulse(transform.right * final_delta.x);
 	}
-
-	elapsed_time = (SDL_GetTicks() - start_time) / 50.0f;
-
-	if (elapsed_time > durations[current_animation])
-	{
-		start_time = 0;
-		elapsed_time = 0;
-	}
-
-	for (GLuint i = 0; i < skeleton->size(); i++)
-	{
-		if (skeleton->get_bone_at(i)->position_keys.size() == 0)
-			continue;
-
-		glm::vec3 start_pos;
-		glm::vec3 end_pos;
-		glm::quat start_rot;
-		glm::quat end_rot;
-		glm::vec3 pos_result;
-		glm::quat rot_result;
-		GLfloat rot_factor = 0;
-		GLfloat pos_factor = 0;
-		GLfloat rot_delta_time;
-		GLfloat pos_delta_time;
-
-		if (skeleton->get_bone_at(i)->position_keys.size() <= current_animation) 
-			continue;
-
-		for (GLuint p = 0; p < skeleton->get_bone_at(i)->position_keys[current_animation].size(); p++)
-		{
-			if (p == skeleton->get_bone_at(i)->position_keys[current_animation].size() - 1)
-			{
-				pos_result = skeleton->get_bone_at(i)->position_keys[current_animation][p].position;
-				break;
-			}
-
-			if (elapsed_time < skeleton->get_bone_at(i)->position_keys[current_animation][p + 1].time)
-			{
-				start_pos = skeleton->get_bone_at(i)->position_keys[current_animation][p].position;
-				end_pos = skeleton->get_bone_at(i)->position_keys[current_animation][p + 1].position;
-				pos_delta_time = skeleton->get_bone_at(i)->position_keys[current_animation][p + 1].time - skeleton->get_bone_at(i)->position_keys[current_animation][p].time;
-				pos_factor = (elapsed_time - skeleton->get_bone_at(i)->position_keys[current_animation][p].time) / pos_delta_time;
-				if (pos_factor > 1) pos_factor = 1;
-				if (pos_factor < 0) pos_factor = 0;
-				pos_result = glm::mix(start_pos, end_pos, pos_factor);
-				break;
-			}
-		}
-
-		for (GLuint r = 0; r < skeleton->get_bone_at(i)->rotation_keys[current_animation].size(); r++)
-		{
-			if (r == skeleton->get_bone_at(i)->rotation_keys[current_animation].size() - 1)
-			{
-				rot_result = skeleton->get_bone_at(i)->rotation_keys[current_animation][r].rotation;
-				break;
-			}
-
-			if (elapsed_time < skeleton->get_bone_at(i)->rotation_keys[current_animation][r + 1].time)
-			{
-				start_rot = skeleton->get_bone_at(i)->rotation_keys[current_animation][r].rotation;
-				end_rot = skeleton->get_bone_at(i)->rotation_keys[current_animation][r + 1].rotation;
-
-				rot_delta_time = skeleton->get_bone_at(i)->rotation_keys[current_animation][r + 1].time - skeleton->get_bone_at(i)->rotation_keys[current_animation][r].time;
-				rot_factor = (elapsed_time - skeleton->get_bone_at(i)->rotation_keys[current_animation][r].time) / rot_delta_time;
-				if (rot_factor > 1) rot_factor = 1;
-				if (rot_factor < 0) rot_factor = 0;
-				rot_result = glm::slerp(start_rot, end_rot, rot_factor);
-				break;
-			}
-
-		}
-		skeleton->get_bone_at(i)->transform = glm::translate(skeleton->get_bone_at(i)->other_transform, pos_result) * glm::toMat4(rot_result);
-	}
-
-	skeleton->bone_transforms.resize(skeleton->size());
-	skeleton->calculate_bone_positions(skeleton->get_first_bone());
-	for (GLuint b = 0; b <skeleton->size(); b++)
-	{
-		skeleton->bone_transforms[b] = skeleton->get_bone_at(b)->final_transform * skeleton->get_bone_at(b)->offset_matrix;
-	}
+	
 }
 
 std::string AnimationController::type_name()
@@ -100,27 +38,31 @@ std::string AnimationController::type_name()
 	return "AnimationController";
 }
 
-void AnimationController::attach_skeleton(Skeleton* skel)
+void AnimationController::play_animation(GLuint index, bool loop)
 {
-	skeleton = skel;
-}
-
-Skeleton* AnimationController::get_skeleton()
-{
-	return skeleton;
-}
-
-void AnimationController::add_duration(GLuint d)
-{
-	durations.push_back(d);
-}
-
-void AnimationController::change_animation(GLuint index)
-{
-	if (current_animation != index && !(index >= durations.size()))
+	if (current_animation != index  && !(index >= animations.size()))
 	{
-		start_time = 0;
-		elapsed_time = 0;
-		current_animation = index;
+		if (!animations[current_animation].is_playing())
+		{
+			current_animation = index;
+			animations[current_animation].play(loop);
+		}
+		else if (animations[current_animation].is_looping())
+		{
+			animations[current_animation].stop();
+			current_animation = index;
+			animations[current_animation].play(loop);
+		}
+		
 	}
+}
+
+GLuint AnimationController::get_active_animation()
+{
+	return current_animation;
+}
+
+bool AnimationController::animation_playing()
+{
+	return animations[current_animation].is_playing();
 }

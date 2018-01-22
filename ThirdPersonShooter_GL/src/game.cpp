@@ -26,19 +26,20 @@ int main(int argc, char* args[])
 	PhysicsWorld::set_gravity(glm::vec3(0.0f, -10.0f, 0.0f));
 	LevelManager::init_level();
 	Entity& cam_entity = Spawn::spawn_camera(
-		glm::vec3(0.0f, 0.0f, 0.0f), glm::radians(60.0f), 1.0f, 10000.0f);
-
+		glm::vec3(0.0f, 2.0f, -6.0f), glm::radians(60.0f), 1.0f, 10000.0f);
+	
 	Camera* camera = cam_entity.get_component<Camera>();
-	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 5.0f, -4.0f), camera);
+	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 1.0f, -4.0f), camera);
 	cam_entity.get_component<CameraController>()->set_target(&player.transform);
-
-	for (GLint i = 0; i < 50; i++)
+	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
+	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
+	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
+	/*for (GLint i = 0; i < 50; i++)
 	{
 		Spawn::spawn_cube(glm::vec3(0.0f, 2.0f, -3.0f), false);
-	}
+	}*/
 
-	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
-	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
+
 	
 	Spawn::spawn_image(glm::vec3(800 / 2, 600 / 2, 0.0f), "crosshair.png");
 	Spawn::spawn_plane(0.0f);
@@ -123,7 +124,7 @@ int main(int argc, char* args[])
 
 		LevelManager::draw_images();
 
-		/*glUseProgram(Graphics::get_debug_shader());
+		glUseProgram(Graphics::get_debug_shader());
 
 		view_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
@@ -131,7 +132,7 @@ int main(int argc, char* args[])
 		projection_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-		PhysicsWorld::draw_physics_world();*/
+		//PhysicsWorld::draw_physics_world();
 
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);

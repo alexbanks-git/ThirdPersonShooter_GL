@@ -22,49 +22,6 @@ GLuint Skeleton::size()
 	return bones.size();
 }
 
-void Skeleton::add_position_key(GLuint index, std::string name, GLfloat time, glm::vec3 pos)
-{
-	PositionKey position_key;
-	position_key.time = time;
-	position_key.position = pos;
-	Bone* bone;
-
-	if ((bone = bone_by_name(name)) != nullptr)
-	{
-		GLuint count = 0;
-		while (index >= bone->position_keys.size())
-		{
-			bone->position_keys.push_back(std::vector<PositionKey>());
-			if (bone->position_keys.size() - 1 != index)
-			{
-				bone->position_keys[bone->position_keys.size() - 1].push_back(PositionKey());
-			}
-		}
-		bone->position_keys[index].push_back(position_key);
-	}
-}
-
-void Skeleton::add_rotation_key(GLuint index, std::string name, GLfloat time, glm::quat rot)
-{
-	RotationKey rotation_key;
-	rotation_key.time = time;
-	rotation_key.rotation = rot;
-	Bone* bone;
-	if ((bone = bone_by_name(name)) != nullptr)
-	{
-		while (index >= bone->rotation_keys.size())
-		{
-			bone->rotation_keys.push_back(std::vector<RotationKey>());
-			if (bone->rotation_keys.size() - 1 != index)
-			{
-				bone->rotation_keys[bone->rotation_keys.size() - 1].push_back(RotationKey());
-			}
-		}
-
-		bone->rotation_keys[index].push_back(rotation_key);
-	}
-}
-
 Skeleton::Bone* Skeleton::get_bone_at(GLuint index)
 {
 	return &bones[index];

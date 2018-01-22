@@ -1,5 +1,6 @@
 #include <memory>
 #include "spawn.hpp"
+#include "asset_loader.hpp"
 
 Entity& Spawn::spawn_sphere(glm::vec3 position, bool is_static)
 {
@@ -53,7 +54,7 @@ Entity& Spawn::spawn_plane(GLfloat y_position)
 	entity->add_component<PhysicsBody>();
 	Model* model = entity->get_component<Model>();
 	model->create("ground_plane.fbx");
-	
+
 	PhysicsBody* body = entity->get_component<PhysicsBody>();
 	body->create("StaticPlane", 0.0f, glm::vec3(
 		model->get_max_bounds().z, model->get_max_bounds().y, model->get_max_bounds().x));
@@ -80,17 +81,29 @@ Entity& Spawn::spawn_basic_enemy(glm::vec3 position, Entity* target)
 	entity->transform.global_translate(position);
 	entity->add_component<Model>();
 	entity->add_component<AnimationController>();
+	AnimationController* animator = entity->get_component<AnimationController>();
+
 	entity->add_component<EnemyController>();
 	entity->get_component<EnemyController>()->set_target(target);
-	entity->add_component<PhysicsBody>();
-	std::vector<std::string> anim_paths;
-	anim_paths.push_back("Firing Rifle (1).fbx");
-	anim_paths.push_back("survivor_run.fbx");
+	
+	entity->get_component<Model>()->create("survivor.fbx", true);
 	Model* model = entity->get_component<Model>();
-	model->create(
-		"survivor.fbx", anim_paths, entity->get_component<AnimationController>());
+
+	entity->add_component<PhysicsBody>();
+	
+	Animation shoot_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("Firing Rifle (1).fbx", shoot_anim);
+	animator->add_animation(shoot_anim);
+
+	Animation run_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("survivor_run.fbx", run_anim);
+	animator->add_animation(run_anim);
+
 	entity->get_component<PhysicsBody>()->create(
-		"Capsule", 1.0f, glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y, model->get_max_bounds().x));
+		"Capsule", 1.0f,
+		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y - 0.5f, model->get_max_bounds().x),
+		glm::vec3(0, -1, 0));
+
 	entity->get_component<PhysicsBody>()->set_kinematic(true);
 	EntityManager::add_entity(std::move(entity));
 	return *EntityManager::get_last();
@@ -102,19 +115,44 @@ Entity& Spawn::spawn_player(glm::vec3 position, Camera* camera)
 	entity->transform.global_translate(position);
 	entity->add_component<Model>();
 	entity->add_component<AnimationController>();
-	std::vector<std::string> anim_paths;
-	anim_paths.push_back("survivor_idle.fbx");
-	anim_paths.push_back("survivor_run.fbx");
-	anim_paths.push_back("survivor_jump.fbx");
-	anim_paths.push_back("Rifle Aiming Idle.fbx");
-	anim_paths.push_back("Firing Rifle (1).fbx");
-	entity->get_component<Model>()->create(
-		"survivor.fbx", anim_paths, entity->get_component<AnimationController>());
+	AnimationController* animator = entity->get_component<AnimationController>();
+	entity->get_component<Model>()->create("survivor.fbx", true);
 
 	entity->add_component<PhysicsBody>();
-	Model model = *entity->get_component<Model>();
+	Model* model = entity->get_component<Model>();
+
+	Animation idle_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("survivor_idle.fbx", idle_anim);
+	animator->add_animation(idle_anim);
+
+	Animation run_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("survivor_run.fbx", run_anim);
+	animator->add_animation(run_anim);
+
+	Animation jump_anim = Animation(&model->skeleton);
+	jump_anim.set_root_bone("Hips");
+	jump_anim.constrain_axes(glm::vec3(0, 1, 0));
+	AssetLoader::load_animation("survivor_jump.fbx", jump_anim);
+	animator->add_animation(jump_anim);
+
+	Animation aiming_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("Rifle Aiming Idle.fbx", aiming_anim);
+	animator->add_animation(aiming_anim);
+
+	Animation shoot_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("Firing Rifle (1).fbx", shoot_anim);
+	animator->add_animation(shoot_anim);
+
+	Animation roll_anim = Animation(&model->skeleton);
+	roll_anim.set_root_bone("Hips");
+	roll_anim.constrain_axes(glm::vec3(1, 0, 1));
+	AssetLoader::load_animation("Dive Roll.fbx", roll_anim);
+	animator->add_animation(roll_anim);
+
 	entity->get_component<PhysicsBody>()->create(
-		"Capsule", 1.0f, glm::vec3(model.get_max_bounds().z, model.get_max_bounds().y, model.get_max_bounds().x));
+		"Capsule", 1.0f,
+		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y - 0.5f, model->get_max_bounds().x),
+		glm::vec3(0, -1, 0));
 
 	entity->add_component<PlayerController>();
 	entity->get_component<PlayerController>()->set_camera(camera);

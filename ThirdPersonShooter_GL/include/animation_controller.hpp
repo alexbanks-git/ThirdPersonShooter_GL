@@ -2,17 +2,13 @@
 #include <memory>
 #include "GL/glew.h"
 #include "controller_component.hpp"
-#include "skeleton.hpp"
+#include "animation.hpp"
 
 class AnimationController : public ControllerComponent
 {
 private:
-	Skeleton* skeleton;
-	GLuint start_time;
-	std::vector<GLuint> durations;
 	GLuint current_animation;
-	GLuint elapsed_time;
-
+	std::vector<Animation> animations;
 public:
 	AnimationController(Entity* entity);
 	/**
@@ -27,26 +23,27 @@ public:
 	std::string type_name();
 
 	/**
-	 * @brief Attaches a skeleton to this animation controller.
-	 * @param skeleton the skeleton to attach
+	 * @brief Begins playback of a specific animation.
+	 * @param index the index of the animation to play
+	 * @param loop whether or not the animation should automatically repeat
 	 */
-	void attach_skeleton(Skeleton* skel);
+	void play_animation(GLuint index, bool loop = false);
 
 	/**
-	 * @brief Sets the durations of the animations.
-	 * @param d the duration to add to the list of durations
+	 * @brief Adds an animation to this animation controller.
+	 * @param animation the animation to add 
 	 */
-	void add_duration(GLuint d);
+	void add_animation(Animation animation);
 
 	/**
-	 * @brief Changes the current animation to the animation of the given index.
-	 * @param index the index of the animationto change to
+	 * @brief Returns the index of the currently playing animation.
+	 * @returns the current animation's index
 	 */
-	void change_animation(GLuint index);
+	GLuint get_active_animation();
 
 	/**
-	 * @brief Returns a pointer to the skeleton attached to this animation controller
-	 * @returns a pointer to the skeleton
+	 * @brief Returns whether or not the current animation is playing.
+	 * @returns true if current animation is playing, and false otherwise
 	 */
-	Skeleton* get_skeleton();
+	bool animation_playing();
 };

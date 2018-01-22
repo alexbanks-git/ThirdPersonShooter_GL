@@ -86,4 +86,6 @@ public:
 	 * @param target the position for the transform to look at
 	 */
 	void look_at(glm::vec3 target);
+
+	void multiply(glm::mat4 matrix);
 };

@@ -40,7 +40,7 @@ private:
 	GLuint current_animation = 0;
 
 public:
-
+	glm::mat4 root;
 	std::vector<glm::mat4> bone_transforms;
 
 	/**
@@ -55,24 +55,6 @@ public:
 	 * @returns the bone with the specified name
 	 */
 	Bone* bone_by_name(std::string name);
-
-	/**
-	 * @brief Adds a position key to a specific bone in the skeleton's bone hierarchy.
-	 * @param index the index of the animation that the position key belongs to
-	 * @param name the name of the bone to add the position key to
-	 * @param time the time (in ticks) of the position key
-	 * @param pos the position of the position key
-	 */
-	void add_position_key(GLuint index, std::string name, GLfloat time, glm::vec3 pos);
-
-	/**
-	 * @brief Adds a rotation key to a specific bone in the skeleton's bone hierarchy.
-	 * @param index the index of the animation that the rotation key belongs to
-	 * @param name the name of the bone to add the rotation key to
-	 * @param time the time (in ticks) of the rotation key
-	 * @param rot the rotation of the rotation key
-	 */
-	void add_rotation_key(GLuint index, std::string name, GLfloat time, glm::quat rot);
 
 	/**
 	 * @brief Adds an empty bone to the skeleton's bone hierarchy.

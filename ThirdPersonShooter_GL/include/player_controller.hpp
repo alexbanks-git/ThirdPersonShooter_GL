@@ -6,7 +6,7 @@ class PlayerController : public ControllerComponent
 {
 private:
 	Camera* camera;
-	enum class Action {None, Shooting, Aiming};
+	enum class Action {None, Shooting, Aiming, Rolling, Jumping};
 	Action current_action;
 	GLfloat shoot_start_time;
 	bool firing_bullet;

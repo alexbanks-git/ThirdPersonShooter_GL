@@ -29,14 +29,14 @@ void CameraController::update()
 	
 	if ((mouse_state & SDL_BUTTON(SDL_BUTTON_LEFT)) || (mouse_state & SDL_BUTTON(SDL_BUTTON_RIGHT)))
 	{
-		target_position += transform.right * 0.75f;
-		target_position.y += 0.80f;
+		target_position += transform.right * 0.55f;
+		target_position.y += 2.0f;
 		owner.get_component<Camera>()->follow(target_position, -1.2f);
 	}
 	else
 	{
 		target_position += -transform.right * 0.05f;
-		target_position.y += 1.0f;
+		target_position.y += 2.2f;
 		owner.get_component<Camera>()->follow(target_position, -3.5f);
 	}
 

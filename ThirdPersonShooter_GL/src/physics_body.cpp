@@ -1,14 +1,16 @@
 #include <iostream>
 #include "physics_body.hpp"
 #include "physics_world.hpp"
+#include "entity.hpp"
 
 PhysicsBody::PhysicsBody(Entity* entity) : Component(entity)
 {
 
 }
 
-void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size)
+void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size, glm::vec3 offset)
 {
+	center_offset = offset;
 	if (shape == "Capsule")
 	{
 		collision_shape = std::make_unique<btCapsuleShape>(btCapsuleShape(size.x, size.y));
@@ -29,15 +31,13 @@ void PhysicsBody::create(std::string shape, GLfloat mass, glm::vec3 size)
 	height = size.y;
 	btVector3 inertia(0.0f, 0.0f, 0.0f);
 	motion_state = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
-		btVector3(transform.position.x, transform.position.y, transform.position.z)));
+		btVector3(transform.position.x, transform.position.y, transform.position.z)),
+		btTransform(btQuaternion(0, 0, 0, 1),
+			btVector3(0, 0, 0)));
 	collision_shape->calculateLocalInertia(mass, inertia);
 	btRigidBody::btRigidBodyConstructionInfo construction_info(mass, &motion_state, collision_shape.get(), inertia);
 	rigid_body = std::make_unique<btRigidBody>(btRigidBody(construction_info));
 	rigid_body->setUserPointer(&owner);
-	if (shape == "BoxShape")
-	{
-		std::cout << transform.position.y << " | " << rigid_body->getCenterOfMassPosition().y() << std::endl;
-	}
 	kinematic = false;
 	PhysicsWorld::add_physics_body(this);
 }
@@ -52,10 +52,11 @@ void PhysicsBody::update()
 	else
 		rigid_body->setAngularFactor(btVector3(0.0f, 0.0f, 0.0f));
 
-	GLfloat delta_y = center.y()  - transform.position.y;
-	GLfloat delta_x = center.x() - transform.position.x;
-	GLfloat delta_z = center.z() - transform.position.z;
-	transform.global_translate(glm::vec3(delta_x, delta_y, delta_z));
+	glm::vec3 delta = glm::vec3();
+	delta.y = center.y() + center_offset.y;
+	delta.x = center.x() + center_offset.z;
+	delta.z = center.z() + center_offset.x;
+	transform.set_position(delta);
 }
 
 std::string PhysicsBody::type_name()
@@ -125,5 +126,9 @@ glm::vec3 PhysicsBody::linear_velocity()
 void PhysicsBody::move(glm::vec3 velocity)
 {
 	rigid_body->activate();
-	rigid_body->translate(btVector3(velocity.x, velocity.y, velocity.z));
+	btTransform trans;
+	trans.setOrigin(rigid_body->getWorldTransform().getOrigin() + btVector3(velocity.x, velocity.y, velocity.z));
+	trans.setRotation(rigid_body->getWorldTransform().getRotation());
+	rigid_body->setWorldTransform(trans);
+	rigid_body->getMotionState()->setWorldTransform(trans);
 }

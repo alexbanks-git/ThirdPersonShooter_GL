@@ -3,18 +3,9 @@
 
 static const aiScene* scene;
 
-void AssetLoader::model_from_file(std::string path, Model* model, std::vector<std::string> animation_paths, AnimationController* animator)
+void AssetLoader::model_from_file(std::string path, Model* model, bool has_bones)
 {
 	Assimp::Importer importer;
-	std::vector<Assimp::Importer> anim_importers;
-	std::vector<const aiScene*> anim_scenes;
-	anim_importers.resize(animation_paths.size());
-	anim_scenes.resize(animation_paths.size());
-
-	for (GLuint i = 0; i < animation_paths.size(); i++)
-	{
-		anim_scenes[i] = anim_importers[i].ReadFile(animation_paths[i], aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
-	}
 
 	scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
 
@@ -24,19 +15,14 @@ void AssetLoader::model_from_file(std::string path, Model* model, std::vector<st
 		return;
 	}
 
-	if (model->skeleton.size() == 0 && animation_paths.size() > 0)
+	if (model->skeleton.size() == 0 && has_bones)
 	{
 		model->skeleton.increase_size();
 		model->skeleton.get_first_bone()->parent_index = -1;
-		setup_bone_transforms(scene->mRootNode->mChildren[0], &model->skeleton);
+		setup_bone_transforms(scene->mRootNode, &model->skeleton);
 	}
 
 	setup_model(scene->mRootNode, *model);
-
-	for (GLuint i = 0; i < anim_scenes.size(); i++)
-	{
-		setup_animations(anim_scenes[i], i, *model, *animator);
-	}
 }
 
 void AssetLoader::setup_model(aiNode* node, Model& model)
@@ -53,41 +39,6 @@ void AssetLoader::setup_model(aiNode* node, Model& model)
 	for (GLint c = 0; c < node->mNumChildren; c++)
 	{
 		setup_model(node->mChildren[c], model);
-	}
-}
-
-void AssetLoader::setup_animations(const aiScene* scene, GLuint index, Model& model, AnimationController& animator)
-{
-	animator.add_duration(scene->mAnimations[0]->mDuration);
-
-	for (GLuint c = 0; c < scene->mAnimations[0]->mNumChannels; c++)
-	{
-		for (GLuint p = 0; p < scene->mAnimations[0]->mChannels[c]->mNumPositionKeys; p++)
-		{
-			glm::vec3 position;
-			position.x = scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.x / 100.0f;
-			position.y = scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.y / 100.0f;
-			position.z = scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.z / 100.0f;
-
-			GLfloat time = scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mTime;
-
-			model.skeleton.add_position_key(index, scene->mAnimations[0]->mChannels[c]->mNodeName.C_Str(),
-				time, position);
-		}
-
-
-		for (GLuint r = 0; r < scene->mAnimations[0]->mChannels[c]->mNumRotationKeys; r++)
-		{
-			glm::quat rotation;
-			rotation.x = scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.x;
-			rotation.y = scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.y;
-			rotation.z = scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.z;
-			rotation.w = scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.w;
-
-			GLfloat time = scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mTime;
-
-			model.skeleton.add_rotation_key(index, scene->mAnimations[0]->mChannels[c]->mNodeName.C_Str(), time, rotation);
-		}
 	}
 }
 
@@ -247,4 +198,42 @@ glm::mat4 AssetLoader::to_glm_mat(aiMatrix4x4 mat1)
 	mat2[3][2] = mat1[2][3];
 	mat2[3][3] = mat1[3][3];
 	return mat2;
+}
+
+void AssetLoader::load_animation(std::string path, Animation& animation)
+{
+	Assimp::Importer importer = Assimp::Importer();
+	const aiScene* anim_scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
+	animation.set_duration(anim_scene->mAnimations[0]->mDuration);
+	animation.set_path(path);
+
+	for (GLuint c = 0; c < anim_scene->mAnimations[0]->mNumChannels; c++)
+	{
+		for (GLuint p = 0; p < anim_scene->mAnimations[0]->mChannels[c]->mNumPositionKeys; p++)
+		{
+			glm::vec3 position;
+			position.x = anim_scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.x / 100.0f;
+			position.y = anim_scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.y / 100.0f;
+			position.z = anim_scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mValue.z / 100.0f;
+
+			GLfloat time = anim_scene->mAnimations[0]->mChannels[c]->mPositionKeys[p].mTime;
+
+			animation.add_position_key(anim_scene->mAnimations[0]->mChannels[c]->mNodeName.C_Str(),
+				time, position);
+		}
+
+
+		for (GLuint r = 0; r < anim_scene->mAnimations[0]->mChannels[c]->mNumRotationKeys; r++)
+		{
+			glm::quat rotation;
+			rotation.x = anim_scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.x;
+			rotation.y = anim_scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.y;
+			rotation.z = anim_scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.z;
+			rotation.w = anim_scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mValue.w;
+
+			GLfloat time = anim_scene->mAnimations[0]->mChannels[c]->mRotationKeys[r].mTime;
+
+			animation.add_rotation_key(anim_scene->mAnimations[0]->mChannels[c]->mNodeName.C_Str(), time, rotation);
+		}
+	}
 }

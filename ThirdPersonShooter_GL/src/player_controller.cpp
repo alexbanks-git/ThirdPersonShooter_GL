@@ -32,6 +32,11 @@ void PlayerController::update()
 		direction = new_dir;
 	}
 
+	if (keystate[SDL_SCANCODE_E])
+	{
+		owner.get_component<AnimationController>()->play_animation(5);
+	}
+
 	if (mouse & SDL_BUTTON(SDL_BUTTON_LEFT))
 	{
 		bones_angle = camera->transform.forward.y;
@@ -49,46 +54,52 @@ void PlayerController::update()
 		bones_angle = camera->transform.forward.y;
 		current_action = Action::Aiming;
 	}
-	else
-	{
-		current_action = Action::None;
-	}
 
 	if (!(mouse & SDL_BUTTON(SDL_BUTTON_LEFT)))
 	{
 		firing_bullet = false;
 	}
 
-	rotate_bones(bones_angle);
-
-	if (PhysicsWorld::on_ground(body))
+	if (owner.get_component<AnimationController>()->get_active_animation() == 5)
 	{
-		if (forward_speed == 0.0f && body->linear_velocity().y >= -0.01f && body->linear_velocity().y <= 0.01f)
+		if (owner.get_component<AnimationController>()->animation_playing())
 		{
-			owner.get_component<AnimationController>()->change_animation(current_animation());
-		}
-		else
-		{
-			owner.get_component<AnimationController>()->change_animation(1);
-		}
-
-		if (keystate[SDL_SCANCODE_SPACE])
-		{
-			jump();
+			current_action = Action::Rolling;
 		}
 	}
 
+	if (PhysicsWorld::on_ground(body) && current_action != Action::Rolling)// && current_action != Action::Jumping)
+	{
+		rotate_bones(bones_angle);
+		if (forward_speed == 0.0f && body->linear_velocity().y >= -0.01f && body->linear_velocity().y <= 0.01f)
+		{
+			owner.get_component<AnimationController>()->play_animation(current_animation(), true);
+		}
+		else
+		{
+			owner.get_component<AnimationController>()->play_animation(1, true);
+		}
+		
+		if (keystate[SDL_SCANCODE_SPACE])
+		{
+			
+			jump();
+		}
+		glm::vec3 forward_velocity = direction * forward_speed;
+		body->set_velocity(glm::vec3(forward_velocity.x, body->linear_velocity().y, forward_velocity.z));
+		direction = glm::normalize(direction);
+		direction.y = 0;
+		transform.look_at(transform.position + direction);
+	}
 	if (SDL_GetTicks() - shoot_start_time >= 200 && firing_bullet)
 	{
 		shoot_start_time = SDL_GetTicks();
 		fire_bullet();
 
 	}
-	direction = glm::normalize(direction);
-	direction.y = 0;
-	transform.look_at(transform.position + direction);
-	glm::vec3 forward_velocity = direction * forward_speed;
-	body->set_velocity(glm::vec3(forward_velocity.x, body->linear_velocity().y, forward_velocity.z));
+	
+
+	current_action = Action::None;
 }
 
 void PlayerController::set_camera(Camera* cam)
@@ -108,9 +119,9 @@ std::string PlayerController::type_name()
 
 void PlayerController::rotate_bones(GLfloat angle)
 {
-	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(5, angle, glm::vec3(-1, 0, 0));
-	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(7, angle, glm::vec3(-1, 0, 0));
-	owner.get_component<AnimationController>()->get_skeleton()->rotate_bone(31, angle, glm::vec3(-1, 0, 0));
+	owner.get_component<Model>()->skeleton.rotate_bone(6, angle, glm::vec3(-1, 0, 0));
+	owner.get_component<Model>()->skeleton.rotate_bone(8, angle, glm::vec3(-1, 0, 0));
+	owner.get_component<Model>()->skeleton.rotate_bone(32, angle, glm::vec3(-1, 0, 0));
 }
 
 GLuint PlayerController::current_animation()
@@ -119,12 +130,14 @@ GLuint PlayerController::current_animation()
 	if (current_action == Action::Aiming)
 	{
 		index = 3;
-		owner.get_component<AnimationController>()->change_animation(3);
+		owner.get_component<AnimationController>()->play_animation(3, true);
+		std::cout << "Aiming" << std::endl;
 	}
 	else if (current_action == Action::Shooting)
 	{
 		index = 4;
-		owner.get_component<AnimationController>()->change_animation(4);
+		owner.get_component<AnimationController>()->play_animation(4, true);
+		std::cout << "Shooting" << std::endl;
 	}
 
 	return index;
@@ -132,8 +145,9 @@ GLuint PlayerController::current_animation()
 
 void PlayerController::jump()
 {
-	owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * jump_force);
-	owner.get_component<AnimationController>()->change_animation(2);
+	//owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * jump_force);
+	current_action = Action::Jumping;
+	owner.get_component<AnimationController>()->play_animation(2);
 }
 
 void PlayerController::fire_bullet()
