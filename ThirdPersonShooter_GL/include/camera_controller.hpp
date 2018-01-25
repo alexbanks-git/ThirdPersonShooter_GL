@@ -4,7 +4,7 @@
 class CameraController : public ControllerComponent
 {
 private:
-	Transform* target;
+	Entity* target;
 	GLint mouse_x;
 	GLint mouse_y;
 	GLfloat pitch = 0;
@@ -25,7 +25,7 @@ public:
 
 	/**
 	 * @brief Sets the target of the camera
-	 * @param target the transform to set the camera's target to
+	 * @param target the entity to set the camera's target to
 	 */
-	void set_target(Transform* target);
+	void set_target(Entity* target);
 };

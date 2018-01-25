@@ -6,8 +6,7 @@
 #include "glm/gtx/euler_angles.hpp"
 #include "glm/gtx/quaternion.hpp"
 
-
-void Transform::local_translate(glm::vec3 pos)
+void Transform::relative_translate(glm::vec3 pos)
 {
 	transform_mat = glm::translate(transform_mat, pos);
 	position = glm::vec3(transform_mat[3][0], transform_mat[3][1], transform_mat[3][2]);

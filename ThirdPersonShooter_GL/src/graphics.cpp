@@ -1,6 +1,7 @@
 #include "graphics.hpp"
 
 static SDL_Window* window;
+static SDL_Renderer* renderer;
 static GLint window_width;
 static GLint window_height;
 static GLuint then;
@@ -67,6 +68,15 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLfloat fps)
 		return 0;
 	}
 
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+
+	if (renderer == nullptr)
+	{
+		std::clog << "Failed to create renderer context" << std::endl;
+		return 0;
+	}
+
 	SDL_GLContext context = SDL_GL_CreateContext(window);
 
 	if (context == nullptr)
@@ -121,6 +131,11 @@ void Graphics::update_window()
 GLfloat Graphics::get_elapsed_time()
 {
 	return elapsed_time;
+}
+
+SDL_Renderer* Graphics::get_renderer()
+{
+	return renderer;
 }
 
 GLuint Graphics::create_shader(std::string shader_type, std::string path)
@@ -202,4 +217,10 @@ void Graphics::draw_mesh(Mesh* mesh)
 
 	glDrawElements(GL_TRIANGLES, mesh->get_index_count(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+}
+
+void Graphics::clear_screen(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
+{
+	glClearColor(r, g, b, a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

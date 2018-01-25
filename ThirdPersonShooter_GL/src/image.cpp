@@ -73,7 +73,6 @@ void Image::draw()
 	glBindVertexArray(vao);
 	GLuint model_location = glGetUniformLocation(Graphics::get_user_interface_shader(), "model");
 	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform.get_transformation()));
-	
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 }

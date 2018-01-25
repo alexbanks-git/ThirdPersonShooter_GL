@@ -19,7 +19,7 @@ public:
 	 * @param target the target that the enemy should attack
 	 * @returns a reference to the enemy
 	 */
-	static Entity& spawn_basic_enemy(glm::vec3 position, Entity* target);
+	static Entity& spawn_runner(glm::vec3 position, Entity* target);
 
 	/**
 	 * @brief Spawns a bullet in the world.
@@ -71,4 +71,14 @@ public:
 	 * @returns a reference to the camera
 	 */
 	static Entity& spawn_camera(glm::vec3 position, GLfloat field_of_view, GLfloat near, GLfloat far);
+
+	static Entity& spawn_text(glm::vec3 position, std::string path);
+
+	static Entity& spawn_model(glm::vec3 position, std::string model_path);
+
+	static Entity& spawn_weapon(glm::vec3 position, std::string model_path, Entity* parent, glm::mat4* offset);
+
+	static Entity& spawn_walker(glm::vec3 position, Entity* target);
+
+	static Entity& spawn_crawler(glm::vec3 position, Entity* target);
 };

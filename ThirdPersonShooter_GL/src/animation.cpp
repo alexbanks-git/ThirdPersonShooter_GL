@@ -191,11 +191,11 @@ void Animation::update()
 			constrained_transform.y = axis_constraint.y <= 0 ? pos_result.y : skeleton->get_bone_at(b)->transform[3][1];
 			constrained_transform.z = axis_constraint.z <= 0 ? pos_result.z : skeleton->get_bone_at(b)->transform[3][2];
 
-			skeleton->get_bone_at(b)->transform = glm::translate(skeleton->get_bone_at(b)->other_transform, constrained_transform) * glm::toMat4(rot_result);
+			skeleton->get_bone_at(b)->transform = glm::translate(skeleton->get_bone_at(b)->world_transform.get_transformation(), constrained_transform) * glm::toMat4(rot_result);
 		}
 		else
 		{
-			skeleton->get_bone_at(b)->transform = glm::translate(skeleton->get_bone_at(b)->other_transform, pos_result) * glm::toMat4(rot_result);
+			skeleton->get_bone_at(b)->transform = glm::translate(skeleton->get_bone_at(b)->world_transform.get_transformation(), pos_result) * glm::toMat4(rot_result);
 		}
 	}
 	skeleton->bone_transforms.resize(skeleton->size());

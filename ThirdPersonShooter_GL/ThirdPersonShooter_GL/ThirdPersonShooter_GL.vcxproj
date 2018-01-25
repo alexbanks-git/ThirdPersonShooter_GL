@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\camera_controller.cpp" />
+    <ClCompile Include="..\src\camera_controller.cpp" />
     <ClCompile Include="..\src\animation.cpp" />
     <ClCompile Include="..\src\animation_controller.cpp" />
     <ClCompile Include="..\src\asset_loader.cpp" />
@@ -28,7 +28,7 @@
     <ClCompile Include="..\src\component.cpp" />
     <ClCompile Include="..\src\controller_component.cpp" />
     <ClCompile Include="..\src\drawable_component.cpp" />
-    <ClCompile Include="..\src\enemy_controller.cpp" />
+    <ClCompile Include="..\src\monster_controller.cpp" />
     <ClCompile Include="..\src\entity.cpp" />
     <ClCompile Include="..\src\entity_manager.cpp" />
     <ClCompile Include="..\src\game.cpp" />
@@ -41,9 +41,11 @@
     <ClCompile Include="..\src\physics_body.cpp" />
     <ClCompile Include="..\src\physics_debug_drawer.cpp" />
     <ClCompile Include="..\src\player_controller.cpp" />
+    <ClCompile Include="..\src\player_weapon.cpp" />
     <ClCompile Include="..\src\skeleton.cpp" />
     <ClCompile Include="..\src\skybox.cpp" />
     <ClCompile Include="..\src\spawn.cpp" />
+    <ClCompile Include="..\src\text_component.cpp" />
     <ClCompile Include="..\src\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +58,7 @@
     <ClInclude Include="..\include\component.hpp" />
     <ClInclude Include="..\include\controller_component.hpp" />
     <ClInclude Include="..\include\drawable_component.hpp" />
-    <ClInclude Include="..\include\enemy_controller.hpp" />
+    <ClInclude Include="..\include\monster_controller.hpp" />
     <ClInclude Include="..\include\entity.hpp" />
     <ClInclude Include="..\include\entity_manager.hpp" />
     <ClInclude Include="..\include\graphics.hpp" />
@@ -68,9 +70,11 @@
     <ClInclude Include="..\include\physics_body.hpp" />
     <ClInclude Include="..\include\physics_debug_drawer.hpp" />
     <ClInclude Include="..\include\player_controller.hpp" />
+    <ClInclude Include="..\include\player_weapon.hpp" />
     <ClInclude Include="..\include\skeleton.hpp" />
     <ClInclude Include="..\include\skybox.hpp" />
     <ClInclude Include="..\include\spawn.hpp" />
+    <ClInclude Include="..\include\text_component.hpp" />
     <ClInclude Include="..\include\transform.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +169,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalOptions>/VERBOSE:LIB %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -190,7 +194,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;SDL2.lib;SDL2main.lib;glu32.lib;glew32.lib;assimp-vc140-mt.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalOptions>/VERBOSE:LIB %(AdditionalOptions)</AdditionalOptions>
     </Link>

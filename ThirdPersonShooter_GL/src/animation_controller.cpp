@@ -5,6 +5,7 @@
 
 AnimationController::AnimationController(Entity* entity) : ControllerComponent(entity)
 {
+	current_animation = -1;
 }
 
 void AnimationController::add_animation(Animation animation)
@@ -14,23 +15,25 @@ void AnimationController::add_animation(Animation animation)
 
 void AnimationController::update()
 {
-	animations[current_animation].update();
-	if (animations[current_animation].has_constraints())
+	if (current_animation != -1)
 	{
-		glm::vec3 delta = animations[current_animation].get_delta_position();
-		glm::vec3 final_delta = delta;
+		animations[current_animation].update();
+		if (animations[current_animation].has_constraints())
+		{
+			glm::vec3 delta = animations[current_animation].get_delta_position();
+			glm::vec3 final_delta = delta;
 
-		if (delta.y > 0)
-			final_delta.y= delta.y*8.0f;
-		
-		final_delta.x *= -1.0f;
-		final_delta.z *= -1.0f;
+			if (delta.y > 0)
+				final_delta.y = delta.y*8.0f;
 
-		owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * final_delta.y);
-		owner.get_component<PhysicsBody>()->apply_impulse(transform.forward * final_delta.z);
-		owner.get_component<PhysicsBody>()->apply_impulse(transform.right * final_delta.x);
+			final_delta.x *= -1.0f;
+			final_delta.z *= -1.0f;
+
+			owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * final_delta.y);
+			owner.get_component<PhysicsBody>()->apply_impulse(transform.forward * final_delta.z);
+			owner.get_component<PhysicsBody>()->apply_impulse(transform.right * final_delta.x);
+		}
 	}
-	
 }
 
 std::string AnimationController::type_name()

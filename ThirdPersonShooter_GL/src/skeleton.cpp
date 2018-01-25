@@ -39,7 +39,8 @@ Skeleton::Bone* Skeleton::get_first_bone()
 
 void Skeleton::rotate_bone(GLuint bone_index, GLfloat angle, glm::vec3 axis)
 {
-	bones[bone_index].other_transform = glm::rotate(glm::mat4(), angle, axis);
+	//bones[bone_index].other_transform = glm::rotate(glm::mat4(), angle, axis);
+	bones[bone_index].world_transform.rotate(angle, axis);
 }
 
 void Skeleton::calculate_bone_positions(Bone* bone)

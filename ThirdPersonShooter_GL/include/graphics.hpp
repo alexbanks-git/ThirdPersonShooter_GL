@@ -99,4 +99,12 @@ public:
 	 * @returns the image shader
 	 */
 	static GLuint Graphics::get_image_shader();
+
+	/**
+	 * @brief Returns the renderer
+	 * @returns the renderer
+	 */
+	static SDL_Renderer* get_renderer();
+
+	static void clear_screen(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 };

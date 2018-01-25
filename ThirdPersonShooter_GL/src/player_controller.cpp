@@ -32,34 +32,6 @@ void PlayerController::update()
 		direction = new_dir;
 	}
 
-	if (keystate[SDL_SCANCODE_E])
-	{
-		owner.get_component<AnimationController>()->play_animation(5);
-	}
-
-	if (mouse & SDL_BUTTON(SDL_BUTTON_LEFT))
-	{
-		bones_angle = camera->transform.forward.y;
-		current_action = Action::Shooting;
-		direction = camera->transform.forward;
-
-		if (!firing_bullet)
-		{
-			firing_bullet = true;
-		}
-	}
-	else if (mouse & SDL_BUTTON(SDL_BUTTON_RIGHT))
-	{
-		direction = camera->transform.forward;
-		bones_angle = camera->transform.forward.y;
-		current_action = Action::Aiming;
-	}
-
-	if (!(mouse & SDL_BUTTON(SDL_BUTTON_LEFT)))
-	{
-		firing_bullet = false;
-	}
-
 	if (owner.get_component<AnimationController>()->get_active_animation() == 5)
 	{
 		if (owner.get_component<AnimationController>()->animation_playing())
@@ -70,7 +42,36 @@ void PlayerController::update()
 
 	if (PhysicsWorld::on_ground(body) && current_action != Action::Rolling)// && current_action != Action::Jumping)
 	{
-		rotate_bones(bones_angle);
+		if (keystate[SDL_SCANCODE_E])
+		{
+			owner.get_component<AnimationController>()->play_animation(5);
+		}
+
+		if (mouse & SDL_BUTTON(SDL_BUTTON_LEFT))
+		{
+			bones_angle = camera->transform.forward.y;
+			current_action = Action::Shooting;
+			direction = camera->transform.forward;
+
+			if (!firing_bullet)
+			{
+				firing_bullet = true;
+			}
+		}
+		else if (mouse & SDL_BUTTON(SDL_BUTTON_RIGHT))
+		{
+			direction = camera->transform.forward;
+			bones_angle = camera->transform.forward.y;
+			current_action = Action::Aiming;
+		}
+
+		if (!(mouse & SDL_BUTTON(SDL_BUTTON_LEFT)))
+		{
+			firing_bullet = false;
+		}
+
+		//rotate_bones(bones_angle);
+
 		if (forward_speed == 0.0f && body->linear_velocity().y >= -0.01f && body->linear_velocity().y <= 0.01f)
 		{
 			owner.get_component<AnimationController>()->play_animation(current_animation(), true);
@@ -98,7 +99,6 @@ void PlayerController::update()
 
 	}
 	
-
 	current_action = Action::None;
 }
 
@@ -131,13 +131,11 @@ GLuint PlayerController::current_animation()
 	{
 		index = 3;
 		owner.get_component<AnimationController>()->play_animation(3, true);
-		std::cout << "Aiming" << std::endl;
 	}
 	else if (current_action == Action::Shooting)
 	{
 		index = 4;
 		owner.get_component<AnimationController>()->play_animation(4, true);
-		std::cout << "Shooting" << std::endl;
 	}
 
 	return index;
@@ -160,7 +158,7 @@ void PlayerController::fire_bullet()
 	if (hit != nullptr)
 	{
 		bullet_end = hit->hit_point;
-		if (hit->entity->get_component<EnemyController>())
+		if (hit->entity->get_component<MonsterController>())
 		{
 			EntityManager::remove_entity(hit->entity);
 		}

@@ -5,6 +5,7 @@
 #include "glm/gtx/string_cast.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include <glm/gtx/quaternion.hpp>
+#include "transform.hpp"
 
 class Skeleton
 {
@@ -26,6 +27,7 @@ private:
 	typedef struct
 	{
 		glm::mat4 offset_matrix;
+		Transform world_transform;
 		glm::mat4 transform;
 		glm::mat4 final_transform;
 		std::string name;

@@ -15,14 +15,13 @@ public:
 	glm::vec3 right;
 	glm::vec3 position;
 	glm::vec3 scale;
-	
 
 	/**
 	 * @brief Translates the transform by the specified amount and direction 
 	 * in relation to the transform's forward direction.
 	 * @param the amount and direction to translate the transform by 
 	 */
-	void local_translate(glm::vec3 pos);
+	void relative_translate(glm::vec3 pos);
 
 	/**
 	 * @brief Translates the transform by the specified amount and direction.

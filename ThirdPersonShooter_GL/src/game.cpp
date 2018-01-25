@@ -21,26 +21,23 @@ int main(int argc, char* args[])
 	GLuint height = 600;
 
 	Graphics::init_graphics(width, height, 60.0f);
+	GLuint result;
+
 	GLboolean running = true;
 	PhysicsWorld::init_physics();
 	PhysicsWorld::set_gravity(glm::vec3(0.0f, -10.0f, 0.0f));
 	LevelManager::init_level();
 	Entity& cam_entity = Spawn::spawn_camera(
 		glm::vec3(0.0f, 2.0f, -6.0f), glm::radians(60.0f), 1.0f, 10000.0f);
-	
+
 	Camera* camera = cam_entity.get_component<Camera>();
 	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 1.0f, -4.0f), camera);
-	cam_entity.get_component<CameraController>()->set_target(&player.transform);
-	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
-	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
-	Spawn::spawn_basic_enemy(glm::vec3(0.0f, 2.0f, -3.0f), &player);
-	/*for (GLint i = 0; i < 50; i++)
-	{
-		Spawn::spawn_cube(glm::vec3(0.0f, 2.0f, -3.0f), false);
-	}*/
+	cam_entity.get_component<CameraController>()->set_target(&player);
+	Spawn::spawn_runner(glm::vec3(0.0f, 1.0f, 0.0f), &player);
 
+	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "survivor.fbx", &player,
+		&player.get_component<Model>()->skeleton.get_bone_at(35)->final_transform);*/
 
-	
 	Spawn::spawn_image(glm::vec3(800 / 2, 600 / 2, 0.0f), "crosshair.png");
 	Spawn::spawn_plane(0.0f);
 	GLint mouse_x;
@@ -60,8 +57,7 @@ int main(int argc, char* args[])
 		if (keystate[SDL_SCANCODE_ESCAPE])
 			running = false;
 
-		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		Graphics::clear_screen(0.5f, 0.5f, 0.5f, 1.0f);
 
 		glm::mat4 projection_matrix;
 		projection_matrix = glm::perspective(
@@ -91,7 +87,7 @@ int main(int argc, char* args[])
 
 		LevelManager::draw_skybox();
 		//glDepthFunc(GL_LESS);
-		
+
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glUseProgram(Graphics::get_default_shader());
@@ -111,7 +107,7 @@ int main(int argc, char* args[])
 		projection_uniform = glGetUniformLocation(Graphics::get_default_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-		LevelManager::draw_level(); 
+		LevelManager::draw_level();
 
 		glDisable(GL_CULL_FACE);
 		glUseProgram(Graphics::get_image_shader());

@@ -12,8 +12,11 @@
 #include "camera.hpp"
 #include "camera_controller.hpp"
 #include "image.hpp"
-#include "enemy_controller.hpp"
+#include "runner_controller.hpp"
 #include "bullet_controller.hpp"
+#include "text_component.hpp"
+#include "player_weapon.hpp"
+#include "monster_controller.hpp"
 
 
 class Entity
