@@ -8,6 +8,10 @@
 class AssetLoader
 {
 private:
+	static Model* get_model(std::string name);
+	static Animation get_animation(std::string name);
+	static bool anim_exists(std::string name);
+
 	/**
 	 * @brief Converts an Assimp matrix into a GLM matrix
 	 * @param mat1 the Assimp matrix to convert
@@ -20,14 +24,14 @@ private:
 	 * @param node the base node of the hierarchy
 	 * @param skeleton the skeleton to initialize
 	 */
-	static void setup_bone_transforms(aiNode* node, Skeleton* skeleton);
+	static void setup_bone_transforms(const aiScene* scene, aiNode* node, Skeleton* skeleton);
 
 	/**
 	 * @brief Iterates through a node's children and sets up model data.
 	 * @param node the parent node
 	 * @param model the model to setup
 	 */
-	static void setup_model(aiNode* node, Model& model);
+	static void setup_model(const aiScene* scene, aiNode* node, Model& model);
 
 	/**
 	 * @brief Sets a specific mesh's data based on Assimp mesh.
@@ -35,7 +39,7 @@ private:
 	 * @param model the model that the mesh belongs to
 	 * @param mesh the mesh to setup
 	 */
-	static void setup_mesh(aiMesh* ai_mesh, Model& model, Mesh& mesh);
+	static void setup_mesh(const aiScene* scene, aiMesh* ai_mesh, Model& model, Mesh& mesh);
 
 	/**
 	 * @brief Initializes bone weights and offset matrices pertaining to a specific bone.
@@ -43,7 +47,7 @@ private:
 	 * @param mesh the mesh that the skeleton belongs to
 	 * @param skeleton the skeleton that the bone belongs to
 	 */
-	static void setup_skinning_info(aiBone* ai_bone, Mesh& mesh, Skeleton& skeleton);
+	static void setup_skinning_info(const aiScene* scene, aiBone* ai_bone, Mesh& mesh, Skeleton& skeleton);
 public:
 	/**
 	* @brief Loads a model from an FBX file.

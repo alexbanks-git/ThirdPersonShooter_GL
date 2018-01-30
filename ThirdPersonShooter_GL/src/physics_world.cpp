@@ -1,6 +1,7 @@
 #include <memory>
 #include <algorithm>
 #include "physics_world.hpp"
+#include "SDL.h"
 
 static btDynamicsWorld* dynamics_world;
 static btBroadphaseInterface* broad_phase;
@@ -53,6 +54,7 @@ void PhysicsWorld::set_gravity(glm::vec3 g)
 }
 void PhysicsWorld::add_physics_body(PhysicsBody* body)
 {
+	GLfloat timer = SDL_GetTicks();
 	if (body == nullptr)
 	{
 		std::clog << "PhysicsWorld::add_physics_body: body is null" << std::endl;

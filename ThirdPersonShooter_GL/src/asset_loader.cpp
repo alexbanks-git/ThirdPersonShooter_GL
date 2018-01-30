@@ -1,13 +1,26 @@
+#include <map>
+#include <assimp/cimport.h>  
 #include "asset_loader.hpp"
 #include "SDL_image.h"
 
 static const aiScene* scene;
+static std::map<std::string, Model*> loaded_models;
+static std::map<std::string, Animation> loaded_animations;
 
 void AssetLoader::model_from_file(std::string path, Model* model, bool has_bones)
 {
 	Assimp::Importer importer;
+	Model* temp;
+	if ((temp = get_model(path)) != nullptr)
+	{
+		model->meshes = temp->meshes;
+		model->skeleton = temp->skeleton;
+		model->done = true;
+		return;
+	}
+	std::cout << path << std::endl;
 
-	scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -19,30 +32,31 @@ void AssetLoader::model_from_file(std::string path, Model* model, bool has_bones
 	{
 		model->skeleton.increase_size();
 		model->skeleton.get_first_bone()->parent_index = -1;
-		setup_bone_transforms(scene->mRootNode, &model->skeleton);
+		setup_bone_transforms(scene, scene->mRootNode, &model->skeleton);
 	}
 
-	setup_model(scene->mRootNode, *model);
+	setup_model(scene, scene->mRootNode, *model);
+	loaded_models.insert(std::make_pair(path, model));
 }
 
-void AssetLoader::setup_model(aiNode* node, Model& model)
+void AssetLoader::setup_model(const aiScene* scene, aiNode* node, Model& model)
 {
 	if (node->mNumMeshes > 0)
 	{
 		for (GLint m = 0; m < node->mNumMeshes; m++)
 		{
 			model.meshes.push_back(Mesh());
-			setup_mesh(scene->mMeshes[node->mMeshes[m]], model, model.meshes[model.meshes.size() - 1]);
+			setup_mesh(scene, scene->mMeshes[node->mMeshes[m]], model, model.meshes[model.meshes.size() - 1]);
 		}
 	}
 
 	for (GLint c = 0; c < node->mNumChildren; c++)
 	{
-		setup_model(node->mChildren[c], model);
+		setup_model(scene, node->mChildren[c], model);
 	}
 }
 
-void AssetLoader::setup_skinning_info(aiBone* ai_bone, Mesh& mesh, Skeleton& skeleton)
+void AssetLoader::setup_skinning_info(const aiScene* scene, aiBone* ai_bone, Mesh& mesh, Skeleton& skeleton)
 {
 	GLuint index = 0;
 	for (GLuint i = 0; i < skeleton.size(); i++)
@@ -67,7 +81,38 @@ void AssetLoader::setup_skinning_info(aiBone* ai_bone, Mesh& mesh, Skeleton& ske
 	}
 }
 
-void AssetLoader::setup_mesh(aiMesh* ai_mesh, Model& model, Mesh& mesh)
+Model* AssetLoader::get_model(std::string name)
+{
+	std::map<std::string, Model*>::iterator it;
+	if ((it = loaded_models.find(name)) != loaded_models.end())
+	{
+		return it->second;
+	}
+	return nullptr;
+}
+
+Animation AssetLoader::get_animation(std::string name)
+{
+	std::map<std::string, Animation>::iterator it;
+	Animation d = Animation(new Skeleton());
+	if ((it = loaded_animations.find(name)) != loaded_animations.end())
+	{
+		d = it->second;
+	}
+	return d;
+}
+
+bool AssetLoader::anim_exists(std::string name)
+{
+	std::map<std::string, Animation>::iterator it;
+	if ((it = loaded_animations.find(name)) != loaded_animations.end())
+	{
+		return true;
+	}
+	return false;
+}
+
+void AssetLoader::setup_mesh(const aiScene* scene, aiMesh* ai_mesh, Model& model, Mesh& mesh)
 {
 	std::vector<glm::vec2> texture_coordinates;
 	std::vector<GLuint> indices;
@@ -78,41 +123,40 @@ void AssetLoader::setup_mesh(aiMesh* ai_mesh, Model& model, Mesh& mesh)
 
 	for (GLint v = 0; v < ai_mesh->mNumVertices; v++)
 	{
-		vertices.push_back(glm::vec3(
+		mesh.add_vertex(glm::vec3(
 			ai_mesh->mVertices[v].x / 100.0f,
 			ai_mesh->mVertices[v].y / 100.0f,
 			ai_mesh->mVertices[v].z / 100.0f));
 
-		normals.push_back(glm::vec3(
+		mesh.add_normal(glm::vec3(
 			ai_mesh->mNormals[v].x,
 			ai_mesh->mNormals[v].y,
 			ai_mesh->mNormals[v].z));
 
-		tangents.push_back(glm::vec3(
+		mesh.add_tangent(glm::vec3(
 			ai_mesh->mTangents[v].x,
 			ai_mesh->mTangents[v].y,
 			ai_mesh->mTangents[v].z));
 
-		bitangents.push_back(glm::vec3(
+		mesh.add_bitangent(glm::vec3(
 			ai_mesh->mBitangents[v].x,
 			ai_mesh->mBitangents[v].y,
 			ai_mesh->mBitangents[v].z));
 
-		texture_coordinates.push_back(glm::vec2(
+		mesh.add_texture_coordinate(glm::vec2(
 			ai_mesh->mTextureCoords[0][v].x, ai_mesh->mTextureCoords[0][v].y));
 	}
-	mesh.set_vertices(vertices);
 
 	for (GLuint b = 0; b < ai_mesh->mNumBones; b++)
 	{
-		setup_skinning_info(ai_mesh->mBones[b], mesh, model.skeleton);
+		setup_skinning_info(scene, ai_mesh->mBones[b], mesh, model.skeleton);
 	}
 
 	for (GLuint f = 0; f < ai_mesh->mNumFaces; f++)
 	{
 		for (GLuint i = 0; i < ai_mesh->mFaces[f].mNumIndices; i++)
 		{
-			indices.push_back(ai_mesh->mFaces[f].mIndices[i]);
+			mesh.add_index(ai_mesh->mFaces[f].mIndices[i]);
 		}
 	}
 
@@ -126,17 +170,12 @@ void AssetLoader::setup_mesh(aiMesh* ai_mesh, Model& model, Mesh& mesh)
 	std::string specular = specular_name.C_Str();
 	std::string normal = normal_name.C_Str();
 
-	mesh.set_bitangents(bitangents);
-	mesh.set_tangents(tangents);
-	mesh.set_normals(normals);
-	mesh.set_texture_coordinates(texture_coordinates);
 	mesh.set_normal_map(normal);
 	mesh.set_specular_texture(specular);
 	mesh.set_diffuse_texture(diffuse);
-	mesh.set_indices(indices);
 }
 
-void AssetLoader::setup_bone_transforms(aiNode* node, Skeleton* skeleton)
+void AssetLoader::setup_bone_transforms(const aiScene* scene, aiNode* node, Skeleton* skeleton)
 {
 	if (node == nullptr)
 	{
@@ -171,7 +210,7 @@ void AssetLoader::setup_bone_transforms(aiNode* node, Skeleton* skeleton)
 		skeleton->increase_size();
 		skeleton->get_last_bone()->parent_index = parent_index;
 		skeleton->get_bone_at(parent_index)->children.push_back(skeleton->size() - 1);
-		setup_bone_transforms(node->mChildren[c], skeleton);
+		setup_bone_transforms(scene, node->mChildren[c], skeleton);
 	}
 }
 
@@ -202,8 +241,14 @@ glm::mat4 AssetLoader::to_glm_mat(aiMatrix4x4 mat1)
 
 void AssetLoader::load_animation(std::string path, Animation& animation)
 {
+	if (anim_exists(path))
+	{
+		Animation anim = get_animation(path);
+		animation.copy(&anim);
+		return;
+	}
 	Assimp::Importer importer = Assimp::Importer();
-	const aiScene* anim_scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_LimitBoneWeights);
+	const aiScene* anim_scene = importer.ReadFile(path, aiProcess_LimitBoneWeights);
 	animation.set_duration(anim_scene->mAnimations[0]->mDuration);
 	animation.set_path(path);
 
@@ -236,4 +281,6 @@ void AssetLoader::load_animation(std::string path, Animation& animation)
 			animation.add_rotation_key(anim_scene->mAnimations[0]->mChannels[c]->mNodeName.C_Str(), time, rotation);
 		}
 	}
+	
+	loaded_animations.insert(std::make_pair(path, animation));
 }

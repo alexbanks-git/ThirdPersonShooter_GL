@@ -14,16 +14,35 @@ void MonsterController::update()
 	PhysicsBody* body = owner.get_component<PhysicsBody>();
 	GLfloat speed = 0.0f;
 	transform.look_at(glm::vec3(target->transform.position.x, transform.position.y, target->transform.position.z));
+	if (owner.get_component<AnimationController>()->get_active_animation() != 1)
+	{
+		should_attack = false;
+	}
 
 	if (dist_to_target < track_distance && !target_found)
 	{
 		target_found = true;
 	}
+	
+	if (dist_to_target < 1.0f)
+	{
+		should_attack = true;
+	}
 
 	if (target_found)
 	{
-		speed = max_speed;
-		owner.get_component<AnimationController>()->play_animation(1, true);
+		if (should_attack)
+		{
+			owner.get_component<AnimationController>()->play_animation(2);
+		}
+		else
+		{
+			owner.get_component<AnimationController>()->play_animation(1, true);
+			if (owner.get_component<AnimationController>()->get_active_animation() == 1)
+			{
+				speed = max_speed;
+			}
+		}
 	}
 	else
 	{

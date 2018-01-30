@@ -23,9 +23,10 @@ class Entity
 {
 private:
 	GLuint id;
-	std::vector<std::unique_ptr<Component>> components;
+	
 
 public:
+	std::vector<std::unique_ptr<Component>> components;
 	Transform transform;
 	Entity();
 

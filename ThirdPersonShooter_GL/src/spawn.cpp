@@ -1,6 +1,19 @@
 #include <memory>
+#include <map>
 #include "spawn.hpp"
 #include "asset_loader.hpp"
+static std::map<std::string, Entity*> loaded_entities;
+
+Entity* Spawn::find_loaded_entity(std::string name)
+{
+	std::map<std::string, Entity*>::iterator it;
+
+	if ((it = loaded_entities.find(name)) != loaded_entities.end())
+	{
+		return it->second;
+	}
+	return nullptr;
+}
 
 Entity& Spawn::spawn_weapon(glm::vec3 position, std::string model_path, Entity* parent, glm::mat4* offset)
 {
@@ -120,26 +133,37 @@ Entity& Spawn::spawn_runner(glm::vec3 position, Entity* target)
 	entity->get_component<MonsterController>()->set_max_speed(1.0f);
 	entity->get_component<MonsterController>()->set_tracking_distance(2.0f);
 	
+	
 	entity->get_component<Model>()->create("cop_zombie.fbx", true);
+	
+	
 	Model* model = entity->get_component<Model>();
 
 	entity->add_component<PhysicsBody>();
 	
+	
 	Animation shoot_anim = Animation(&model->skeleton);
 	AssetLoader::load_animation("cop_zombie_idle.fbx", shoot_anim);
+	
 	animator->add_animation(shoot_anim);
 
 	Animation run_anim = Animation(&model->skeleton);
 	AssetLoader::load_animation("cop_zombie_run.fbx", run_anim);
 	animator->add_animation(run_anim);
-
+	
+	Animation attack_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("cop_zombie_attack.fbx", attack_anim);
+	animator->add_animation(attack_anim);
+	
+	
 	entity->get_component<PhysicsBody>()->create(
 		"Capsule", 1.0f,
-		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y - 0.5f, model->get_max_bounds().x),
+		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y, model->get_max_bounds().x),
 		glm::vec3(0, -1, 0));
-
+	
 	entity->get_component<PhysicsBody>()->set_kinematic(true);
 	EntityManager::add_entity(std::move(entity));
+	
 	return *EntityManager::get_last();
 }
 
@@ -154,8 +178,8 @@ Entity& Spawn::spawn_walker(glm::vec3 position, Entity* target)
 	entity->add_component<MonsterController>();
 	entity->get_component<MonsterController>()->set_target(target);
 
-	entity->get_component<MonsterController>()->set_max_speed(0.5f);
-	entity->get_component<MonsterController>()->set_tracking_distance(2.0f);
+	entity->get_component<MonsterController>()->set_max_speed(0.1f);
+	entity->get_component<MonsterController>()->set_tracking_distance(50.0f);
 
 	entity->get_component<Model>()->create("cop_zombie.fbx", true);
 	Model* model = entity->get_component<Model>();
@@ -167,12 +191,16 @@ Entity& Spawn::spawn_walker(glm::vec3 position, Entity* target)
 	animator->add_animation(shoot_anim);
 
 	Animation run_anim = Animation(&model->skeleton);
-	AssetLoader::load_animation("cop_zombie_run.fbx", run_anim);
+	AssetLoader::load_animation("cop_zombie_walk.fbx", run_anim);
 	animator->add_animation(run_anim);
+
+	Animation attack_anim = Animation(&model->skeleton);
+	AssetLoader::load_animation("cop_zombie_attack.fbx", attack_anim);
+	animator->add_animation(attack_anim);
 
 	entity->get_component<PhysicsBody>()->create(
 		"Capsule", 1.0f,
-		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y - 0.5f, model->get_max_bounds().x),
+		glm::vec3(model->get_max_bounds().z, model->get_max_bounds().y, model->get_max_bounds().x),
 		glm::vec3(0, -1, 0));
 
 	entity->get_component<PhysicsBody>()->set_kinematic(true);
@@ -192,7 +220,7 @@ Entity& Spawn::spawn_crawler(glm::vec3 position, Entity* target)
 	entity->get_component<MonsterController>()->set_target(target);
 
 	entity->get_component<MonsterController>()->set_max_speed(1.5f);
-	entity->get_component<MonsterController>()->set_tracking_distance(3.0f);
+	entity->get_component<MonsterController>()->set_tracking_distance(50.0f);
 
 	entity->get_component<Model>()->create("cop_zombie.fbx", true);
 	Model* model = entity->get_component<Model>();

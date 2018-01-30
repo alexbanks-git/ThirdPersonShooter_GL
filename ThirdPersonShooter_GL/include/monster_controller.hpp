@@ -8,6 +8,8 @@ private:
 	bool target_found;
 	GLfloat track_distance;
 	GLfloat max_speed;
+	GLfloat attack_timer;
+	bool should_attack;
 public:
 	MonsterController(Entity* entity);
 	void update();

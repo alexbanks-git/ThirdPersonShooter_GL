@@ -33,7 +33,30 @@ int main(int argc, char* args[])
 	Camera* camera = cam_entity.get_component<Camera>();
 	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 1.0f, -4.0f), camera);
 	cam_entity.get_component<CameraController>()->set_target(&player);
-	Spawn::spawn_runner(glm::vec3(0.0f, 1.0f, 0.0f), &player);
+	
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+	
 
 	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "survivor.fbx", &player,
 		&player.get_component<Model>()->skeleton.get_bone_at(35)->final_transform);*/
@@ -74,6 +97,11 @@ int main(int argc, char* args[])
 			Transform::world_up_vector());
 
 		LevelManager::update_level();
+
+		if (keystate[SDL_SCANCODE_RCTRL])
+		{
+			
+		}
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);

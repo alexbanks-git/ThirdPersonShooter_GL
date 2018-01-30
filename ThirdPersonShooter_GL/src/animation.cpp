@@ -205,3 +205,21 @@ void Animation::update()
 		skeleton->bone_transforms[b] = skeleton->get_bone_at(b)->final_transform * skeleton->get_bone_at(b)->offset_matrix;
 	}
 }
+
+void Animation::copy(Animation* anim)
+{
+	std::map<std::string, std::vector<Animation::PositionKey>>::iterator p_it;
+	for (p_it = anim->position_keys.begin(); p_it != anim->position_keys.end(); p_it++)
+	{
+		position_keys[p_it->first] = p_it->second;
+	}
+
+	std::map<std::string, std::vector<Animation::RotationKey>>::iterator r_it;
+	for (r_it = anim->rotation_keys.begin(); r_it != anim->rotation_keys.end(); r_it++)
+	{
+		rotation_keys[r_it->first] = r_it->second;
+	}
+
+	skeleton->bone_transforms = anim->skeleton->bone_transforms;
+	duration = anim->duration;
+}

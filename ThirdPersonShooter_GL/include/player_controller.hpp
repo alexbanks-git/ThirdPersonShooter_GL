@@ -12,6 +12,7 @@ private:
 	bool firing_bullet;
 	GLfloat jump_force;
 	GLfloat run_speed;
+	GLfloat walk_speed;
 
 	/**
 	 * @brief Rotates the players shoulder and neck bones.

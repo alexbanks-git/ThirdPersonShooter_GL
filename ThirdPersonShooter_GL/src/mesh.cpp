@@ -41,65 +41,60 @@ void Mesh::set_normal_map(std::string path)
 	normal_map = path;
 }
 
-void Mesh::set_indices(std::vector<GLuint> data)
+void Mesh::add_index(GLuint index)
 {
-	indices = data;
+	indices.push_back(index);
 }
 
-void Mesh::set_vertices(std::vector<glm::vec3> data)
+void Mesh::add_vertex(glm::vec3 vert)
 {
-	if (vertices.size() <= 0)
-		vertices.resize(data.size());
-
-	for (GLuint i = 0; i < vertices.size(); i++)
+	Vertex v = Vertex();
+	v.position = vert;
+	vertices.push_back(v);
+	if (v.position.x > max_bounds.x)
 	{
-		vertices[i].position = data[i];
-		vertices[i].bone_count = 0;
+		max_bounds.x = v.position.x;
+	}
+	else if (v.position.x < min_bounds.x)
+	{
+		min_bounds.x = v.position.x;
+	}
+	if (v.position.y > max_bounds.y)
+	{
+		max_bounds.y = v.position.y;
+	}
+	else if (v.position.y < min_bounds.y)
+	{
+		min_bounds.y = v.position.y;
+	}
+	if (v.position.z > max_bounds.z)
+	{
+		max_bounds.z = v.position.z;
+	}
+	else if (v.position.z < min_bounds.z)
+	{
+		min_bounds.z = v.position.z;
 	}
 }
 
-void Mesh::set_normals(std::vector<glm::vec3> data)
+void Mesh::add_normal(glm::vec3 norm)
 {
-	if (vertices.size() <= 0)
-		vertices.resize(data.size());
-
-	for (GLuint i = 0; i < vertices.size(); i++)
-	{
-		vertices[i].normal = data[i];
-	}
+	vertices[vertices.size() - 1].normal = norm;
 }
 
-void Mesh::set_tangents(std::vector<glm::vec3> data)
+void Mesh::add_tangent(glm::vec3 tan)
 {
-	if (vertices.size() <= 0)
-		vertices.resize(data.size());
-
-	for (GLuint i = 0; i < vertices.size(); i++)
-	{
-		vertices[i].tangent = data[i];
-	}
+	vertices[vertices.size() - 1].tangent = tan;
 }
 
-void Mesh::set_bitangents(std::vector<glm::vec3> data)
+void Mesh::add_bitangent(glm::vec3 bitan)
 {
-	if (vertices.size() <= 0)
-		vertices.resize(data.size());
-
-	for (GLuint i = 0; i < vertices.size(); i++)
-	{
-		vertices[i].bitangent = data[i];
-	}
+	vertices[vertices.size() - 1].bitangent = bitan;
 }
 
-void Mesh::set_texture_coordinates(std::vector<glm::vec2> data)
+void Mesh::add_texture_coordinate(glm::vec2 tex)
 {
-	if (vertices.size() <= 0)
-		vertices.resize(data.size());
-
-	for (GLuint i = 0; i < vertices.size(); i++)
-	{
-		vertices[i].uv = data[i];
-	}
+	vertices[vertices.size() - 1].uv = tex;
 }
 
 GLuint Mesh::get_index_count()
@@ -136,39 +131,7 @@ void Mesh::bind_texture(GLuint id, std::string location, GLuint num)
 
 void Mesh::create()
 {
-	glm::vec3 min = glm::vec3();
-	glm::vec3 max = glm::vec3();
-
-	for (GLuint i = 0; i < vertices.size(); i++)
-	{
-		if (vertices[i].position.x > max.x)
-		{
-			max.x = vertices[i].position.x;
-		}
-		else if (vertices[i].position.x < min.x)
-		{
-			min.x = vertices[i].position.x;
-		}
-		if (vertices[i].position.y > max.y)
-		{
-			max.y = vertices[i].position.y;
-		}
-		else if (vertices[i].position.y < min.y)
-		{
-			min.y = vertices[i].position.y;
-		}
-		if (vertices[i].position.z > max.z)
-		{
-			max.z = vertices[i].position.z;
-		}
-		else if (vertices[i].position.z < min.z)
-		{
-			min.z = vertices[i].position.z;
-		}
-	}
-	min_bounds = min;
-	max_bounds = max;
-
+	
 	SDL_Surface* diffuse_surface = IMG_Load(diffuse_texture.c_str());
 	create_texture(diffuse_surface, &diffuse_id, "diffuse_texture", 0);
 
@@ -214,6 +177,7 @@ void Mesh::create()
 	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, bone_weights));
 
 	glBindVertexArray(0);
+	
 }
 
 glm::vec3 Mesh::get_min_bounds()

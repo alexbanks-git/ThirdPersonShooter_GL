@@ -43,20 +43,20 @@ std::string AnimationController::type_name()
 
 void AnimationController::play_animation(GLuint index, bool loop)
 {
-	if (current_animation != index  && !(index >= animations.size()))
+	if (index < animations.size())
 	{
 		if (!animations[current_animation].is_playing())
 		{
 			current_animation = index;
 			animations[current_animation].play(loop);
 		}
-		else if (animations[current_animation].is_looping())
+		else if (animations[current_animation].is_looping() && (index != current_animation))
 		{
 			animations[current_animation].stop();
 			current_animation = index;
 			animations[current_animation].play(loop);
 		}
-		
+
 	}
 }
 

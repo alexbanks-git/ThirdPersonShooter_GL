@@ -21,11 +21,10 @@ private:
 		glm::quat rotation;
 	}RotationKey;
 
-	std::map<std::string, std::vector<PositionKey>> position_keys;
-	std::map<std::string, std::vector<RotationKey>> rotation_keys;
-	glm::vec3 axis_constraint;
-	std::string root_bone;
-	GLfloat duration;
+
+	glm::vec3 delta_position;
+	glm::vec3 prev_pos;
+	glm::vec3 new_pos;
 	bool playing;
 	bool looping;
 	std::string path;
@@ -34,12 +33,16 @@ private:
 	Skeleton* skeleton;
 	bool first_frame_passed;
 	bool constraints_active;
-	glm::vec3 delta_position;
-	glm::vec3 prev_pos;
-	glm::vec3 new_pos;
+	glm::vec3 axis_constraint;
+	std::string root_bone;
 public:
-	Animation(Skeleton* skel);
+	std::map<std::string, std::vector<PositionKey>> position_keys;
+	std::map<std::string, std::vector<RotationKey>> rotation_keys;
+	GLfloat duration;
 
+	void copy(Animation* anim);
+
+	Animation(Skeleton* skel);
 	/**
 	 * @brief Sets a keyframe's position for a specific bone.
 	 * @param bone_name the name of the bone

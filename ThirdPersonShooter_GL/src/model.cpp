@@ -5,7 +5,6 @@
 Model::Model(Entity* entity) : DrawableComponent(entity)
 {
 	material = 0;
-
 }
 
 void Model::set_meshes(std::vector<Mesh> data)
@@ -16,16 +15,21 @@ void Model::set_meshes(std::vector<Mesh> data)
 void Model::create(std::string path, bool has_bones)
 {
 	skeleton = Skeleton();
+
 	AssetLoader::model_from_file(path.c_str(), this, has_bones);
 
-	if (has_bones)
+	if (!done)
 	{
-		skeleton.init();
-	}
+		if (has_bones)
+		{
+			skeleton.init();
+		}
 
-	for (GLuint i = 0; i < meshes.size(); i++)
-	{
-		meshes[i].create();
+		for (GLuint i = 0; i < meshes.size(); i++)
+		{
+			meshes[i].create();
+		}
+		done = true;
 	}
 }
 
@@ -44,10 +48,6 @@ void Model::draw()
 	}
 	else
 	{
-		//glm::mat4 new_matrix = transform.get_transformation();
-		//new_matrix[3][1] -= get_max_bounds().y / 2;
-		//glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(new_matrix));
-
 		GLint flag_loc = glGetUniformLocation(Graphics::get_default_shader(), "has_bones");
 		glUniform1i(flag_loc, 0);
 	}

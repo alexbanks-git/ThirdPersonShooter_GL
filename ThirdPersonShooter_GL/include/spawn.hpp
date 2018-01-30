@@ -4,6 +4,8 @@
 
 class Spawn
 {
+private:
+	static Entity* find_loaded_entity(std::string name);
 public:
 	/**
 	 * @brief Spawns the player in the world.
@@ -73,6 +75,7 @@ public:
 	static Entity& spawn_camera(glm::vec3 position, GLfloat field_of_view, GLfloat near, GLfloat far);
 
 	static Entity& spawn_text(glm::vec3 position, std::string path);
+
 
 	static Entity& spawn_model(glm::vec3 position, std::string model_path);
 

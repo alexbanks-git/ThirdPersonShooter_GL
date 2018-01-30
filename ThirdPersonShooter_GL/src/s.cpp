@@ -25,7 +25,6 @@ void PlayerController::update()
 	glm::vec3 direction = transform.forward;
 	glm::vec3 new_dir;
 	GLfloat bones_angle = 0.0f;
-	glm::vec3 move_dir = glm::vec3();
 
 	if ((new_dir = change_facing_direction(keystate)) != glm::vec3())
 	{
@@ -52,7 +51,6 @@ void PlayerController::update()
 		{
 			bones_angle = camera->transform.forward.y;
 			current_action = Action::Shooting;
-			move_dir = direction;
 			direction = camera->transform.forward;
 
 			if (!firing_bullet)
@@ -62,7 +60,6 @@ void PlayerController::update()
 		}
 		else if (mouse & SDL_BUTTON(SDL_BUTTON_RIGHT))
 		{
-			move_dir = direction;
 			direction = camera->transform.forward;
 			bones_angle = camera->transform.forward.y;
 			current_action = Action::Aiming;
@@ -73,39 +70,31 @@ void PlayerController::update()
 			firing_bullet = false;
 		}
 
-		rotate_bones(bones_angle);
+		//rotate_bones(bones_angle);
 
 		if (forward_speed == 0.0f && body->linear_velocity().y >= -0.01f && body->linear_velocity().y <= 0.01f)
 		{
-
 			owner.get_component<AnimationController>()->play_animation(current_animation(), true);
 		}
 		else
 		{
-			if (current_action != Action::Aiming && current_action != Action::Shooting)
-			{
-				owner.get_component<AnimationController>()->play_animation(1, true);
-			}
+			owner.get_component<AnimationController>()->play_animation(1, true);
 		}
-
+		
 		if (keystate[SDL_SCANCODE_SPACE])
 		{
-
+			
 			jump();
 		}
-		glm::vec3 forward_velocity = glm::vec3();
-		if (current_action == Action::Aiming || current_action == Action::Shooting)
-		{
-			forward_velocity = move_dir * forward_speed;
-		}
-		else
-		{
-			forward_velocity = direction * forward_speed;
-		}
+		glm::vec3 forward_velocity = direction * forward_speed;
 		body->set_velocity(glm::vec3(forward_velocity.x, body->linear_velocity().y, forward_velocity.z));
 		direction = glm::normalize(direction);
 		direction.y = 0;
+		if (!(current_action == Action::Aiming || current_action == Action::Shooting))
+		{
+
 		transform.look_at(transform.position + direction);
+}
 	}
 	if (SDL_GetTicks() - shoot_start_time >= 200 && firing_bullet)
 	{
@@ -113,7 +102,7 @@ void PlayerController::update()
 		fire_bullet();
 
 	}
-
+	
 	current_action = Action::None;
 }
 
@@ -145,10 +134,12 @@ GLuint PlayerController::current_animation()
 	if (current_action == Action::Aiming)
 	{
 		index = 3;
+		owner.get_component<AnimationController>()->play_animation(3, true);
 	}
 	else if (current_action == Action::Shooting)
 	{
 		index = 4;
+		owner.get_component<AnimationController>()->play_animation(4, true);
 	}
 
 	return index;

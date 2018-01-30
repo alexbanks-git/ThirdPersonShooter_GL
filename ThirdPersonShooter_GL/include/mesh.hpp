@@ -43,35 +43,35 @@ private:
 	std::vector<Vertex> vertices;
 
 public:
-
+	
 	/**
 	 * @brief Sets the positions for the mesh's vertices
 	 * @param data the data to set the vertex positions with
 	 */
-	void set_vertices(std::vector<glm::vec3> data);
+	void add_vertex(glm::vec3 vert);
 
 	/**
 	 * @brief Sets the normals for the mesh's vertices
 	 * @param data the data to set the vertex normals with
 	 */
-	void set_normals(std::vector<glm::vec3> data);
+	void add_normal(glm::vec3 norm);
 	/**
 	 * @brief Sets the tangents for the mesh's vertices
 	 * @param data the data to set the vertex tangents with
 	 */
-	void set_tangents(std::vector<glm::vec3> data);
+	void add_tangent(glm::vec3 tan);
 
 	/**
 	 * @brief Sets the bitangents for the mesh's vertices
 	 * @param data the data to set the vertex bitangents with
 	 */
-	void set_bitangents(std::vector<glm::vec3> data);
+	void add_bitangent(glm::vec3 bitan);
 
 	/**
 	 * @brief Sets the texture coordinates for the mesh's vertices
 	 * @param data the data to set the vertex texture coordinates with
 	 */
-	void set_texture_coordinates(std::vector<glm::vec2> data);
+	void add_texture_coordinate(glm::vec2 tex);
 
 	/**
 	 * @brief Sets the diffuse texture of the mesh.
@@ -95,7 +95,7 @@ public:
 	 * @brief Sets the indices for the mesh.
 	 * @param data the to set the indices with
 	 */
-	void set_indices(std::vector<GLuint> data);
+	void add_index(GLuint index);
 
 	/**
 	 * @brief Generates, and binds, array and buffer objects for the mesh.
