@@ -2,17 +2,15 @@
 #include <map>
 #include "spawn.hpp"
 #include "asset_loader.hpp"
-static std::map<std::string, Entity*> loaded_entities;
 
-Entity* Spawn::find_loaded_entity(std::string name)
+Entity& Spawn::spawn_light(glm::vec3 position, GLfloat radius, GLfloat intensity, glm::vec4 color)
 {
-	std::map<std::string, Entity*>::iterator it;
-
-	if ((it = loaded_entities.find(name)) != loaded_entities.end())
-	{
-		return it->second;
-	}
-	return nullptr;
+	std::unique_ptr<Entity> entity(new Entity());
+	entity->transform.global_translate(position);
+	entity->add_component<Light>();
+	entity->get_component<Light>()->set_properties(radius, intensity, color);
+	EntityManager::add_entity(std::move(entity));
+	return *EntityManager::get_last();
 }
 
 Entity& Spawn::spawn_weapon(glm::vec3 position, std::string model_path, Entity* parent, glm::mat4* offset)

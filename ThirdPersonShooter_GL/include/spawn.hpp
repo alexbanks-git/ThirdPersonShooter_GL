@@ -4,8 +4,6 @@
 
 class Spawn
 {
-private:
-	static Entity* find_loaded_entity(std::string name);
 public:
 	/**
 	 * @brief Spawns the player in the world.
@@ -84,4 +82,6 @@ public:
 	static Entity& spawn_walker(glm::vec3 position, Entity* target);
 
 	static Entity& spawn_crawler(glm::vec3 position, Entity* target);
+
+	static Entity& spawn_light(glm::vec3 position, GLfloat radius, GLfloat intensity, glm::vec4 color);
 };

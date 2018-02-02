@@ -56,6 +56,9 @@ int main(int argc, char* args[])
 	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
 	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
 	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
+
+	Spawn::spawn_light(glm::vec3(2.0f, 5.0f, 0.0f), 30.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	Spawn::spawn_light(glm::vec3(-2.0f, 5.0f, 0.0f), 30.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	
 
 	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "survivor.fbx", &player,
@@ -69,9 +72,6 @@ int main(int argc, char* args[])
 	GLfloat yaw = 0;
 	Uint32 mouseState;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-
-	glm::vec3 light_pos = glm::vec3(0, 50, 0);
-	glm::mat4 light_mat = glm::translate(glm::mat4(), light_pos);
 	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	while (running)
 	{
@@ -123,18 +123,13 @@ int main(int argc, char* args[])
 		glUniform3f(camera_uniform, camera->transform.position.x, camera->transform.position.y,
 			camera->transform.position.z);
 
-		GLint light_mat_uniform = glGetUniformLocation(Graphics::get_default_shader(), "light_mat");
-		glUniformMatrix4fv(light_mat_uniform, 1, GL_FALSE, glm::value_ptr(light_mat));
-
-		GLint light_uniform = glGetUniformLocation(Graphics::get_default_shader(), "light");
-		glUniform3f(light_uniform, light_pos.x, light_pos.y, light_pos.z);
-
 		view_uniform = glGetUniformLocation(Graphics::get_default_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
 		projection_uniform = glGetUniformLocation(Graphics::get_default_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
+		LevelManager::draw_lights();
 		LevelManager::draw_level();
 
 		glDisable(GL_CULL_FACE);

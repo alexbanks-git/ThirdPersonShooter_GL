@@ -2,10 +2,31 @@
 #include "physics_world.hpp"
 
 static std::vector<std::unique_ptr<Entity>> entities;
+static int current_light;
+static int light_count;
 
 void EntityManager::init()
 {
 
+}
+
+GLuint EntityManager::get_current_light()
+{
+	return current_light;
+}
+
+void EntityManager::change_light()
+{
+	current_light++;
+	if (current_light == light_count)
+	{
+		current_light = 0;
+	}
+}
+
+GLuint EntityManager::get_num_lights()
+{
+	return light_count;
 }
 
 Entity* EntityManager::get_entity(GLuint index)
@@ -30,6 +51,12 @@ void EntityManager::add_entity(std::unique_ptr<Entity> entity)
 		std::clog << "EntityManager::add_entity: entity is null" << std::endl;
 		return;
 	}
+	
+	if (entity->get_component<Light>())
+	{
+		light_count++;
+	}
+
 	entity->set_id(entities.size());
 	entities.push_back(std::move(entity));
 }

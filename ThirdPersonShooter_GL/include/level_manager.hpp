@@ -32,4 +32,9 @@ public:
 	 * @brief Draws all non user interface images.
 	 */
 	static void draw_images();
+
+	/**
+	 * @brief Draws all lights in the level.
+	 */
+	static void draw_lights();
 };

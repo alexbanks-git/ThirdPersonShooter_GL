@@ -10,7 +10,7 @@ public:
 	Model(Entity* entity);
 	std::vector<Mesh> meshes;
 	Skeleton skeleton;
-	bool done;
+	bool loaded;
 	/**
 	 * @brief Retrieves the number of meshes the model contains.
 	 * @returns the number of meshes

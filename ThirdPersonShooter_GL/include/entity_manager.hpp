@@ -5,6 +5,10 @@
 class EntityManager
 {
 public:
+	
+	static GLuint EntityManager::get_num_lights();
+	static void change_light();
+	static GLuint get_current_light();
 	static void init();
 
 	/**

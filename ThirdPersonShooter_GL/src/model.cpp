@@ -18,7 +18,7 @@ void Model::create(std::string path, bool has_bones)
 
 	AssetLoader::model_from_file(path.c_str(), this, has_bones);
 
-	if (!done)
+	if (!loaded)
 	{
 		if (has_bones)
 		{
@@ -29,7 +29,7 @@ void Model::create(std::string path, bool has_bones)
 		{
 			meshes[i].create();
 		}
-		done = true;
+		loaded = true;
 	}
 }
 

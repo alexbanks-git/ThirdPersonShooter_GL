@@ -28,6 +28,8 @@
     <ClCompile Include="..\src\component.cpp" />
     <ClCompile Include="..\src\controller_component.cpp" />
     <ClCompile Include="..\src\drawable_component.cpp" />
+    <ClCompile Include="..\src\light.cpp" />
+    <ClCompile Include="..\src\light_manager.cpp" />
     <ClCompile Include="..\src\monster_controller.cpp" />
     <ClCompile Include="..\src\entity.cpp" />
     <ClCompile Include="..\src\entity_manager.cpp" />
@@ -37,6 +39,7 @@
     <ClCompile Include="..\src\level_manager.cpp" />
     <ClCompile Include="..\src\mesh.cpp" />
     <ClCompile Include="..\src\model.cpp" />
+    <ClCompile Include="..\src\monster_spawn.cpp" />
     <ClCompile Include="..\src\physics_world.cpp" />
     <ClCompile Include="..\src\physics_body.cpp" />
     <ClCompile Include="..\src\physics_debug_drawer.cpp" />
@@ -58,6 +61,8 @@
     <ClInclude Include="..\include\component.hpp" />
     <ClInclude Include="..\include\controller_component.hpp" />
     <ClInclude Include="..\include\drawable_component.hpp" />
+    <ClInclude Include="..\include\light.hpp" />
+    <ClInclude Include="..\include\light_manager.hpp" />
     <ClInclude Include="..\include\monster_controller.hpp" />
     <ClInclude Include="..\include\entity.hpp" />
     <ClInclude Include="..\include\entity_manager.hpp" />
@@ -66,6 +71,7 @@
     <ClInclude Include="..\include\level_manager.hpp" />
     <ClInclude Include="..\include\mesh.hpp" />
     <ClInclude Include="..\include\model.hpp" />
+    <ClInclude Include="..\include\monster_spawn.hpp" />
     <ClInclude Include="..\include\physics_world.hpp" />
     <ClInclude Include="..\include\physics_body.hpp" />
     <ClInclude Include="..\include\physics_debug_drawer.hpp" />

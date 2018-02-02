@@ -15,7 +15,7 @@ void AssetLoader::model_from_file(std::string path, Model* model, bool has_bones
 	{
 		model->meshes = temp->meshes;
 		model->skeleton = temp->skeleton;
-		model->done = true;
+		model->loaded = true;
 		return;
 	}
 	std::cout << path << std::endl;

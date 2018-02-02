@@ -17,7 +17,7 @@
 #include "text_component.hpp"
 #include "player_weapon.hpp"
 #include "monster_controller.hpp"
-
+#include "light.hpp"
 
 class Entity
 {

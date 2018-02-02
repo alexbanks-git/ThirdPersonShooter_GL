@@ -156,7 +156,6 @@ GLuint PlayerController::current_animation()
 
 void PlayerController::jump()
 {
-	//owner.get_component<PhysicsBody>()->apply_impulse(Transform::world_up_vector() * jump_force);
 	current_action = Action::Jumping;
 	owner.get_component<AnimationController>()->play_animation(2);
 }
@@ -185,8 +184,9 @@ void PlayerController::fire_bullet()
 	{
 		bullet_end = camera->transform.position + camera->transform.forward * 3000.0f;
 	}
-	bullet_velocity = glm::normalize(bullet_end - transform.position) * 5.0f;
-	Entity& bullet = Spawn::spawn_bullet(transform.position, bullet_velocity, bullet_end, "crosshair.png");
+	bullet_velocity = glm::normalize(bullet_end - transform.position) * 0.5f;
+	glm::vec3 bullet_pos = glm::vec3(transform.position.x, transform.position.y + 0.2, transform.position.z);
+	Entity& bullet = Spawn::spawn_bullet(bullet_pos, bullet_velocity, bullet_end, "crosshair.png");
 	bullet.transform.look_at(transform.position + transform.right);
 }
 

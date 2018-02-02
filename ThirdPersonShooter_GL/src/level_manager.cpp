@@ -32,6 +32,13 @@ void LevelManager::draw_level()
 	EntityManager::draw_entities(0);
 }
 
+void LevelManager::draw_lights()
+{
+	GLint light_count_location = glGetUniformLocation(Graphics::get_default_shader(), "light_count");
+	glUniform1i(light_count_location, EntityManager::get_num_lights());
+	EntityManager::draw_entities(3);
+}
+
 void LevelManager::draw_ui()
 {
 	EntityManager::draw_entities(1);

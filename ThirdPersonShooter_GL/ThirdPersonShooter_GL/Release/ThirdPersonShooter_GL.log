@@ -1,11 +1,12 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  asset_loader.cpp
-..\src\asset_loader.cpp(46): warning C4018: '<': signed/unsigned mismatch
-..\src\asset_loader.cpp(53): warning C4018: '<': signed/unsigned mismatch
-..\src\asset_loader.cpp(124): warning C4018: '<': signed/unsigned mismatch
-..\src\asset_loader.cpp(252): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-..\src\asset_loader.cpp(264): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-..\src\asset_loader.cpp(279): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  game.cpp
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+c:\users\sharg_000\documents\thirdpersonshooter_gl\third-party\bullet3-2.87\bullet3-2.87\src\LinearMath/btIDebugDraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+..\src\game.cpp(24): warning C4101: 'result': unreferenced local variable
+..\src\game.cpp(78): warning C4101: 'mouse_x': unreferenced local variable
+..\src\game.cpp(82): warning C4101: 'mouseState': unreferenced local variable
+..\src\game.cpp(79): warning C4101: 'mouse_y': unreferenced local variable
   
   Searching libraries
       Searching C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86\OpenGL32.lib:
