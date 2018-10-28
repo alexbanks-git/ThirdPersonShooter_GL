@@ -18,6 +18,7 @@
 #include "player_weapon.hpp"
 #include "monster_controller.hpp"
 #include "light.hpp"
+#include "button.hpp"
 
 class Entity
 {

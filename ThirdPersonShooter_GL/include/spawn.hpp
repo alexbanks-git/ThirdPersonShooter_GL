@@ -60,7 +60,7 @@ public:
 	 * @param path the file path of the texture to use 
 	 * @returns a reference to the image
 	 */
-	static Entity& spawn_image(glm::vec3 position, std::string path);
+	static Entity& spawn_image(glm::vec3 position, GLfloat width, GLfloat height, std::string path);
 
 	/**
 	 * @brief Spawns a camera in the world.
@@ -83,5 +83,9 @@ public:
 
 	static Entity& spawn_crawler(glm::vec3 position, Entity* target);
 
-	static Entity& spawn_light(glm::vec3 position, GLfloat radius, GLfloat intensity, glm::vec4 color);
+	static Entity& spawn_point_light(glm::vec3 position, GLfloat radius, GLfloat intensity, glm::vec4 color);
+
+	static Entity& spawn_directional_light(glm::vec3 dir, GLfloat intens, glm::vec4 col);
+
+	static Entity& spawn_button(glm::vec2 position, GLfloat width, GLfloat height, glm::vec4 color);
 };

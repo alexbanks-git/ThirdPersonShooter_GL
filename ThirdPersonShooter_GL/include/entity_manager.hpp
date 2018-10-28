@@ -6,7 +6,7 @@ class EntityManager
 {
 public:
 	
-	static GLuint EntityManager::get_num_lights();
+	static GLuint get_num_lights();
 	static void change_light();
 	static GLuint get_current_light();
 	static void init();
@@ -30,11 +30,21 @@ public:
 	 */
 	static Entity* get_last();
 
+	static Entity* get_last_light();
+
+	static Entity* get_last_ui_element();
+
+	static Entity* get_first_ui_element();
+
+	static void add_ui_element(std::unique_ptr<Entity> entity);
+
 	/**
 	 * @brief Returns a pointer to the first entity added to the game.
 	 * @returns pointer to the entity
 	 */
 	static Entity* get_first();
+
+	static Entity* get_first_light();
 
 	/**
 	 * @brief Removes an entity from the game.
@@ -52,4 +62,12 @@ public:
 	 * @param material_index the material of the entities that should be drawn
 	 */
 	static void draw_entities(GLuint material_index);
+
+	static void create_shadows();
+
+	static void draw_lights();
+
+	static void draw_ui();
+
+	static void update_ui();
 };

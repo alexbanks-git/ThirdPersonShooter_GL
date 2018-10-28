@@ -111,15 +111,15 @@ void Mesh::bind()
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, diffuse_id);
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "diffuse_texture"), 0);
+	glUniform1i(glGetUniformLocation(Shader::get_shader("default_shader"), "diffuse_texture"), 0);
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, specular_id);
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "specular_texture"), 1);
+	glUniform1i(glGetUniformLocation(Shader::get_shader("default_shader"), "specular_texture"), 1);
 
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, normal_id);
-	glUniform1i(glGetUniformLocation(Graphics::get_default_shader(), "normal_map"), 2);
+	glUniform1i(glGetUniformLocation(Shader::get_shader("default_shader"), "normal_map"), 2);
 
 	glBindVertexArray(vao);
 }

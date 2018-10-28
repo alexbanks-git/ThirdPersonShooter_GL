@@ -93,7 +93,7 @@ Model* AssetLoader::get_model(std::string name)
 
 Animation AssetLoader::get_animation(std::string name)
 {
-	std::map<std::string, Animation>::iterator it;
+	std::map<std:: string, Animation>::iterator it;
 	Animation d = Animation(new Skeleton());
 	if ((it = loaded_animations.find(name)) != loaded_animations.end())
 	{

@@ -7,8 +7,23 @@ Image::Image(Entity* entity) : DrawableComponent(entity)
 	material = 1;
 }
 
+void Image::set_color(glm::vec4 col)
+{
+	color = col;
+}
+
+void Image::set_color(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
+{
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	color.a = a;
+}
+
 void Image::set_size(GLfloat width, GLfloat height)
 {
+	width /= 2;
+	height /= 2;
 	GLfloat vertices[] =
 	{
 		width, height, -1, 1, 1,
@@ -67,12 +82,17 @@ void Image::set_image_path(std::string path)
 
 void Image::draw()
 {
+
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glUniform1i(glGetUniformLocation(Graphics::get_user_interface_shader(), "sampler"), 4);
+	glUniform1i(glGetUniformLocation(Shader::get_shader("user_interface_shader"), "sampler"), 4);
 	glBindVertexArray(vao);
-	GLuint model_location = glGetUniformLocation(Graphics::get_user_interface_shader(), "model");
+	GLuint model_location = glGetUniformLocation(Shader::get_shader("user_interface_shader"), "model");
 	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(transform.get_transformation()));
+
+	GLuint color_location = glGetUniformLocation(Shader::get_shader("user_interface_shader"), "color");
+	glUniform4fv(color_location, 1, glm::value_ptr(color));
+
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 }

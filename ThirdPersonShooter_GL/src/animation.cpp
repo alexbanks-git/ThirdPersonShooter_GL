@@ -114,7 +114,7 @@ void Animation::update()
 		start_time = SDL_GetTicks();
 	}
 
-	elapsed_time = (SDL_GetTicks() - start_time) / 50.0f;
+	elapsed_time = (SDL_GetTicks() - start_time) / 30.0f;
 
 	if (elapsed_time >= duration)
 	{

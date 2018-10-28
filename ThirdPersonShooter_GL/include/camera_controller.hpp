@@ -10,6 +10,7 @@ private:
 	GLfloat pitch = 0;
 	GLfloat yaw = 0;
 	GLint mouse_state;
+	GLfloat vertical_offset;
 public:
 	CameraController(Entity* entity);
 	/**
@@ -28,4 +29,6 @@ public:
 	 * @param target the entity to set the camera's target to
 	 */
 	void set_target(Entity* target);
+
+	void set_vertical_offset(float offset);
 };

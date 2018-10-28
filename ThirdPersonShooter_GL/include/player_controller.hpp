@@ -6,13 +6,42 @@ class PlayerController : public ControllerComponent
 {
 private:
 	Camera* camera;
-	enum class Action {None, Shooting, Aiming, Rolling, Jumping};
+	enum class Action {None, Shooting, Aiming, Rolling, Jumping, Cover};
+	enum class PlayerAnimation 
+	{
+		Idle, 
+		Run, 
+		Jump, 
+		Aim, 
+		Shoot, 
+		Roll, 
+		Crouch_Idle, 
+		Crouch_Walk, 
+		Cover_Idle, 
+		Cover_left,
+		Cover_Right,
+		Cover_Idle_Opposite
+	};
+
 	Action current_action;
 	GLfloat shoot_start_time;
 	bool firing_bullet;
 	GLfloat jump_force;
 	GLfloat run_speed;
 	GLfloat walk_speed;
+	GLfloat cover_timer;
+	glm::vec3 cover_move_dir;
+	Entity* cover;
+	GLfloat cover_speed;
+	SDL_GameController* game_controller;
+	bool a_button;
+	bool b_button;
+	Sint16 left_trigger;
+	Sint16 right_trigger;
+	Sint16 left_stick_x;
+	Sint16 left_stick_y;
+	glm::vec3 cover_left;
+	glm::vec3 cover_right;
 
 	/**
 	 * @brief Rotates the players shoulder and neck bones.
@@ -42,6 +71,8 @@ private:
 	 * @brief Makes the player perform a jump
 	 */
 	void jump();
+
+	void play_animation(PlayerAnimation anim, bool loop = false);
 public:
 	PlayerController(Entity* entity);
 	/**
@@ -60,4 +91,6 @@ public:
 	 * @param cam pointer to the camera
 	 */
 	void set_camera(Camera* cam);
+
+	void init_game_controller();
 };

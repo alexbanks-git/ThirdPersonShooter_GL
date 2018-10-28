@@ -1,14 +1,1 @@
-﻿  Building Custom Rule C:/Users/sharg_000/Documents/ThirdPersonShooter_GL/Third-Party/bullet3-2.87/bullet3-2.87/src/LinearMath/CMakeLists.txt
-  CMake does not need to re-run because C:/Users/sharg_000/Documents/ThirdPersonShooter_GL/Third-Party/bullet3-2.87/bullet3-2.87/build3/src/LinearMath/CMakeFiles/generate.stamp is up-to-date.
-  btAlignedAllocator.cpp
-  btConvexHull.cpp
-  btConvexHullComputer.cpp
-  btGeometryUtil.cpp
-  btPolarDecomposition.cpp
-  btQuickprof.cpp
-  btSerializer.cpp
-  btSerializer64.cpp
-  btThreads.cpp
-  btVector3.cpp
-  Generating Code...
-  LinearMath.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib
+﻿  LinearMath.vcxproj -> C:\Users\sharg_000\Documents\ThirdPersonShooter_GL\Third-Party\bullet3-2.87\bullet3-2.87\build3\lib\Release\LinearMath.lib

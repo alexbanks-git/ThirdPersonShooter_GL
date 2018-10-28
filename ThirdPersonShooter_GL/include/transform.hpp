@@ -86,5 +86,7 @@ public:
 	 */
 	void look_at(glm::vec3 target);
 
+	void right_look_at(glm::vec3 target);
+
 	void multiply(glm::mat4 matrix);
 };

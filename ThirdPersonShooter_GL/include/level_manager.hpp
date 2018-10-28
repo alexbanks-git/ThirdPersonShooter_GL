@@ -37,4 +37,9 @@ public:
 	 * @brief Draws all lights in the level.
 	 */
 	static void draw_lights();
+
+	static void create_shadows();
+
+	static void pause_level(bool pause);
+	static bool is_paused();
 };

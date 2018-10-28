@@ -1,4 +1,5 @@
 #pragma once
+#include "light.hpp"
 
 class LightManager
 {

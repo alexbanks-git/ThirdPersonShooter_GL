@@ -10,7 +10,12 @@
 #include "level_manager.hpp"
 #include "player_controller.hpp"
 #include "spawn.hpp"
+#include "input_manager.hpp"
 
+void pause(Button* button)
+{
+		LevelManager::pause_level(!LevelManager::is_paused());
+}
 
 int main(int argc, char* args[])
 {
@@ -33,38 +38,23 @@ int main(int argc, char* args[])
 	Camera* camera = cam_entity.get_component<Camera>();
 	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 1.0f, -4.0f), camera);
 	cam_entity.get_component<CameraController>()->set_target(&player);
-	
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
-	Spawn::spawn_runner(glm::vec3(1.0f, 1.0f, 0.0f), &player);
 
-	Spawn::spawn_light(glm::vec3(2.0f, 5.0f, 0.0f), 30.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	Spawn::spawn_light(glm::vec3(-2.0f, 5.0f, 0.0f), 30.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	//Spawn::spawn_point_light(glm::vec3(2.0f, 5.0f, 0.0f), 5.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	Entity& light = Spawn::spawn_directional_light(glm::normalize(glm::vec3(0.0f, -1.0f, 1.0f)), 0.7f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	
+	//Spawn::spawn_cube(glm::vec3(0.0f, 0.0f, 1.0f), true);
+	Spawn::spawn_model(glm::vec3(-3.0f, 1.2f, -4.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(3.0f, 1.2f, -4.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(-2.0f, 1.2f, 0.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(1.0f, 1.2f, 2.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(4.0f, 1.2f, 3.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(7.0f, 1.2f, 6.0f), "wall.fbx");
+	Spawn::spawn_model(glm::vec3(-5.0f, 1.2f, 7.0f), "wall.fbx");
 
-	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "survivor.fbx", &player,
+	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "default_cube.fbx", &player,
 		&player.get_component<Model>()->skeleton.get_bone_at(35)->final_transform);*/
 
-	Spawn::spawn_image(glm::vec3(800 / 2, 600 / 2, 0.0f), "crosshair.png");
+	Spawn::spawn_image(glm::vec3(800 / 2, 600 / 2, 0.0f), 3, 3, "crosshair.png");
 	Spawn::spawn_plane(0.0f);
 	GLint mouse_x;
 	GLint mouse_y;
@@ -72,9 +62,11 @@ int main(int argc, char* args[])
 	GLfloat yaw = 0;
 	Uint32 mouseState;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-	//SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	while (running)
 	{
+		InputManager::init();
 		SDL_PumpEvents();
 
 		if (keystate[SDL_SCANCODE_ESCAPE])
@@ -96,6 +88,8 @@ int main(int argc, char* args[])
 			camera->transform.position + camera->transform.forward,
 			Transform::world_up_vector());
 
+		Graphics::set_matrices(projection_matrix, view_matrix);
+
 		LevelManager::update_level();
 
 		if (keystate[SDL_SCANCODE_RCTRL])
@@ -103,70 +97,70 @@ int main(int argc, char* args[])
 			
 		}
 
-		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
 		//glDisable(GL_CULL_FACE);
-		glUseProgram(Graphics::get_skybox_shader());
-		GLint view_uniform = glGetUniformLocation(Graphics::get_skybox_shader(), "view");
+		Shader::use_shader("skybox_shader");
+		GLint view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(glm::mat4(glm::mat3(view_matrix))));
 
-		GLint projection_uniform = glGetUniformLocation(Graphics::get_skybox_shader(), "projection");
+		GLint projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
 		LevelManager::draw_skybox();
 		//glDepthFunc(GL_LESS);
 
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glUseProgram(Graphics::get_default_shader());
-		GLint camera_uniform = glGetUniformLocation(Graphics::get_default_shader(), "camera_position");
+		Shader::use_shader("shadow_shader");
+		LevelManager::create_shadows();
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		Shader::use_shader("default_shader");
+		glViewport(0, 0, Graphics::get_window_width(), Graphics::get_window_height());
+		GLint camera_uniform = glGetUniformLocation(Shader::get_current_shader(), "camera_position");
 		glUniform3f(camera_uniform, camera->transform.position.x, camera->transform.position.y,
 			camera->transform.position.z);
 
-		view_uniform = glGetUniformLocation(Graphics::get_default_shader(), "view");
+		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
-		projection_uniform = glGetUniformLocation(Graphics::get_default_shader(), "projection");
+		projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
-
+		
 		LevelManager::draw_lights();
+
 		LevelManager::draw_level();
 
-		glDisable(GL_CULL_FACE);
-		glUseProgram(Graphics::get_image_shader());
-
-		view_uniform = glGetUniformLocation(Graphics::get_image_shader(), "view");
+		
+		Shader::use_shader("image_shader");
+		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
-		projection_uniform = glGetUniformLocation(Graphics::get_image_shader(), "projection");
+		projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
 		LevelManager::draw_images();
 
-		glUseProgram(Graphics::get_debug_shader());
+		 Shader::use_shader("physics_shader");
 
-		view_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "view");
+		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
-		projection_uniform = glGetUniformLocation(Graphics::get_debug_shader(), "projection");
+		projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-		//PhysicsWorld::draw_physics_world();
+		PhysicsWorld::draw_physics_world();
 
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-		glUseProgram(Graphics::get_user_interface_shader());
-		view_uniform = glGetUniformLocation(Graphics::get_user_interface_shader(), "view");
+		Shader::use_shader("user_interface_shader");
+		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		view_matrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
 
-		projection_uniform = glGetUniformLocation(Graphics::get_user_interface_shader(), "projection");
-		projection_matrix = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.0f, 200.0f);
+		projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
+		projection_matrix = glm::ortho(0.0f, 800.0f, 600.0f, 0.0f, 0.0f, 200.0f);
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 		LevelManager::draw_ui();
 
 		Graphics::update_window();
-		//SDL_WarpMouseInWindow(Graphics::get_window(), width / 2, height / 2);
+		SDL_WarpMouseInWindow(Graphics::get_window(), width / 2, height / 2);
 	}
 	return 0;
 }

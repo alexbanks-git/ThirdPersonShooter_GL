@@ -107,3 +107,15 @@ void Transform::look_at(glm::vec3 target)
 		forward.x, forward.y, forward.z, 0,
 		position.x, position.y, position.z, 1);
 }
+
+void Transform::right_look_at(glm::vec3 target)
+{
+	right = glm::normalize(target - position);
+	forward = glm::normalize(glm::cross(world_up_vector(), right));
+	up = glm::normalize(glm::cross(forward, right));
+	transform_mat = glm::mat4(
+		right.x, right.y, right.z, 0,
+		up.x, up.y, up.z, 0,
+		forward.x, forward.y, forward.z, 0,
+		position.x, position.y, position.z, 1);
+}

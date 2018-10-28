@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\button.cpp" />
     <ClCompile Include="..\src\camera_controller.cpp" />
     <ClCompile Include="..\src\animation.cpp" />
     <ClCompile Include="..\src\animation_controller.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="..\src\component.cpp" />
     <ClCompile Include="..\src\controller_component.cpp" />
     <ClCompile Include="..\src\drawable_component.cpp" />
+    <ClCompile Include="..\src\input_manager.cpp" />
     <ClCompile Include="..\src\light.cpp" />
     <ClCompile Include="..\src\light_manager.cpp" />
     <ClCompile Include="..\src\monster_controller.cpp" />
@@ -45,6 +47,7 @@
     <ClCompile Include="..\src\physics_debug_drawer.cpp" />
     <ClCompile Include="..\src\player_controller.cpp" />
     <ClCompile Include="..\src\player_weapon.cpp" />
+    <ClCompile Include="..\src\shader.cpp" />
     <ClCompile Include="..\src\skeleton.cpp" />
     <ClCompile Include="..\src\skybox.cpp" />
     <ClCompile Include="..\src\spawn.cpp" />
@@ -56,11 +59,13 @@
     <ClInclude Include="..\include\animation_controller.hpp" />
     <ClInclude Include="..\include\asset_loader.hpp" />
     <ClInclude Include="..\include\bullet_controller.hpp" />
+    <ClInclude Include="..\include\button.hpp" />
     <ClInclude Include="..\include\camera.hpp" />
     <ClInclude Include="..\include\camera_controller.hpp" />
     <ClInclude Include="..\include\component.hpp" />
     <ClInclude Include="..\include\controller_component.hpp" />
     <ClInclude Include="..\include\drawable_component.hpp" />
+    <ClInclude Include="..\include\input_manager.hpp" />
     <ClInclude Include="..\include\light.hpp" />
     <ClInclude Include="..\include\light_manager.hpp" />
     <ClInclude Include="..\include\monster_controller.hpp" />
@@ -77,6 +82,7 @@
     <ClInclude Include="..\include\physics_debug_drawer.hpp" />
     <ClInclude Include="..\include\player_controller.hpp" />
     <ClInclude Include="..\include\player_weapon.hpp" />
+    <ClInclude Include="..\include\shader.hpp" />
     <ClInclude Include="..\include\skeleton.hpp" />
     <ClInclude Include="..\include\skybox.hpp" />
     <ClInclude Include="..\include\spawn.hpp" />
@@ -84,14 +90,17 @@
     <ClInclude Include="..\include\transform.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\shaders\debug_fragment_shader.glsl" />
+    <None Include="..\shaders\debug_vertex_shader.glsl" />
     <None Include="..\shaders\image_fragment_shader.glsl" />
     <None Include="..\shaders\image_vertex_shader.glsl" />
+    <None Include="..\shaders\shadow_fragment_shader.glsl" />
+    <None Include="..\shaders\shadow_vertex_shader.glsl" />
     <None Include="..\shaders\ui_fragment_shader.glsl" />
     <None Include="..\shaders\ui_vertex_shader.glsl" />
     <None Include="..\shaders\fragment_shader.glsl" />
     <None Include="..\shaders\physics_fragment_shader.glsl" />
     <None Include="..\shaders\physics_vertex_shader.glsl" />
-    <None Include="..\shaders\skybox_fragment_shader.glsl" />
     <None Include="..\shaders\skybox_vertex_shader.glsl" />
     <None Include="..\shaders\vertex_shader.glsl" />
   </ItemGroup>
@@ -109,32 +118,32 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FF24F5E5-93F4-42C2-9785-5FC7092E2D8D}</ProjectGuid>
     <RootNamespace>ThirdPersonShooter_GL</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

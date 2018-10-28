@@ -24,7 +24,7 @@ void AnimationController::update()
 			glm::vec3 final_delta = delta;
 
 			if (delta.y > 0)
-				final_delta.y = delta.y*8.0f;
+				final_delta.y = delta.y*12.0f;
 
 			final_delta.x *= -1.0f;
 			final_delta.z *= -1.0f;

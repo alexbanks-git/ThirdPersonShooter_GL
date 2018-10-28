@@ -1,7 +1,6 @@
 #include <vector>
 #include <algorithm>
 #include "graphics.hpp"
-#include "light.hpp"
 #include "light_manager.hpp"
 
 static std::vector<Light*> lights;

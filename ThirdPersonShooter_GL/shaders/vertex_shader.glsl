@@ -14,12 +14,14 @@ out vec2 tex_coord;
 out vec3 v_normal;
 out vec3 frag_position;
 out mat3 tbn_mat;
+out vec4 light_pos;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform mat4 bone_mats[100];
 uniform int has_bones;
+uniform mat4 light_matrix;
 
 void main()
 {
@@ -45,5 +47,7 @@ void main()
 
 	tbn_mat = mat3(v_tangent, v_bitangent, v_normal);
 	frag_position = vec3(model * final_position);
+	light_pos = light_matrix * vec4(frag_position, 1.0f);
+
 	gl_Position = projection * view * model * final_position;
 }

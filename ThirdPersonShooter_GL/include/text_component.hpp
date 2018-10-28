@@ -2,6 +2,7 @@
 #include "drawable_component.hpp"
 #include "SDL_ttf.h"
 
+
 class TextComponent : public DrawableComponent
 {
 private:
@@ -22,8 +23,6 @@ public:
 	void set_text(std::string new_text);
 	void set_properties(std::string font, GLfloat size, SDL_Color color);
 	void set_size(GLfloat w, GLfloat h);
-	void update_texture();
 	void draw();
 	std::string type_name();
-	static void init_ttf();
 };

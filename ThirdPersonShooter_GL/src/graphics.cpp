@@ -8,36 +8,23 @@ static GLuint then;
 static GLuint now;
 static GLfloat target_fps;
 static GLfloat frame_delay;
-static GLuint default_shader;
-static GLuint user_interface_shader;
-static GLuint debug_shader;
-static GLuint skybox_shader;
+static glm::mat4 proj;
+static glm::mat4 view;
+
 static GLfloat elapsed_time;
-static GLuint image_shader;
+static FT_Library ft_library;
+static FT_Face ft_face;
 
-GLuint Graphics::get_default_shader()
+void Graphics::set_matrices(glm::mat4 p, glm::mat4 v)
 {
-	return default_shader;
+	proj = p;
+	view = v;
 }
 
-GLuint Graphics::get_image_shader()
+glm::vec4 Graphics::to_world_coords(glm::vec4 vec, glm::mat4 model)
 {
-	return image_shader;
-}
-
-GLuint Graphics::get_user_interface_shader()
-{
-	return user_interface_shader;
-}
-
-GLuint Graphics::get_debug_shader()
-{
-	return debug_shader;
-}
-
-GLuint Graphics::get_skybox_shader()
-{
-	return skybox_shader;
+	//Add code
+	return vec;
 }
 
 GLint Graphics::init_graphics(GLint w, GLint h, GLfloat fps)
@@ -93,11 +80,12 @@ GLint Graphics::init_graphics(GLint w, GLint h, GLfloat fps)
 		std::clog << "Error: " << glewGetErrorString(glew_status) << std::endl;
 		return 0;
 	}
-	image_shader = create_shader_program("image_vertex_shader.glsl", "image_fragment_shader.glsl");
-	user_interface_shader = create_shader_program("ui_vertex_shader.glsl", "ui_fragment_shader.glsl");
-	default_shader = create_shader_program("vertex_shader.glsl", "fragment_shader.glsl");
-	debug_shader = create_shader_program("physics_vertex_shader.glsl", "physics_fragment_shader.glsl");
-	skybox_shader = create_shader_program("skybox_vertex_shader.glsl", "skybox_fragment_shader.glsl");
+	Shader::init();
+
+	//FT_Init_FreeType(&ft_library);
+	//FT_New_Face(ft_library, "coolvetica rg.ttf", 0, &ft_face);
+	//FT_Set_Pixel_Sizes(ft_face, 0, 48);
+
 	return 1;
 }
 
@@ -136,74 +124,6 @@ GLfloat Graphics::get_elapsed_time()
 SDL_Renderer* Graphics::get_renderer()
 {
 	return renderer;
-}
-
-GLuint Graphics::create_shader(std::string shader_type, std::string path)
-{
-	std::ifstream file;
-	std::string shader_source = "";
-	std::string line;
-
-	GLuint shader;
-	GLint result;
-	GLchar info_log[512];
-	const GLchar* source;
-
-	file.open(path);
-
-	while (std::getline(file, line))
-	{
-		shader_source.append(line + "\n");
-	}
-
-	source = shader_source.c_str();
-
-	if (shader_type == "vertex")
-	{
-		shader = glCreateShader(GL_VERTEX_SHADER);
-	}
-	else if (shader_type == "fragment")
-	{
-		shader = glCreateShader(GL_FRAGMENT_SHADER);
-	}
-	glShaderSource(shader, 1, &source, nullptr);
-	glCompileShader(shader);
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
-
-	if (!result)
-	{
-		glGetShaderInfoLog(shader, 512, nullptr, info_log);
-		std::clog << "SHADER COMPILATION FAILED\n" << info_log << std::endl;
-		return 0;
-	}
-	file.close();
-	return shader;
-}
-
-GLuint Graphics::create_shader_program(std::string vs_path, std::string fs_path)
-{
-	std::string path =
-		"C:/Users/sharg_000/Documents/ThirdPersonShooter_GL/ThirdPersonShooter_GL/shaders/";
-
-	GLint result;
-	GLchar info_log[512];
-	GLuint vertex_shader = create_shader("vertex", path + vs_path);
-	GLuint fragment_shader = create_shader("fragment", path + fs_path);
-
-	GLuint shader_program = glCreateProgram();
-	glAttachShader(shader_program, vertex_shader);
-	glAttachShader(shader_program, fragment_shader);
-	glLinkProgram(shader_program);
-	glGetProgramiv(shader_program, GL_LINK_STATUS, &result);
-	if (!result)
-	{
-		glGetProgramInfoLog(shader_program, 512, nullptr, info_log);
-		std::clog << "SHADER LINKING FAILED\n" << info_log << std::endl;
-	}
-	glDeleteShader(vertex_shader);
-	glDeleteShader(fragment_shader);
-
-	return shader_program;
 }
 
 void Graphics::draw_mesh(Mesh* mesh)

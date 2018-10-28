@@ -7,6 +7,7 @@ private:
 	GLuint vao;
 	GLuint texture;
 	std::string image_path;
+	glm::vec4 color;
 public:
 	Image(Entity* entity);
 
@@ -27,4 +28,8 @@ public:
 	 * @param height the height of the image
 	 */
 	void set_size(GLfloat width, GLfloat height);
+
+	void set_color(glm::vec4 col);
+
+	void set_color(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 };

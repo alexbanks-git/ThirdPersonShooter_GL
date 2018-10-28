@@ -6,6 +6,9 @@
 #include "GL\glew.h"
 #include "SDL.h"
 #include "model.hpp"
+#include "shader.hpp"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 class Graphics
 {
@@ -23,22 +26,6 @@ public:
 	 * @brief Swaps buffers and updates the game by one frame.
 	 */
 	static void update_window();
-
-	/**
-	 * @brief Creates a shader object.
-	 * @param shader_type the type of shader to be created 
-	 * @param path the file path of the shader file
-	 * @returns the shader object if successful, or 0 on error 
-	 */
-	static GLuint create_shader(std::string shader_type, std::string path);
-
-	/**
-	 * @brief Creates a shader program.
-	 * @param vs_path the file path of the vertex shader
-	 * @param fs_path the file path of the fragment shader
-	 * @returns returns the shader program
-	 */
-	static GLuint create_shader_program(std::string vs_path, std::string fs_path);
 
 	/**
 	 * @brief Retrieves the current window.
@@ -59,34 +46,10 @@ public:
 	static GLint get_window_height();
 
 	/**
-	 * @brief Retrieves the default shader.
-	 * @returns the default shader
-	 */
-	static GLuint get_default_shader();
-
-	/**
-	* @brief Retrieves the user interface shader.
-	* @returns the user interface shader
-	*/
-	static GLuint get_user_interface_shader();
-
-	/**
-	 * @brief Retrieves the skybox shader.
-	 * @returns the skybox shader
-	 */
-	static GLuint get_skybox_shader();
-
-	/**
 	 * @brief Draws a mesh to the screen.
 	 * @param mesh the mesh to draw
 	 */
-	static void Graphics::draw_mesh(Mesh* mesh);
-
-	/**
-	 * @brief Retrieves the debug shader.
-	 * @returns the debug shader
-	 */
-	static GLuint get_debug_shader();
+	static void draw_mesh(Mesh* mesh);
 
 	/**
 	 * @brief Retrieves the time passed since the last update.
@@ -95,16 +58,14 @@ public:
 	static GLfloat get_elapsed_time();
 
 	/**
-	 * @brief Returns the image shader.
-	 * @returns the image shader
-	 */
-	static GLuint Graphics::get_image_shader();
-
-	/**
 	 * @brief Returns the renderer
 	 * @returns the renderer
 	 */
 	static SDL_Renderer* get_renderer();
 
 	static void clear_screen(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+
+	static glm::vec4 to_world_coords(glm::vec4 vec, glm::mat4 model);
+
+	static void set_matrices(glm::mat4 p, glm::mat4 v);
 };
