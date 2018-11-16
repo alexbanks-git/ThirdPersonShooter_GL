@@ -13,7 +13,7 @@ void CameraController::update()
 {
 	mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
 	glm::vec3 target_position = target->transform.position;
-	float mouse_speed = 0.1f;
+	float mouse_speed = 0.05f;
 	bool aiming = false;
 	Sint16 right_stick_x = InputManager::get_axis(SDL_CONTROLLER_AXIS_RIGHTX);
 	Sint16 right_stick_y = InputManager::get_axis(SDL_CONTROLLER_AXIS_RIGHTY);
@@ -54,7 +54,7 @@ void CameraController::update()
 		pitch = 0;
 	}
 
-	if (aiming)
+	if (aiming && able_to_zoom)
 	{
 		target_position += transform.right * 0.55f;
 		target_position.y += vertical_offset;
@@ -73,6 +73,11 @@ void CameraController::update()
 void CameraController::set_vertical_offset(float offset)
 {
 	vertical_offset = offset;
+}
+
+void CameraController::set_zoom_availability(bool able_to_zoom)
+{
+	this->able_to_zoom = able_to_zoom;
 }
 
 void CameraController::set_target(Entity* target)

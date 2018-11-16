@@ -39,20 +39,19 @@ int main(int argc, char* args[])
 	Entity& player = Spawn::spawn_player(glm::vec3(0.0f, 1.0f, -4.0f), camera);
 	cam_entity.get_component<CameraController>()->set_target(&player);
 
-	//Spawn::spawn_point_light(glm::vec3(2.0f, 5.0f, 0.0f), 5.0f, 0.5f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	Entity& light = Spawn::spawn_directional_light(glm::normalize(glm::vec3(0.0f, -1.0f, 1.0f)), 0.7f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	
 	//Spawn::spawn_cube(glm::vec3(0.0f, 0.0f, 1.0f), true);
 	Spawn::spawn_model(glm::vec3(-3.0f, 1.2f, -4.0f), "wall.fbx");
-	Spawn::spawn_model(glm::vec3(3.0f, 1.2f, -4.0f), "wall.fbx");
 	Spawn::spawn_model(glm::vec3(-2.0f, 1.2f, 0.0f), "wall.fbx");
 	Spawn::spawn_model(glm::vec3(1.0f, 1.2f, 2.0f), "wall.fbx");
-	Spawn::spawn_model(glm::vec3(4.0f, 1.2f, 3.0f), "wall.fbx");
 	Spawn::spawn_model(glm::vec3(7.0f, 1.2f, 6.0f), "wall.fbx");
 	Spawn::spawn_model(glm::vec3(-5.0f, 1.2f, 7.0f), "wall.fbx");
 
-	/*Spawn::spawn_weapon(glm::vec3(0.0f, 0.0f, 0.0f), "default_cube.fbx", &player,
-		&player.get_component<Model>()->skeleton.get_bone_at(35)->final_transform);*/
+	Spawn::spawn_cube(glm::vec3(0.0f, 4.0f, -2.0f), false);
+	Spawn::spawn_cube(glm::vec3(2.0f, 4.0f, -2.0f), false);
+	Spawn::spawn_cube(glm::vec3(-2.0f, 4.0f, -2.0f), false);
+	Spawn::spawn_cube(glm::vec3(-2.0f, 4.0f, -1.0f), false);
 
 	Spawn::spawn_image(glm::vec3(800 / 2, 600 / 2, 0.0f), 3, 3, "crosshair.png");
 	Spawn::spawn_plane(0.0f);
@@ -62,7 +61,7 @@ int main(int argc, char* args[])
 	GLfloat yaw = 0;
 	Uint32 mouseState;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	while (running)
 	{
@@ -139,7 +138,7 @@ int main(int argc, char* args[])
 
 		LevelManager::draw_images();
 
-		 Shader::use_shader("physics_shader");
+		/* Shader::use_shader("physics_shader");
 
 		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
 		glUniformMatrix4fv(view_uniform, 1, GL_FALSE, glm::value_ptr(view_matrix));
@@ -147,7 +146,7 @@ int main(int argc, char* args[])
 		projection_uniform = glGetUniformLocation(Shader::get_current_shader(), "projection");
 		glUniformMatrix4fv(projection_uniform, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-		PhysicsWorld::draw_physics_world();
+		PhysicsWorld::draw_physics_world();*/
 
 		Shader::use_shader("user_interface_shader");
 		view_uniform = glGetUniformLocation(Shader::get_current_shader(), "view");
@@ -160,7 +159,7 @@ int main(int argc, char* args[])
 		LevelManager::draw_ui();
 
 		Graphics::update_window();
-		SDL_WarpMouseInWindow(Graphics::get_window(), width / 2, height / 2);
+		//SDL_WarpMouseInWindow(Graphics::get_window(), width / 2, height / 2);
 	}
 	return 0;
 }

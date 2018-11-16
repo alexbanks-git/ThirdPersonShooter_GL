@@ -18,7 +18,7 @@ PlayerController::PlayerController(Entity* entity) : ControllerComponent(entity)
 void PlayerController::init_game_controller()
 {
 	game_controller = SDL_GameControllerOpen(0);
-	
+
 }
 
 void PlayerController::update()
@@ -40,7 +40,7 @@ void PlayerController::update()
 	glm::vec3 new_dir;
 	GLfloat bones_angle = 0.0f;
 	glm::vec3 move_dir = glm::vec3();
-	
+
 
 	if (current_action != Action::Cover)
 	{
@@ -81,6 +81,7 @@ void PlayerController::update()
 
 	if (current_action == Action::Cover)
 	{
+		camera->get_owner().get_component<CameraController>()->set_zoom_availability(false);
 		cover_timer++;
 		if (keystate[SDL_SCANCODE_A])
 		{
@@ -124,7 +125,6 @@ void PlayerController::update()
 			{
 				play_animation(PlayerAnimation::Cover_Idle, true);
 			}
-
 		}
 
 		glm::vec3 forward_velocity = glm::vec3();
@@ -197,15 +197,11 @@ void PlayerController::update()
 		direction.y = 0.0f;
 		transform.look_at(transform.position + direction);
 
-		if (current_action == Action::Aiming || current_action == Action::Shooting)
-		{
-			forward_velocity = move_dir * forward_speed;
-		}
-		else
+		if (current_action != Action::Aiming && current_action != Action::Shooting)
 		{
 			forward_velocity = direction * forward_speed;
 		}
-	
+
 		body->set_velocity(glm::vec3(forward_velocity.x, body->linear_velocity().y, forward_velocity.z));
 	}
 	if (SDL_GetTicks() - shoot_start_time >= 200 && firing_bullet)
@@ -213,6 +209,8 @@ void PlayerController::update()
 		shoot_start_time = SDL_GetTicks();
 		fire_bullet();
 	}
+
+	camera->get_owner().get_component<CameraController>()->set_zoom_availability(current_action == Action::Aiming || current_action == Action::Shooting);
 }
 
 void PlayerController::set_camera(Camera* cam)
